@@ -1,0 +1,21 @@
+Vim: Warning: Output is not to a terminal
+Vim: Warning: Input is not from a terminal
+Error detected while processing /home/juliosueiras/.spf13-vim-3/.vim/bundle/vim-javascript/ftdetect/javascript.vim:[?25l[J
+line    1:[J
+Interrupted[J
+Error detected while processing /usr/share/vim/vim74/filetype.vim:[J
+line 2669:[J
+Interrupted[J
+Error detected while processing /usr/share/vim/vim74/ftplugin.vim:[J
+line    1:[J
+Interrupted[J
+Error detected while processing /usr/share/vim/vim74/indent.vim:[J
+line    1:[J
+Interrupted[J
+Error detected while processing /home/juliosueiras/.vimrc:[J
+line   81:[J
+Interrupted[J
+Interrupt: Press ENTER or type command to continue[?12l[?25h[24;1HVim: Error reading input, exiting...
+
+Vim: Finished.
+[24;1H

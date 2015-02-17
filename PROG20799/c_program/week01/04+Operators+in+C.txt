@@ -1,0 +1,860 @@
+Operators in
+
+C
+Instructor: Maninder Kaur
+Email: maninder.kaur2@sheridancollege.ca
+Course: PROG20799
+
+What are Operators?
+ An operator is a symbol that tells the compiler to perform specific
+mathematical or logical operation.
+ C language is rich in built-in operators and provides following type
+of operators:
+ Arithmetic Operators
+ Relational Operators
+ Logical Operators
+ Assignment Operators
+ Misc. Operators
+15年1月21日
+
+Maninder Kaur
+
+2
+
+Arithmetic Operators
+ Following table shows all the arithmetic operators
+supported by C language.
+ Assume variable A holds 10 and variable B holds 20:
+Operato
+Description
+r
++
+Adds two operands
+Subtracts second operand from the first
+*
+/
+%
+++
+15年1月21日
+--
+
+Multiply both operands
+Divide numerator by de-numerator
+Modulus Operator and remainder of after an integer division
+Increment operator increases integer value by one
+Maninder
+Kaur value by one
+Decrement operator decreases
+integer
+
+Example
+A + B will give 30
+A - B will give
+-10
+A * B will give
+200
+B / A will give 2
+B % A will give 0
+A++ will give 11
+A-- will give 93
+
+Arithmetic Operators – Example
+#include
+#include <stdio.h>
+<stdio.h>
+
+Output:
+
+void
+void main()
+main()
+{{
+int
+int aa == 21,
+21, bb == 10,
+10, c;
+c;
+
+Line
+Line
+Line
+Line
+Line
+Line
+Line
+Line
+Line
+Line
+Line
+Line
+Line
+Line
+
+cc == aa ++ b;
+b;
+printf("Line
+printf("Line 11 -- Value
+Value of
+of cc is
+is %d\n",
+%d\n", cc );
+);
+cc == aa -- b;
+b;
+printf("Line
+printf("Line 22 -- Value
+Value of
+of cc is
+is %d\n",
+%d\n", cc );
+);
+cc == aa ** b;
+b;
+printf("Line
+printf("Line 33 -- Value
+Value of
+of cc is
+is %d\n",
+%d\n", cc );
+);
+cc == aa // b;
+b;
+printf("Line
+printf("Line 44 -- Value
+Value of
+of cc is
+is %d\n",
+%d\n", cc );
+);
+
+11
+22
+33
+44
+55
+66
+77
+
+--------
+
+Value
+Value
+Value
+Value
+Value
+Value
+Value
+Value
+Value
+Value
+Value
+Value
+Value
+Value
+
+of
+of
+of
+of
+of
+of
+of
+of
+of
+of
+of
+of
+of
+of
+
+cc
+cc
+cc
+cc
+cc
+cc
+cc
+
+is
+is
+is
+is
+is
+is
+is
+is
+is
+is
+is
+is
+is
+is
+
+31
+31
+11
+11
+210
+210
+22
+11
+21
+21
+22
+22
+
+cc == aa %% b;
+b;
+printf("Line
+printf("Line 55 -- Value
+Value of
+of cc is
+is %d\n",
+%d\n", cc );
+);
+cc == a++;
+a++;
+printf("Line
+printf("Line 66 -- Value
+Value of
+of cc is
+is %d\n",
+%d\n", cc );
+);
+
+}}
+
+cc == a--;
+a--;
+printf("Line
+printf("Line 77 -- Value
+Value of
+of cc is
+is %d\n",
+%d\n", cc );
+);
+
+15年1月21日
+
+Maninder Kaur
+
+4
+
+Relational Operators
+ Following table shows all the relational operators supported by C
+language.
+ Assume variable A holds 10 and variable B holds 20:
+Operator
+
+Description
+
+Example
+
+==
+
+Checks if the value of two operands is equal or not, if yes then condition
+becomes true.
+
+!=
+
+Checks if the value of two operands is equal or not, if values are not equal then
+(A != B) is true.
+condition becomes true.
+
+(A == B) is not true.
+
+>
+
+Checks if the value of left operand is greater than the value of right operand, if
+(A > B) is not true.
+yes then condition becomes true.
+
+<
+
+Checks if the value of left operand is less than the value of right operand, if yes
+(A < B) is true.
+then condition becomes true.
+
+>=
+
+Checks if the value of left operand is greater than or equal to the value of right
+(A >= B) is not true.
+operand, if yes then condition becomes true.
+
+<=
+
+Checks if the value of left operand is less than or equal to the value of right
+operand, if yes then condition becomes true.
+
+15年1月21日
+
+Maninder Kaur
+
+(A <= B) is true.
+
+5
+
+Relational Operators – Example
+#include
+#include <stdio.h>
+<stdio.h>
+
+Output:
+Output:
+
+void
+void main()
+main()
+{{
+int
+int aa == 21,
+21, bb == 10;
+10;
+if(
+if( aa ==
+== bb ))
+printf("Line
+printf("Line 11 -- aa is
+is equal
+equal to
+to b.
+b. \n"
+\n" );
+);
+else
+else
+printf("Line
+printf("Line 11 -- aa is
+is not
+not equal
+equal to
+to b.
+b. \n"
+\n" );
+);
+
+Line
+Line
+Line
+Line
+b.
+b.
+Line
+Line
+
+11 -- aa is
+is not
+not equal
+equal to
+to b.
+b.
+22 -- aa is
+is not
+not less
+less than
+than
+33 -- aa is
+is greater
+greater than
+than b.
+b.
+
+if
+if (( aa << bb ))
+printf("Line
+printf("Line 22 -- aa is
+is less
+less than
+than b.
+b. \n"
+\n" );
+);
+else
+else
+printf("Line
+printf("Line 22 -- aa is
+is not
+not less
+less than
+than b.
+b. \n"
+\n" );
+);
+if
+if (( aa >> bb ))
+printf("Line
+printf("Line 33 -- aa is
+is greater
+greater than
+than b.
+b. \n"
+\n" );
+);
+else
+else
+printf("Line
+printf("Line 33 -- aa is
+is not
+not greater
+greater than
+than b.
+b.
+\n"
+\n" );
+);
+}}
+
+15年1月21日
+
+Maninder Kaur
+
+6
+
+Logical Operators
+ Following table shows all the logical operators
+supported by C language.
+ Assume variable A holds 1 and variable B holds 0:
+Operato
+r
+
+Description
+
+Example
+
+&&
+
+Called Logical AND operator. If both the operands are
+(A && B) is false.
+non zero then condition becomes true.
+
+||
+
+Called Logical OR Operator. If any of the two
+operands is non zero then condition becomes true.
+
+!
+
+Called Logical NOT Operator. Use to reverses the
+logical state of its operand. If a condition is true then !(A && B) is true.
+Logical NOT operator will make false.
+
+15年1月21日
+
+Maninder Kaur
+
+(A || B) is true.
+
+7
+
+Logical Operators – Example
+#include
+#include <stdio.h>
+<stdio.h>
+
+Output:
+Output:
+
+void
+void main()
+main()
+{{
+int
+int aa == 5,
+5, bb == 20;
+20;
+
+Line
+Line 33 -- Condition
+Condition is
+is true
+true
+
+if
+if (( aa << 10
+10 &&
+&& bb >> 20
+20 ))
+printf("Line
+printf("Line 11 -- Condition
+Condition is
+is true\n"
+true\n" );
+);
+if
+if (( aa ==
+== 10
+10 ||
+|| bb ==
+== 55 ))
+printf("Line
+printf("Line 22 -- Condition
+Condition is
+is true\n"
+true\n" );
+);
+if
+if (!(a
+(!(a ==
+== b))
+b))
+printf("Line
+printf("Line 33 -- Condition
+Condition is
+is true\n"
+true\n" );
+);
+}}
+
+15年1月21日
+
+Maninder Kaur
+
+8
+
+Assignment Operators
+ There are following assignment operators supported by
+C language:
+Operato
+r
+
+Description
+
+Example
+
+Simple assignment operator, Assigns values from right side
+operands to left side operand
+
+C = A + B will assign value of A +
+B into C
+
++=
+
+Add AND assignment operator, It adds right operand to the left
+operand and assign the result to left operand
+
+C += A is equivalent to C = C + A
+
+-=
+
+Subtract AND assignment operator, It subtracts right operand from
+C -= A is equivalent to C = C - A
+the left operand and assign the result to left operand
+
+*=
+
+Multiply AND assignment operator, It multiplies right operand with
+the left operand and assign the result to left operand
+
+C *= A is equivalent to C = C * A
+
+/=
+
+Divide AND assignment operator, It divides left operand with the
+right operand and assign the result to left operand
+
+C /= A is equivalent to C = C / A
+
+%=
+
+Modulus AND assignment operator, It takes modulus using two
+operands and assign the result to left operand
+
+C %= A is equivalent to C = C % A
+
+=
+
+15年1月21日
+
+Maninder Kaur
+
+9
+
+Assignment Operators –
+Example Output:
+Output:
+
+#include
+#include <stdio.h>
+<stdio.h>
+void
+void main()
+main()
+{{
+int
+int aa == 21,
+21, c;
+c;
+
+cc == a;
+a;
+printf("Line
+printf("Line 1:
+1: ==
+
+Operator
+Operator Example,
+Example, Value
+Value of
+of cc == %d\n",
+%d\n", cc );
+);
+
+cc +=
++= a;
+a;
+printf("Line
+printf("Line 2:
+2: +=
++= Operator
+Operator Example,
+Example, Value
+Value of
+of cc == %d\n",
+%d\n", cc );
+);
+cc -=
+-= a;
+a;
+printf("Line
+printf("Line 3:
+3: -=
+-= Operator
+Operator Example,
+Example, Value
+Value of
+of cc == %d\n",
+%d\n", cc );
+);
+cc *=
+*= a;
+a;
+printf("Line
+printf("Line 4:
+4: *=
+*= Operator
+Operator Example,
+Example, Value
+Value of
+of cc == %d\n",
+%d\n", cc );
+);
+
+Line
+Line
+21
+21
+Line
+Line
+42
+42
+Line
+Line
+21
+21
+Line
+Line
+441
+441
+Line
+Line
+21
+21
+Line
+Line
+11
+11
+
+1:
+1: ==
+
+Operator
+Operator Example,
+Example, Value
+Value of
+of cc ==
+
+2:
+2: +=
++= Operator
+Operator Example,
+Example, Value
+Value of
+of cc ==
+3:
+3: -=
+-= Operator
+Operator Example,
+Example, Value
+Value of
+of cc ==
+4:
+4: *=
+*= Operator
+Operator Example,
+Example, Value
+Value of
+of cc ==
+5:
+5: /=
+/= Operator
+Operator Example,
+Example, Value
+Value of
+of cc ==
+6:
+6: %=
+%= Operator
+Operator Example,
+Example, Value
+Value of
+of cc ==
+
+cc /=
+/= a;
+a;
+printf("Line
+printf("Line 5:
+5: /=
+/= Operator
+Operator Example,
+Example, Value
+Value of
+of cc == %d\n",
+%d\n", cc );
+);
+
+}}
+
+cc == 200;
+200;
+cc %=
+a;
+%= a;
+printf("Line
+printf("Line 6:
+6: %=
+%= Operator
+Operator Example,
+Example, Value
+Value of
+of cc == %d\n",
+%d\n", cc );
+);
+
+15年1月21日
+
+Maninder Kaur
+
+10
+
+Misc. Operators
+ There are few other important operators including
+sizeof and ?: supported by C Language.
+Operator
+
+Example
+
+Returns the size of an variable.
+
+sizeof(a), where a is integer,
+will return 4.
+
+&
+
+Returns the address of an variable.
+
+&a; will give actual address of
+the variable.
+
+*
+
+Pointer to a variable.
+
+*a; will pointer to a variable.
+
+Conditional Expression
+
+If Condition is true ? Then
+value X : Otherwise value Y
+
+sizeof()
+
+?:
+
+15年1月21日
+
+Description
+
+Maninder Kaur
+
+11
+
+Integer Types – Example
+#include <stdio.h>
+Void main()
+{
+printf("Storage size for int: %d", sizeof(int));
+}
+
+ Check the output for yourself.
+
+9-May-13
+
+Maninder Kaur
+
+12
+
+Operators Precedence in C
+ Operator precedence determines the grouping of terms in an expression.
+This affects how an expression is evaluated.
+ Certain operators have higher precedence than others; for example, the
+multiplication operator has higher precedence than the addition operator:
+ For example x = 7 + 3 * 2; Here x is assigned 13, not 20 because
+operator * has higher precedence than + so it first get multiplied with 3*2
+and then adds into 7.
+ Operators with the highest precedence appear at the top of the table,
+those with the lowest appear at the bottom. Within an expression, higher
+precedence operators will be evaluated first.
+15年1月21日
+
+Maninder Kaur
+
+13
+
+Operators Precedence in C
+Operators
+-, ++, --, !
+*, /, %
++, <, <=, >, >=
+==, !=
+&&
+||
+
+15年1月21日
+
+Priority
+Highest
+
+Lowest
+
+Maninder Kaur
+
+Associativity
+Right to left
+Left to right
+Left to right
+Left to right
+Left to right
+Left to right
+Left to right
+
+14
+
+Any questions please?
+15年1月21日
+
+Maninder Kaur
+
+15
+
+

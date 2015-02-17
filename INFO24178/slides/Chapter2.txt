@@ -1,0 +1,650 @@
+WINTER 2015
+SHERIDAN COLLEGE
+Abdul Mustafa
+
+• Reading assignment:
+• Ciampa, Ch 2
+
+• Slides are taken mostly from the text book (Ciampa)
+
+• Web video:
+• Social Engineering (Lesson 1) The Art of Deception
+
+(c) Abdul Mustafa
+
+• Reference:
+
+• http://youtu.be/xn9hH1BckPE
+
+2
+
+• Describe the differences between a virus and a worm
+
+• Identify different kinds of malware that is designed for profit
+
+• Describe the types of social engineering psychological attacks
+
+(c) Khaled Mahmud
+
+• List the types of malware that conceals its appearance
+
+• Explain physical social engineering attacks
+
+3
+
+• Malicious software (malware)
+• Enters a computer system:
+• Without the owner’s knowledge or consent
+
+• Primary objectives of malware
+• Infecting systems – rapidly spreading
+• Concealing its purpose
+• Making profit for creator
+
+(c) Khaled Mahmud
+
+• Refers to a wide variety of damaging or annoying software
+
+4
+
+• Viruses
+• Malicious computer code that reproduces itself on the same computer
+
+• Appender infection
+• Virus appends itself to end of a file
+• Moves first three bytes of original file to virus code
+• Replaces them with a jump instruction pointing to the virus code
+
+(c) Khaled Mahmud
+
+• Virus infection methods
+
+5
+
+• Virus infection methods (cont’d.)
+• Swiss cheese infection
+• Viruses inject themselves into executable code
+• Original code transferred and stored inside virus code
+• Host code executes properly after the infection
+•
+•
+•
+•
+
+Virus splits into several parts
+Parts placed at random positions in host program
+Head of virus code starts at beginning of file
+Gives control to next piece of virus code
+
+(c) Khaled Mahmud
+
+• Split infection
+
+6
+
+• When infected program is launched:
+• Virus replicates itself by spreading to another file on same computer
+• Virus activates its malicious payload
+• Or be much more harmful
+
+• Examples of virus actions
+•
+•
+•
+•
+
+Cause a computer to repeatedly crash
+Erase files from or reformat hard drive
+Turn off computer’s security settings
+Make multiple copies of itself until space is filled up in HDD.
+
+(c) Khaled Mahmud
+
+• Viruses may display an annoying message:
+
+7
+
+(c) Khaled Mahmud
+
+Figure 2-4 Annoying virus message
+© Cengage Learning 2012
+8
+
+• Virus cannot automatically spread to another computer
+• Viruses are attached to files
+• Viruses are spread by transferring infected files
+• Two carriers:
+• A file to which it attaches
+• Human to transport it to other computers.
+
+(c) Khaled Mahmud
+
+• Relies on user action to spread
+
+9
+
+• Types of computer viruses
+• Program
+• Infects executable files
+• Executes a script
+
+• Resident
+• Virus infects files opened by user or operating system
+
+(c) Khaled Mahmud
+
+• Macro
+
+10
+
+• Types of computer viruses (cont’d.)
+• Boot virus
+• Infects the Master Boot Record
+• Adds malicious copycat program to operating system
+
+(c) Khaled Mahmud
+
+• Companion virus
+
+11
+
+• Worm
+
+• Worms may:
+• Consume resources or
+• Leave behind a payload to harm infected systems
+
+• Examples of worm actions
+
+(c) Khaled Mahmud
+
+• Malicious program
+• Exploits application or operating system vulnerability
+• Sends copies of itself to other network devices
+
+• Deleting computer files
+• Allowing remote control of a computer by an attacker
+12
+
+(c) Khaled Mahmud
+
+Table 2-1 Difference between viruses and worms
+
+13
+
+• Trojans
+• Program that does something other than advertised
+• Typically executable programs
+• Sometimes made to appear as data file
+• Example
+• User downloads “free calendar program”
+• Program scans system for credit card numbers and passwords
+• Transmits information to attacker through network
+
+(c) Khaled Mahmud
+
+• Contain hidden code that launches an attack
+
+14
+
+• Software tools used by an attacker to hide actions or presence of other
+types of malicious software
+• Hide or remove traces of log-in records, log entries
+• May alter or replace operating system files with modified versions:
+• Specifically designed to ignore malicious activity
+
+(c) Khaled Mahmud
+
+• Rootkits
+
+15
+
+• Rootkits can be detected using programs that compare file contents
+with original files
+• Rootkits that operate at operating system’s lower levels:
+• Removal of a rootkit can be difficult
+• Rootkit must be erased
+• Original operating system files must be restored
+• Reformat hard drive and reinstall operating system
+
+(c) Khaled Mahmud
+
+• May be difficult to detect
+
+16
+
+• Logic bomb
+• Computer code that lies dormant
+
+• Difficult to detect before it is triggered
+
+• Backdoor
+• Software code that circumvents normal security to give program access
+• Common practice by developers
+• Intent is to remove backdoors in final application
+
+(c) Khaled Mahmud
+
+• Triggered by a specific logical event
+• Then performs malicious activities
+
+17
+
+(c) Khaled Mahmud
+
+Table 2-2 Famous logic bombs
+
+18
+
+•
+•
+•
+•
+
+Botnets
+Spyware
+Adware
+Keyloggers
+
+(c) Khaled Mahmud
+
+• Types of malware designed to profit attackers
+
+19
+
+• Botnets
+• Computer is infected with program that allows it to be remotely
+controlled by attacker
+
+• Infected computer called a zombie
+• Groups of zombie computers together called botnet
+
+• Early botnet attackers used Internet Relay Chat to remotely control
+zombies
+
+(c) Khaled Mahmud
+
+• Often payload of Trojans, worms, and viruses
+
+• HTTP is often used today
+
+20
+
+• Botnets’ advantages for attackers
+• Operate in the background:
+• Provide means for concealing actions of attacker
+• Can remain active for years
+• Large percentage of zombies are accessible at a given time
+• Due to growth of always-on Internet services
+
+(c) Khaled Mahmud
+
+• Often with no visible evidence of existence
+
+21
+
+(c) Khaled Mahmud
+
+Table 2-3 Uses of botnets
+22
+
+• Spyware
+
+• Advertising
+• Collecting personal information
+• Changing computer configurations
+
+(c) Khaled Mahmud
+
+• Software that gathers information without user consent
+• Usually used for:
+
+23
+
+•
+•
+•
+•
+•
+•
+
+Slows computer performance
+Causes system instability
+May install new browser menus or toolbars
+May place new shortcuts
+May hijack home page
+Causes increased pop-ups
+
+(c) Khaled Mahmud
+
+• Spyware’s negative effects
+
+24
+
+(c) Khaled Mahmud
+
+Table 2-4 Technologies used by spyware
+
+25
+
+• Adware
+• Program that delivers advertising content:
+• Typically displays advertising banners and pop-up ads
+• May open new browser windows randomly
+• Can also perform tracking of online activities
+
+(c) Khaled Mahmud
+
+• In manner unexpected and unwanted by the user
+
+26
+
+•
+•
+•
+•
+
+May display objectionable content
+Frequent pop-up ads cause lost productivity
+Pop-up ads slow computer or cause crashes
+Unwanted ads can be a nuisance
+
+(c) Khaled Mahmud
+
+• Downsides of adware for users
+
+27
+
+• Program that captures user’s keystrokes
+• Information later retrieved by attacker
+• Attacker searches for useful information
+• Passwords
+• Credit card numbers
+• Personal information
+
+(c) Khaled Mahmud
+
+• Keyloggers
+
+28
+
+• Keyloggers (cont’d.)
+• Inserted between computer keyboard and connector
+• Unlikely to be detected
+• Attacker physically removes device to collect information
+
+(c) Khaled Mahmud
+
+• Can be a small hardware device
+
+29
+
+(c) Khaled Mahmud
+
+Figure 2-6 Hardware keylogger
+© Cengage Learning 2012
+
+r
+
+30
+
+(c) Khaled Mahmud
+
+Figure 2-7 Information captured by a software keylogger
+© Cengage Learning 2012
+
+31
+
+• Hybrid Threats
+• http://www.sans.edu/research/security-laboratory/article/hybridthreats-did
+
+(c) Khaled Mahmud
+
+• Hybrid threat platform
+• TDL-4
+• Zeus
+
+32
+
+33
+
+(c) Khaled Mahmud
+
+• Directly gathering information from individuals
+• Relies on trusting nature of individuals
+•
+•
+•
+•
+
+Goal: persuade the victim to provide information or take action
+Flattery or flirtation
+Conformity
+Friendliness
+
+(c) Khaled Mahmud
+
+• Psychological approaches
+
+34
+
+• Attacker will ask for only small amounts of information
+• Often from several different victims
+
+• Before victim suspects anything
+
+• Attacker may smile and ask for help
+
+(c) Khaled Mahmud
+
+• Request needs to be believable
+• Attacker “pushes the envelope” to get information:
+
+35
+
+• True example of social engineering attack
+• One attacker called human resources office
+• Asked for and got names of key employees
+• Pretended to have lost key code
+• Let in by friendly employee
+• Entered another secured area in the same way
+
+• Group had learned CFO was out of town
+• Because of his voicemail greeting message
+
+(c) Khaled Mahmud
+
+• Small group of attackers approached door to building
+
+36
+
+•
+•
+•
+•
+
+Group entered CFO’s office
+Gathered information from unprotected computer
+Dug through trash to retrieve useful documents
+One member called help desk from CFO’s office
+• Pretended to be CFO
+• Asked for password urgently
+• Help desk gave password
+
+• Group left building with complete network access
+
+(c) Khaled Mahmud
+
+• True example of social engineering attack (cont’d.)
+
+37
+
+• Impersonation
+•
+•
+•
+•
+
+Help desk support technician
+Repairperson
+Trusted third party
+Individuals in roles of authority
+
+(c) Khaled Mahmud
+
+• Attacker pretends to be someone else
+
+38
+
+• Phishing
+• Sending an email claiming to be from legitimate source
+• May contain legitimate logos and wording
+
+• Variations of phishing
+• Pharming
+• Automatically redirects user to fraudulent Web site
+
+(c) Khaled Mahmud
+
+• Tries to trick user into giving private information
+
+39
+
+• Variations of phishing (cont’d.)
+• Spear phishing
+• Email messages target specific users
+• Going after the “big fish”
+• Targeting wealthy individuals
+
+• Vishing (voice phishing)
+• Attacker calls victim with recorded “bank” message with callback number
+• Victim calls attacker’s number and enters private information
+
+(c) Khaled Mahmud
+
+• Whaling
+
+40
+
+(c) Khaled Mahmud
+
+Figure 2-8 Phishing message
+© Cengage Learning 2012
+
+41
+
+• Ways to recognize phishing messages
+• Deceptive Web links
+
+•
+•
+•
+•
+
+Variations of legitimate addresses
+Presence of vendor logos that look legitimate
+Fake sender’s address
+Urgent request
+
+(c) Khaled Mahmud
+
+• @ sign in middle of address
+
+42
+
+• Spam
+
+• Spim: targets instant messaging users
+• Image spam
+• Uses graphical images of text
+• Circumvents text-based filters
+• Often contains nonsense text
+
+(c) Khaled Mahmud
+
+• Unsolicited e-mail
+• Primary vehicles for distribution of malware
+• Sending spam is a lucrative business
+
+43
+
+• Spammer techniques
+• GIF layering
+
+• Word splitting
+• Horizontally separating words
+• Can still be read by human eye
+
+• Geometric variance
+• Uses speckling and different colors so no two emails appear to be the same
+
+(c) Khaled Mahmud
+
+• Image spam divided into multiple images
+• Layers make up one complete legible message
+
+44
+
+(c) Khaled Mahmud
+
+Figure 2-10 Image spam
+© Cengage Learning 2012
+
+45
+
+• Hoaxes
+• False warning or claim
+• May be first step in an attack
+• Dumpster diving
+• Digging through trash to find useful information
+
+• Tailgating
+• Following behind an authorized individual through an access door
+
+(c) Khaled Mahmud
+
+• Physical procedures
+
+46
+
+(c) Khaled Mahmud
+
+Table 2-5 Dumpster diving items and their usefulness
+47
+
+• Tailgater calls “please hold the door”
+• Waits outside door and enters when authorized employee leaves
+• Employee conspires with unauthorized person to walk together
+through open door
+
+• Shoulder surfing
+• Casually observing user entering keypad code
+
+(c) Khaled Mahmud
+
+• Methods of tailgating
+
+48
+
+(c) Khaled Mahmud
+
+• Malware is software that enters a computer system without the
+owner’s knowledge or consent
+• Malware that spreads include computer viruses and worms
+• Malware that conceals include Trojans, rootkits, logic bombs, and
+backdoors
+• Malware with a profit motive includes botnets, spyware, adware,
+and keyloggers
+
+49
+
+(c) Khaled Mahmud
+
+• Social engineering is a means of gathering information for an attack
+from individuals
+• Types of social engineering approaches include phishing,
+impersonation, dumpster diving, and tailgating
+
+50
+
+

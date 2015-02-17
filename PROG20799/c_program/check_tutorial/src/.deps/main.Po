@@ -1,0 +1,5 @@
+main.o: main.c /usr/include/stdc-predef.h money.h
+
+/usr/include/stdc-predef.h:
+
+money.h:

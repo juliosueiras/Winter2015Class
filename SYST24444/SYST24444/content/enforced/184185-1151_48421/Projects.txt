@@ -1,0 +1,58 @@
+SYST24444
+Project Examples
+1. Course Comparison System(CCS):
+The project should compare the details of courses on the basis
+of following criteria:
+A student should be able to enter the relevant name of course
+and
+1. Course Duration
+2. Course Fee
+3. University course
+4. College course
+5. Weekdays/weekend
+2.E-shopping Portal(Auto, Electronics, Furniture, Appliances)
+Create an E-Shopping portal that provides the details of
+product on the basis of entered criteria. For example, if
+you choose product as used car, it should provide you the
+information on the basis of following criteria:
+1. Name of Make
+2. Name of Model
+3. Year of make
+4. Range of price
+5. Range of KM.
+
+3.
+
+Toronto Recreation Centre(TRC)
+Toronto recreation Centre provides various recreation
+facilities to children, adults and senior citizens. The web
+site provides the complete details of the various activities
+and secures registration facility. There are special
+discounts to the regular/returned customers.
+
+4. Toronto Student Housing Accommodation(TSHA):
+TSHA takes housing requirements from the students and
+provide them with the best available housing options. The
+input taken from user may be location, type of house,
+rent, etc.
+5. Toronto Tourism Information System(TTIS)
+Select at least four tourist places in Toronto and provide
+the complete details about every place. The details may
+include
+1. Location
+2. Plan
+3. Commuting facilities
+4. Stay
+5. App cost(day/week)
+6. Eat and drink
+7. Sports/adventures
+8. Contact
+
+6. Green Flyers
+A web site that provides the information on all the flyers
+pertaining to certain class of goods (furniture, auto,
+electronics, housing material, grocery). It should also
+provide a comparative study on the list prices so that it
+could help the consumers to a great extent.
+
+

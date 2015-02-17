@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title></title>
+        <script type="text/javascript">
+            var x;
+            var y;
+            x=Number(prompt("Enter something for x"));
+            y=Number(prompt("Enter something for y"));
+            sum=x+y;
+            alert("Value of" + sum);
+        </script>
+        <style>
+            #container{
+                height:700px;
+                width:900px;
+                margin:0px;
+                border:2px solid red;
+            }
+
+            #container #header{
+                height:100px;
+                font-size:60px;
+                font-align:center;
+                background:navy;
+                color:yellow;
+            }
+
+            #container #content #col1{
+                height:500px;
+                width:500px;
+                font-align:center;
+                background:red;
+                color:red;
+                float:left;
+            }
+            #container #content #col2{
+                height:500px;
+                width:500px;
+                font-align:center;
+                background:red;
+                color:red;
+                float:left;
+            }
+            #container #footer{
+                height:500px;
+                width:500px;
+                font-align:center;
+                background:red;
+                color:red;
+                float:left;
+            }
+        </style>
+    </head>
+    <body>
+    <form>
+        <!-- User Name<input type="TEXT"></br> -->
+        <!-- Passoword<input type="Passoword"></br> -->
+        <!-- <input type="submit" value="submit"> -->
+        <!-- <input type="RESET" value="Reset"> -->
+        <div id="container">
+            <div id="header">This is the header section</div>
+        <div id="content">
+            <div id="col1">This is column 1</div>
+            <div id="col2">This is column 2</div>
+        </div>
+        <div id="footer">This is the footer section</div>
+        </div>
+
+    </form>
+    </body>
+</html>
