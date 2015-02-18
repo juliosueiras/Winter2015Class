@@ -1,0 +1,46 @@
+			&nbsp;
+
+
+
+
+
+
+
+
+
+RCR
+
+
+
+
+	memory, immediate
+	REG, immediate
+	memory, CL
+	REG, CL
+
+
+
+
+Rotate operand1 right through Carry Flag. The number of rotates is set by operand2.
+
+Algorithm:
+
+
+	shift all bits right, the bit that goes off is set to
+	CF and previous value of CF is inserted to the left-most position.
+
+
+Example:STC               ; set carry (CF=1).
+MOV AL, 1Ch       ; AL = 00011100b
+RCR AL, 1         ; AL = 10001110b,  CF=0.
+RET
+
+
+
+ C O 
+ r r 
+
+
+OF=0 if first operand keeps original sign.
+
+TOP

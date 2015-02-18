@@ -1,0 +1,45 @@
+^I^I^I&nbsp;
+
+
+
+
+
+
+
+
+
+ROL
+
+
+
+
+^Imemory, immediate
+^IREG, immediate
+^Imemory, CL
+^IREG, CL
+
+
+
+
+Rotate operand1 left. The number of rotates is set by operand2.
+
+Algorithm:
+
+
+^Ishift all bits left, the bit that goes off is set to
+^ICF and the same bit is inserted to the right-most position.
+
+
+Example:MOV AL, 1Ch       ; AL = 00011100b
+ROL AL, 1         ; AL = 00111000b,  CF=0.
+RET
+
+
+
+ C O 
+ r r 
+
+
+OF=0 if first operand keeps original sign.
+
+TOP

@@ -1,0 +1,50 @@
+^I^I^I&nbsp;
+
+
+
+
+
+
+
+
+
+JZ
+
+
+
+
+^Ilabel
+
+
+
+
+Short Jump if Zero (equal).
+Set by CMP, SUB, ADD, TEST, AND, OR, XOR instructions.
+Algorithm:
+
+
+^Iif ZF = 1 then jump
+
+
+^I
+^Iexample for emu8086 emulator:
+
+   include 'emu8086.inc'
+   ORG 100h
+   MOV AL, 5
+   CMP AL, 5
+   JZ  label1
+   PRINT 'AL is not equal to 5.'
+   JMP exit
+label1:
+   PRINT 'AL is equal to 5.'
+exit:
+   RET
+
+
+
+ C Z S O P A 
+ unchanged 
+
+
+TOP

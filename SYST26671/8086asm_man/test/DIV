@@ -1,0 +1,50 @@
+^I^I^I&nbsp;
+
+
+
+
+
+
+
+
+
+DIV
+
+
+
+
+^I
+^IREG
+^Imemory
+^I
+
+
+
+
+Unsigned divide.
+Algorithm:
+ 
+^I when operand is a byte:
+^I AL = AX / operand
+^I AH = remainder (modulus)
+^I 
+ 
+
+ 
+^Iwhen operand is a word:
+^IAX = (DX AX) / operand
+^IDX = remainder (modulus)
+^I
+ 
+ Example:MOV AX, 203   ; AX = 00CBh
+MOV BL, 4
+DIV BL        ; AL = 50 (32h), AH = 3
+RET
+
+
+
+ C Z S O P A 
+ ? ? ? ? ? ? 
+
+
+TOP

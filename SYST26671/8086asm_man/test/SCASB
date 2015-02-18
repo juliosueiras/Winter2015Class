@@ -1,0 +1,44 @@
+^I^I^I&nbsp;
+
+
+
+
+
+
+
+
+
+
+SCASB
+
+
+No operands
+
+
+Compare bytes: AL from ES:[DI]. Algorithm:
+
+
+
+AL - ES:[DI]
+set flags according to result: OF, SF, ZF, AF, PF, CF
+if DF = 0 then
+^I
+^IDI = DI + 1
+^I
+^Ielse
+^I
+^IDI = DI - 1
+^I
+
+
+
+
+
+
+
+
+ C Z S O P A 
+ r r r r r r 
+
+
+TOP

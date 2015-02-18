@@ -1,0 +1,90 @@
+; not used in version 5.00
+
+
+MASM_PATH=
+MASM_LINK_PATH=
+MASM_INCLUDE_PATH=
+
+STARTUPWIN=false
+
+ACTIVATE_SCREEN_WHEN_STOPPED=true
+
+ACTIVATE_SCREEN=true
+
+LISTING=true
+                                                            ; warn before running executables outside of the emulator
+WARN_RUN=true
+                                                            
+ASK_OPEN_URL=true
+                                                            ; default vdrive path is \vdrive\ 
+VDRIVE_PATH=default
+                                                            ; i/o file
+EMUPORT=d:\emu\emu8086.io
+                                                            
+                                                            
+                                                            
+                                                            
+
+                                                            ; initial state of Interrupt Flag (IF). true=1, false=0.
+HARDWARE_INTERRUPTS=true
+                                                            ; harware interrupts file
+HW_INTERRUPT_FILE=d:\emu\emu8086.hw
+                                                            ;======================================================
+                                                            
+                                                            ; other fonts can be set from the options
+
+LEXICAL_FLAG_ANALYZER_FONT_SIZE=default
+LEXICAL_FLAG_ANALYZER_FONT_FACE=default
+
+VAR_FONT_SIZE=default
+VAR_FONT_FACE=default
+
+DEBUG_LOG_FONT_SIZE=default
+DEBUG_LOG_FONT_FACE=default
+
+                                                            ;======================================================
+ENABLE_STEP_BACK=true
+MAXIMUM_STEPS_BACK=default
+MAXIMUM_FILES_TO_TRACK=default
+                                                            ; warn about un-step-backable file operations (emulation only)
+FILE_UNDO_NOTE=true
+                                                            ; files with these extensions are to be opened in editor rather than in the emulator
+ASCII_EXTENTIONS=.cpp,.java,.vb,.c,.ini,.cgi,.inf,.binf,.pl,.js,.bat,.txt,.doc,.htm,.html,.log,.symbol,.inc,.bas,.h,.hla,.lst,.list,.asm_,.txt_,.html_,.cpp_,.java_,.vb_,.c_,.js_,.bat_,.doc_,.htm_,.log_,.symbol_,.inc_,.bas,.h_,.pdf,.pdf_,.iss,.~asm,.cs
+
+                                                            ; beep for ASCII code 7 and keyboard buffer overflow
+BEEP=true
+
+                                                            ; allow #start=...# directive to launch devices outside \devices\
+START_OUTSIDE_DEVICES_FOLDER=false
+
+                                                            ; check if operands do not match, for example: 16 bit register and 8 bit effective address
+STRICT_SYNTAX=true
+
+                                                            ; number of recent files on file menu (max 20)
+RECENT_FILES=default
+
+
+UPDATE_CHECK=0
+       
+                                                   
+TRIM_ORIGINAL_SOURCE=true                                   ; trim lines of the original source code (for emulator only)
+
+                                                            ; save emulator's state in ascii instead of binary (not possible to reload).
+SAVE_ASCII_STATE=true
+
+                                                            ; if set "SCREEN_HOTKEYS=true" the emulator screen accepts hot-keys such as F8, F11, etc... 
+                                                            ; and these keys are not written to the keyboard buffer.
+SCREEN_HOTKEYS=true
+
+                                                            ; by default Notepad is used to view the listing, symbol table and exported HTML code.
+ASCII_VIEWER=default
+
+                                                            ; fix Terminal font when its width is less than 8 pixels
+FIX_SMALL_FONTS=true
+
+                                                            ; when set "true" small status window is not shown for batch assembly of several source files. For example: "emu8086 /a d:\sources"
+SILENT_ASSEMBLER=false
+
+                                                            ; when set "false" a backup is not saved and the binary file is overwritten without a notice even if it's outside of Build directory.
+ALWAYS_BACKUP=true
+

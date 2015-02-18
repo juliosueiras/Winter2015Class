@@ -1,0 +1,57 @@
+^I^I^I&nbsp;
+
+
+
+
+
+
+
+
+
+LDS
+
+
+
+
+^I
+^IREG, memory
+^I
+
+
+
+
+Load memory double word into word register and DS.
+Algorithm:
+
+
+    REG = first word
+^IDS = second word
+
+
+
+Example:
+
+
+
+ORG 100h
+
+LDS AX, m
+
+RET
+
+m  DW  1234h
+   DW  5678h
+
+END
+
+
+AX is set to 1234h, DS is set to 5678h.
+
+
+
+
+ C Z S O P A 
+ unchanged 
+
+
+TOP

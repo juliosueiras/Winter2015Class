@@ -1,0 +1,31 @@
+			&nbsp;
+
+
+
+
+
+
+
+
+
+STD
+
+
+No operands
+
+
+Set Direction flag. SI and DI will be decremented by chain
+instructions: CMPSB, CMPSW, LODSB, LODSW, MOVSB, MOVSW, STOSB, STOSW. Algorithm:
+
+
+DF = 1
+
+
+
+
+
+ D 
+ 1 
+
+
+TOP

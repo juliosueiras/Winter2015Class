@@ -1,6 +1,7 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
-CFLAGS=-Wall
+CFLAGS=-Wall -Wextra
+AM_CFLAGS=-g
 LIBS=-lcheck
 
 AC_PREREQ([2.69])

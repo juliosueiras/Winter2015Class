@@ -1,0 +1,11 @@
+
+0000:0000 - System.bin
+F000:0000 - Rom.bin
+12AC - BIOS_ROM
+0040h:004A - BIOS_ROM
+
+
+; for use rename this file to "CUSTOM_MEMORY_MAP.inf"  (without "NO_" prefix).
+; see documentation at:
+; http://www.emu8086.com/assembly_language_tutorial_assembler_reference/custom_memory_map.html
+

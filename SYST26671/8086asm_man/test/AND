@@ -1,0 +1,45 @@
+^I^I^I&nbsp;
+
+
+
+
+
+
+
+
+
+AND
+
+
+
+
+^I
+^IREG, memory
+^Imemory, REG
+^IREG, REG
+^Imemory, immediate
+^IREG, immediate
+^I
+
+
+
+
+Logical AND between all bits of two operands. Result is stored in operand1.
+These rules apply:
+
+1 AND 1 = 1
+1 AND 0 = 0
+0 AND 1 = 0
+0 AND 0 = 0
+
+Example:MOV AL, 'a'        ; AL = 01100001b
+AND AL, 11011111b  ; AL = 01000001b  ('A')
+RET
+
+
+
+ C Z S O P 
+ 0 r r 0 r 
+
+
+TOP

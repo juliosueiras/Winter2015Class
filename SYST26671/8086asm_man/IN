@@ -1,0 +1,37 @@
+ 			&nbsp;
+
+
+
+
+
+
+
+IN
+
+
+
+
+	
+	AL, byte
+	AL, DX
+	AX, byte
+	AX, DX
+	
+
+
+
+
+Input from port into AL or AX.
+Second operand is a port number. If required to access
+port number over 255 - DX register should be used.
+Example:IN AX, 4  ; get status of traffic lights.
+IN AL, 7  ; get status of stepper-motor.
+
+
+
+
+ C Z S O P A 
+ unchanged 
+
+
+TOP

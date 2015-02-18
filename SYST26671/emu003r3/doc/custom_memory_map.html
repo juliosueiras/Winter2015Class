@@ -1,0 +1,74 @@
+
+<HTML>
+
+<HEAD>
+
+<TITLE>Custom Memory Map</TITLE>
+
+<META name="description" content="Custom Memory Map">
+
+<META name="keywords" content="custom memory map, 8086">
+
+
+
+</HEAD>
+
+<BODY>
+
+
+
+<FONT FACE="Courier" SIZE=3>
+
+<FONT SIZE=+2>
+<B>Custom Memory Map</B>
+</FONT>
+
+<BR><BR>
+
+<BR>
+
+
+Memory configuration file: <B>custom_memory_map.inf</B>
+
+<BR><BR>
+
+<TABLE BORDER=1 CELLPADDING=10><TR><TD>
+
+<FONT FACE="Courier">
+NO_SYS_INFO<BR>
+0000:0000 - System.bin<BR>
+F000:0000 - Rom.bin<BR>
+12AC - Data.dat<BR>
+</FONT>
+
+</TD></TR>
+</TABLE>
+
+<BR><BR>
+
+Interrupts may malfunction if interrupt vector is broken or overwritten.
+<BR><BR>
+<B>NO_SYS_INFO</B> directive restricts overwriting system information area.<BR><BR>
+<!-- (memory from 00400h to 00500h) -->
+
+<BR><BR>
+
+
+<HR>
+
+<BR><BR>
+
+
+
+</FONT>
+
+
+
+<BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
+<BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
+
+
+
+</BODY>
+
+</HTML>

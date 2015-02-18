@@ -1,0 +1,50 @@
+0100   ; load segment.
+0000   ; load offset.
+00     ;   AL
+00     ;   AH
+00     ;   BL
+00     ;   BH
+00     ;   CL
+00     ;   CH
+00     ;   DL
+00     ;   DH
+0100   ;   DS
+0100   ;   ES
+0000   ;   SI
+0000   ;   DI
+0000   ;   BP
+0100   ;   CS
+0000   ;   IP
+0100   ;   SS
+FFFE   ;   SP
+
+
+
+
+; notes:
+
+; all values are in hexadecimal!
+
+; line numbers are important for correct loading, for example,
+; the value of AL register is always loaded from the third line, no matter what the comment says.
+; this file is used by the emulator to decide at what address to load the file and what
+; register values to set before starting the execution.
+
+; this file is used only if file does not have its own binary information file:
+; personal information file has the same file name and it has ".binf" extension.
+; for example, when emu8086 assembler saves test.bin it creates test.binf
+
+
+
+
+; ret instruction will pop address ff00. at offset ff00 there is f4 - HLT instruction.
+MEM=0100:FFFE,00FF-0100:FF00,F4
+
+; "#mem=..." directive can be used to write values to memory before program starts.
+; #MEM=nnnn,[bytestring]-nnnn:nnnn,[bytestring]# 
+; for example:
+; #MEM=1000,01ABCDEF0122-0200,1233#
+; all values are in hex, nnnn - for physical address, or (nnnn:nnnn) for logical address.
+; "-" separates the entries. spaces are allowed inside.
+
+

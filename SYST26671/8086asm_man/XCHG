@@ -1,0 +1,45 @@
+			&nbsp;
+
+
+
+
+
+
+
+
+
+
+
+XCHG
+
+
+
+
+	
+	REG, memory
+	memory, REG
+	REG, REG
+	
+
+
+
+
+Exchange values of two operands.
+Algorithm:
+
+operand1 &lt; - > operand2
+
+
+Example:MOV AL, 5
+MOV AH, 2
+XCHG AL, AH   ; AL = 2, AH = 5
+XCHG AL, AH   ; AL = 5, AH = 2
+RET
+
+
+
+ C Z S O P A 
+ unchanged 
+
+
+TOP

@@ -1,0 +1,6 @@
+EXPORTS
+disassemble
+tfunc
+analyse
+s_Last_analyse_ERROR
+yur_init_analyser

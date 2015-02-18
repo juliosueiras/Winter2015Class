@@ -1,0 +1,47 @@
+			&nbsp;
+
+
+
+
+
+
+
+
+
+AAA
+
+
+No operands
+
+
+ASCII Adjust after Addition.
+Corrects result in AH and AL after addition
+when working with BCD values.  It works according to the following Algorithm:
+
+
+if low nibble of AL > 9 or AF = 1 then:
+
+AL = AL + 6
+AH = AH + 1
+AF = 1
+CF = 1
+
+else
+
+AF = 0
+CF = 0
+
+in both cases:
+clear the high nibble of AL.
+
+Example:MOV AX, 15   ; AH = 00, AL = 0Fh
+AAA          ; AH = 01, AL = 05
+RET
+
+
+
+ C Z S O P A 
+ r ? ? ? ? r 
+
+
+TOP

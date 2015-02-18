@@ -1,0 +1,56 @@
+^I^I^I&nbsp;
+
+
+
+
+
+
+
+
+
+MOVSB
+
+
+No operands
+
+
+Copy byte at DS:[SI] to ES:[DI].
+Update SI and DI.Algorithm:
+
+
+
+ES:[DI] = DS:[SI]
+if DF = 0 then
+^I
+^ISI = SI + 1
+^IDI = DI + 1
+^I
+^Ielse
+^I
+^ISI = SI - 1
+^IDI = DI - 1
+^I
+
+
+
+Example:
+ORG 100h
+
+CLD
+LEA SI, a1
+LEA DI, a2
+MOV CX, 5
+REP MOVSB
+
+RET
+
+a1 DB 1,2,3,4,5
+a2 DB 5 DUP(0)
+
+
+
+ C Z S O P A 
+ unchanged 
+
+
+TOP

@@ -1,0 +1,43 @@
+			&nbsp;
+
+
+
+
+
+
+
+
+
+ADC
+
+
+
+
+	
+	REG, memory
+	memory, REG
+	REG, REG
+	memory, immediate
+	REG, immediate
+	
+
+
+
+
+Add with Carry.
+Algorithm:
+
+operand1 = operand1 + operand2 + CF
+
+Example:STC        ; set CF = 1
+MOV AL, 5  ; AL = 5
+ADC AL, 1  ; AL = 7
+RET
+
+
+
+ C Z S O P A 
+ r r r r r r 
+
+
+TOP

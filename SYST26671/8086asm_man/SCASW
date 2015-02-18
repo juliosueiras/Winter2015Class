@@ -1,0 +1,43 @@
+			&nbsp;
+
+
+
+
+
+
+
+
+
+SCASW
+
+
+No operands
+
+
+Compare words: AX from ES:[DI]. Algorithm:
+
+
+
+AX - ES:[DI]
+set flags according to result: OF, SF, ZF, AF, PF, CF
+if DF = 0 then
+	
+	DI = DI + 2
+	
+	else
+	
+	DI = DI - 2
+	
+
+
+
+
+
+
+
+
+ C Z S O P A 
+ r r r r r r 
+
+
+TOP

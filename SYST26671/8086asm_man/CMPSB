@@ -1,0 +1,45 @@
+			&nbsp;
+
+
+
+
+
+
+
+
+
+CMPSB
+
+
+No operands
+
+
+Compare bytes: ES:[DI] from DS:[SI]. Algorithm:
+
+
+
+DS:[SI] - ES:[DI]
+set flags according to result: OF, SF, ZF, AF, PF, CF
+if DF = 0 then
+	
+	SI = SI + 1
+	DI = DI + 1
+	
+	else
+	
+	SI = SI - 1
+	DI = DI - 1
+	
+
+
+
+
+
+
+
+
+ C Z S O P A 
+ r r r r r r 
+
+
+TOP

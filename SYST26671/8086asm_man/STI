@@ -1,0 +1,32 @@
+			&nbsp;
+
+
+
+
+
+
+
+
+
+
+
+STI
+
+
+No operands
+
+
+Set Interrupt enable flag. This enables hardware interrupts. Algorithm:
+
+
+IF = 1
+
+
+
+
+
+ I 
+ 1 
+
+
+TOP

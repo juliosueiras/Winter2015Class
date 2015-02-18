@@ -1,0 +1,44 @@
+			&nbsp;
+
+
+
+
+
+
+
+
+
+RETF
+
+
+No operands
+or even immediate
+
+
+Return from Far procedure.
+Algorithm:
+
+
+	
+		Pop from stack:
+		
+		IP
+		CS
+		
+	
+	
+	if immediate operand is present:
+	SP = SP + operand
+	
+
+
+
+
+
+
+
+ C Z S O P A 
+ unchanged 
+
+
+TOP

@@ -1,0 +1,32 @@
+			&nbsp;
+
+
+
+
+
+
+
+
+
+CLD
+
+
+No operands
+
+
+Clear Direction flag. SI and DI will be incremented by chain
+instructions: CMPSB, CMPSW, LODSB, LODSW, MOVSB, MOVSW, STOSB, STOSW. Algorithm:
+
+
+DF = 0
+
+
+
+
+
+
+ D 
+ 0 
+
+
+TOP

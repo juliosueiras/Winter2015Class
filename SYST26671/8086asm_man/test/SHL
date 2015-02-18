@@ -1,0 +1,47 @@
+^I^I^I&nbsp;
+
+
+
+
+
+
+
+
+
+
+SHL
+
+
+
+
+^Imemory, immediate
+^IREG, immediate
+^Imemory, CL
+^IREG, CL
+
+
+
+
+Shift operand1 Left. The number of shifts is set by operand2.
+
+Algorithm:
+
+
+^IShift all bits left, the bit that goes off is set to CF.
+^IZero bit is inserted to the right-most position.
+
+
+Example:MOV AL, 11100000b
+SHL AL, 1         ; AL = 11000000b,  CF=1.
+
+RET
+
+
+
+ C O 
+ r r 
+
+
+OF=0 if first operand keeps original sign.
+
+TOP

@@ -1,0 +1,53 @@
+^I^I^I&nbsp;
+
+
+
+
+
+
+
+
+
+LODSW
+
+
+No operands
+
+
+Load word at DS:[SI] into AX. Update SI.Algorithm:
+
+
+
+AX = DS:[SI]
+if DF = 0 then
+^I
+^ISI = SI + 2
+^I
+^Ielse
+^I
+^ISI = SI - 2
+^I
+
+
+
+Example:
+
+
+ORG 100h
+
+LEA SI, a1
+MOV CX, 5
+
+REP LODSW   ; finally there will be 555h in AX.
+
+RET
+
+a1 dw 111h, 222h, 333h, 444h, 555h
+
+
+
+ C Z S O P A 
+ unchanged 
+
+
+TOP

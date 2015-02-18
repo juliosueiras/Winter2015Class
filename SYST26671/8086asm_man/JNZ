@@ -1,0 +1,50 @@
+			&nbsp;
+
+
+
+
+
+
+
+
+
+JNZ
+
+
+
+
+	label
+
+
+
+
+Short Jump if Not Zero (not equal).
+Set by CMP, SUB, ADD, TEST, AND, OR, XOR instructions.
+Algorithm:
+
+
+	if ZF = 0 then jump
+
+
+	
+	example for emu8086 emulator:
+
+   include 'emu8086.inc'
+   ORG 100h
+   MOV AL, 00000111b   ; AL = 7
+   OR  AL, 0           ; just set flags.
+   JNZ label1
+   PRINT 'zero.'
+   JMP exit
+label1:
+   PRINT 'not zero.'
+exit:
+   RET
+
+
+
+ C Z S O P A 
+ unchanged 
+
+
+TOP

@@ -1,0 +1,56 @@
+^I^I^I&nbsp;
+
+
+
+
+
+
+
+
+
+LODSB
+
+
+No operands
+
+
+Load byte at DS:[SI] into AL. Update SI.Algorithm:
+
+
+
+AL = DS:[SI]
+if DF = 0 then
+^I
+^ISI = SI + 1
+^I
+^Ielse
+^I
+^ISI = SI - 1
+^I
+
+
+
+Example:
+
+
+ORG 100h
+
+LEA SI, a1
+MOV CX, 5
+MOV AH, 0Eh
+
+m: LODSB
+INT 10h
+LOOP m
+
+RET
+
+a1 DB 'H', 'e', 'l', 'l', 'o'
+
+
+
+ C Z S O P A 
+ unchanged 
+
+
+TOP

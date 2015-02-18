@@ -1,0 +1,49 @@
+			&nbsp;
+
+
+
+
+
+
+
+
+
+CALL
+
+
+
+
+	
+	procedure name
+	label
+	4-byte address
+	
+
+
+
+
+Transfers control to procedure, return address is (IP) is pushed to
+stack. 4-byte address may be entered in this form:
+1234h:5678h, first value is a segment second
+value is an offset (this is a far call, so CS is also pushed to stack).
+Example:
+ORG 100h  ; for COM file.
+
+CALL p1
+
+ADD AX, 1
+
+RET         ; return to OS.
+
+p1 PROC     ; procedure declaration.
+    MOV AX, 1234h
+    RET     ; return to caller.
+p1 ENDP
+
+
+
+ C Z S O P A 
+ unchanged 
+
+
+TOP

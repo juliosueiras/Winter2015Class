@@ -1,0 +1,45 @@
+^I^I^I&nbsp;
+
+
+
+
+
+
+
+
+
+CMPSW
+
+
+No operands
+
+
+Compare words: ES:[DI] from DS:[SI]. Algorithm:
+
+
+
+DS:[SI] - ES:[DI]
+set flags according to result: OF, SF, ZF, AF, PF, CF
+if DF = 0 then
+^I
+^ISI = SI + 2
+^IDI = DI + 2
+^I
+^Ielse
+^I
+^ISI = SI - 2
+^IDI = DI - 2
+^I
+
+
+
+
+
+
+
+
+ C Z S O P A 
+ r r r r r r 
+
+
+TOP

@@ -1,0 +1,54 @@
+^I^I^I&nbsp;
+
+
+
+
+
+
+
+
+
+STOSB
+
+
+No operands
+
+
+Store byte in AL into ES:[DI]. Update DI.Algorithm:
+
+
+
+ES:[DI] = AL
+if DF = 0 then
+^I
+^IDI = DI + 1
+^I
+^Ielse
+^I
+^IDI = DI - 1
+^I
+
+
+
+Example:
+
+
+ORG 100h
+
+LEA DI, a1
+MOV AL, 12h
+MOV CX, 5
+
+REP STOSB
+
+RET
+
+a1 DB 5 dup(0)
+
+
+
+ C Z S O P A 
+ unchanged 
+
+
+TOP

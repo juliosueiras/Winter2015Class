@@ -1,0 +1,78 @@
+			&nbsp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+LEA
+
+
+
+
+	
+	REG, memory
+	
+
+
+
+
+Load Effective Address.
+Algorithm:
+
+
+    REG = address of memory (offset)
+
+
+
+Example:
+<!-- START AUTOMATIC ASM TO HTML EXPORT -->
+
+MOV BX, 35h
+MOV DI, 12h
+LEA SI, [BX+DI]    ; SI = 35h + 12h = 47h 
+
+<!-- emu8086 version 4.00-Beta-19    -->
+<!-- STOP AUTOMATIC ASM TO HTML EXPORT -->
+
+Note: The integrated 8086 assembler automatically replaces LEA with a
+more efficient MOV where possible.
+For example:
+<!-- START AUTOMATIC ASM TO HTML EXPORT -->
+
+org 100h
+LEA AX, m       ; AX = offset of m
+RET
+m  dw  1234h
+END
+
+<!-- emu8086 version 4.00-Beta-19    -->
+<!-- STOP AUTOMATIC ASM TO HTML EXPORT -->
+
+
+
+
+ C Z S O P A 
+ unchanged 
+
+
+
+TOP

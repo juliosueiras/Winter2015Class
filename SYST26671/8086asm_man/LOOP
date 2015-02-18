@@ -1,0 +1,54 @@
+			&nbsp;
+
+
+
+
+
+
+
+
+
+LOOP
+
+
+
+
+	label
+
+
+
+
+Decrease CX, jump to label if CX not zero. Algorithm:
+
+
+
+CX = CX - 1
+if CX &lt;> 0 then
+	
+	jump
+	
+	else
+	
+	no jump, continue
+	
+
+
+
+	
+	example for emu8086 emulator:
+
+   include 'emu8086.inc'
+   ORG 100h
+   MOV CX, 5
+label1:
+   PRINTN 'loop!'
+   LOOP label1
+   RET
+
+   
+   
+    C Z S O P A 
+    unchanged 
+   
+   
+TOP

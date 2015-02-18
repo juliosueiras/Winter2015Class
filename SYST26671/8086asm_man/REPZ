@@ -1,0 +1,55 @@
+			&nbsp;
+
+
+
+
+
+
+
+
+
+
+REPZ
+
+
+
+
+	chain instruction
+
+
+
+
+Repeat following CMPSB, CMPSW, SCASB, SCASW instructions
+while ZF = 1 (result is Zero), maximum CX times.
+Algorithm:
+
+check_cx:
+if CX &lt;> 0 then
+
+	do following chain instruction
+	CX = CX - 1
+	if ZF = 1 then:
+		
+		go back to check_cx
+		
+	else
+		
+		exit from REPZ cycle
+		
+	
+
+else
+
+	exit from REPZ cycle
+
+
+
+
+
+
+
+ Z 
+ r  
+
+
+TOP

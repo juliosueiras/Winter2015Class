@@ -1,0 +1,55 @@
+^I^I^I&nbsp;
+
+
+
+
+
+
+
+
+
+
+REPZ
+
+
+
+
+^Ichain instruction
+
+
+
+
+Repeat following CMPSB, CMPSW, SCASB, SCASW instructions
+while ZF = 1 (result is Zero), maximum CX times.
+Algorithm:
+
+check_cx:
+if CX &lt;> 0 then
+
+^Ido following chain instruction
+^ICX = CX - 1
+^Iif ZF = 1 then:
+^I^I
+^I^Igo back to check_cx
+^I^I
+^Ielse
+^I^I
+^I^Iexit from REPZ cycle
+^I^I
+^I
+
+else
+
+^Iexit from REPZ cycle
+
+
+
+
+
+
+
+ Z 
+ r  
+
+
+TOP

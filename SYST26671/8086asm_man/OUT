@@ -1,0 +1,39 @@
+			&nbsp;
+
+
+
+
+
+
+OUT
+
+
+
+
+	
+	byte, AL
+	byte, AX
+	DX, AL
+	DX, AX
+	
+
+
+
+
+Output from AL or AX to port.
+First operand is a port number. If required to access
+port number over 255 - DX register should be used.
+
+Example:MOV AX, 0FFFh 
+OUT 4, AX    
+
+MOV AL, 100b 
+OUT 7, AL    
+
+
+
+ C Z S O P A 
+ unchanged 
+
+
+TOP

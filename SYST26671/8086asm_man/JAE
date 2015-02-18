@@ -1,0 +1,51 @@
+			&nbsp;
+
+
+
+
+
+
+
+
+
+JAE
+
+
+
+
+	label
+
+
+
+
+Short Jump if first operand is Above or Equal to second operand (as set by CMP instruction).
+Unsigned.
+Algorithm:
+
+
+	if CF = 0 then jump
+
+
+	
+	example for emu8086 emulator:
+
+
+   include 'emu8086.inc'
+   ORG 100h
+   MOV AL, 5
+   CMP AL, 5
+   JAE label1
+   PRINT 'AL is not above or equal to 5'
+   JMP exit
+label1:
+   PRINT 'AL is above or equal to 5'
+exit:
+   RET
+
+
+
+ C Z S O P A 
+ unchanged 
+
+
+TOP

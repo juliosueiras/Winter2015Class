@@ -1,0 +1,38 @@
+			&nbsp;
+
+
+
+
+
+
+
+
+
+IRET
+
+
+No operands
+
+
+Interrupt Return.
+Algorithm:
+
+
+	Pop from stack:
+	
+	IP
+	CS
+	flags register
+	
+
+
+
+
+
+
+
+ C Z S O P A 
+ popped 
+
+
+TOP

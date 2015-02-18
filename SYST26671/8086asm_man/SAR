@@ -1,0 +1,51 @@
+			&nbsp;
+
+
+
+
+
+
+
+
+
+
+SAR
+
+
+
+
+	memory, immediate
+	REG, immediate
+	memory, CL
+	REG, CL
+
+
+
+
+Shift Arithmetic operand1 Right. The number of shifts is set by operand2.
+
+Algorithm:
+
+
+	Shift all bits right, the bit that goes off is set to CF.
+	The sign bit that is inserted to the left-most position has
+	    the same value as before shift.
+
+
+Example:MOV AL, 0E0h      ; AL = 11100000b
+SAR AL, 1         ; AL = 11110000b,  CF=0.
+
+MOV BL, 4Ch       ; BL = 01001100b
+SAR BL, 1         ; BL = 00100110b,  CF=0.
+
+RET
+
+
+
+ C O 
+ r r 
+
+
+OF=0 if first operand keeps original sign.
+
+TOP

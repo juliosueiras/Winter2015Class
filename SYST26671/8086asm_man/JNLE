@@ -1,0 +1,50 @@
+			&nbsp;
+
+
+
+
+
+
+
+
+
+JNLE
+
+
+
+
+	label
+
+
+
+
+Short Jump if first operand is Not Less and Not Equal to second operand (as set by CMP instruction).
+Signed.
+Algorithm:
+
+
+	if (SF = OF) and (ZF = 0) then jump
+
+
+	
+	example for emu8086 emulator:
+
+   include 'emu8086.inc'
+   ORG 100h
+   MOV AL, 2
+   CMP AL, -3
+   JNLE label1
+   PRINT 'AL &lt;= -3.'
+   JMP exit
+label1:
+   PRINT 'Al > -3.'
+exit:
+   RET
+
+
+
+ C Z S O P A 
+ unchanged 
+
+
+TOP

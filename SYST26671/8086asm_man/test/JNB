@@ -1,0 +1,50 @@
+^I^I^I&nbsp;
+
+
+
+
+
+
+
+
+
+JNB
+
+
+
+
+^Ilabel
+
+
+
+
+Short Jump if first operand is Not Below second operand (as set by CMP instruction).
+Unsigned.
+Algorithm:
+
+
+^Iif CF = 0 then jump
+
+
+^I
+^Iexample for emu8086 emulator:
+
+   include 'emu8086.inc'
+   ORG 100h
+   MOV AL, 7
+   CMP AL, 5
+   JNB label1
+   PRINT 'AL &lt; 5.'
+   JMP exit
+label1:
+   PRINT 'AL >= 5.'
+exit:
+   RET
+
+
+
+ C Z S O P A 
+ unchanged 
+
+
+TOP

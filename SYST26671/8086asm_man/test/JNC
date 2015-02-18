@@ -1,0 +1,49 @@
+^I^I^I&nbsp;
+
+
+
+
+
+
+
+
+
+JNC
+
+
+
+
+^Ilabel
+
+
+
+
+Short Jump if Carry flag is set to 0.
+Algorithm:
+
+
+^Iif CF = 0 then jump
+
+
+^I
+^Iexample for emu8086 emulator:
+
+   include 'emu8086.inc'
+   ORG 100h
+   MOV AL, 2
+   ADD AL, 3
+   JNC  label1
+   PRINT 'has carry.'
+   JMP exit
+label1:
+   PRINT 'no carry.'
+exit:
+   RET
+
+
+
+ C Z S O P A 
+ unchanged 
+
+
+TOP

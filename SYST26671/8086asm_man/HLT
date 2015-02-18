@@ -1,0 +1,30 @@
+ 			&nbsp;
+
+
+
+
+
+
+
+
+
+
+
+HLT
+
+
+No operands
+
+
+Halt the System.
+
+ Example:MOV AX, 5
+HLT
+
+
+
+ C Z S O P A 
+ unchanged 
+
+
+TOP

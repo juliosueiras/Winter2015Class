@@ -1,0 +1,42 @@
+ 			&nbsp;
+
+
+
+
+
+
+
+POP
+
+
+
+
+	
+	REG
+	SREG
+	memory
+	
+
+
+
+
+Get 16 bit value from the stack.
+Algorithm:
+ 
+ 
+ operand = SS:[SP] (top of the stack)
+ SP = SP + 2
+ 
+ 
+ Example:MOV AX, 1234h
+PUSH AX
+POP  DX     ; DX = 1234h
+RET
+
+
+
+ C Z S O P A 
+ unchanged 
+
+
+TOP

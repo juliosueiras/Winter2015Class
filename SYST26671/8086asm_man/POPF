@@ -1,0 +1,32 @@
+ 			&nbsp;
+
+
+
+
+
+
+
+POPF
+
+
+No operands
+
+
+Get flags register from the stack.
+Algorithm:
+ 
+ 
+ flags = SS:[SP] (top of the stack)
+ SP = SP + 2
+ 
+ 
+
+ 
+ 
+ 
+ 
+  C Z S O P A 
+  popped 
+ 
+ 
+TOP

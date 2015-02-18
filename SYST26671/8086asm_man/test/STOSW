@@ -1,0 +1,54 @@
+^I^I^I&nbsp;
+
+
+
+
+
+
+
+
+
+
+STOSW
+
+
+No operands
+
+
+Store word in AX into ES:[DI]. Update DI.Algorithm:
+
+
+
+ES:[DI] = AX
+if DF = 0 then
+^I
+^IDI = DI + 2
+^I
+^Ielse
+^I
+^IDI = DI - 2
+^I
+
+
+
+Example:
+
+ORG 100h
+
+LEA DI, a1
+MOV AX, 1234h
+MOV CX, 5
+
+REP STOSW
+
+RET
+
+a1 DW 5 dup(0)
+
+
+
+ C Z S O P A 
+ unchanged 
+
+
+TOP

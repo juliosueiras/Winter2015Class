@@ -1,0 +1,62 @@
+			&nbsp;
+
+
+
+
+
+
+
+
+
+MOV
+
+
+
+
+	
+	REG, memory
+	memory, REG
+	REG, REG
+	memory, immediate
+	REG, immediate
+
+	SREG, memory
+	memory, SREG
+	REG, SREG
+	SREG, REG
+	
+
+
+
+
+Copy operand2 to operand1.
+The MOV instruction cannot:
+
+set the value of the CS and IP registers.
+copy value of one segment register to another segment register (should copy to general register first).
+copy immediate value to segment register (should copy to general register first).
+
+Algorithm:
+
+
+operand1 = operand2
+
+
+Example:
+ORG 100h
+MOV AX, 0B800h    ; set AX = B800h (VGA memory).
+MOV DS, AX        ; copy value of AX to DS.
+MOV CL, 'A'       ; CL = 41h (ASCII code).
+MOV CH, 01011111b ; CL = color attribute.
+MOV BX, 15Eh      ; BX = position on screen.
+MOV [BX], CX      ; w.[0B800h:015Eh] = CX.
+RET               ; returns to operating system.
+
+
+
+
+ C Z S O P A 
+ unchanged 
+
+
+TOP

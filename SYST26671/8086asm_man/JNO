@@ -1,0 +1,52 @@
+			&nbsp;
+
+
+
+
+
+
+
+
+
+JNO
+
+
+
+
+	label
+
+
+
+
+Short Jump if Not Overflow.
+Algorithm:
+
+
+	if OF = 0 then jump
+
+
+	
+	example for emu8086 emulator:
+
+; -5 - 2 = -7 (inside -128..127)
+; the result of SUB is correct,
+; so OF = 0:
+include 'emu8086.inc'
+ORG 100h
+  MOV AL, -5
+  SUB AL, 2   ; AL = 0F9h (-7)
+JNO  label1
+  PRINT 'overflow!'
+JMP exit
+label1:
+  PRINT 'no overflow.'
+exit:
+  RET
+
+
+
+ C Z S O P A 
+ unchanged 
+
+
+TOP

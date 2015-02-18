@@ -1,0 +1,3276 @@
+<html>
+<head>
+       <title>source code: MicroAsm.asm</title>
+       <meta name="description" content="source code">
+       <style>
+           a:link {text-decoration: none}
+           a:visited {text-decoration: none}
+           a:hover {text-decoration: none; color:#ff0000}
+       </style>
+</head>
+<body leftmargin=110  rightmargin=110 topmargin=20 bgcolor=#FFFFFF text=#000000 link=blue vlink=blue alink=blue>
+ 
+ 
+<!-- * -->
+ 
+ 
+
+
+
+
+&nbsp; &nbsp;<center> <font color=#FFFFFF> ;</font> <font size=2 face="Terminal"> MicroAsm.asm </font></center>
+
+
+
+
+
+
+<!-- START AUTOMATIC ASM TO HTML EXPORT -->
+<pre><font size=2 face="Terminal">
+<font color=#008000>; cloned from: DLL creation example </font>
+ 
+format PE GUI 4.0 DLL 
+entry DllEntryPoint 
+ 
+ 
+<font color=#000064>include</font> <font color=#800080>'win32a.inc'</font> 
+ 
+<font color=#008000>; CRASHES VB ; section '.code' code readable executable    </font>
+section <font color=#800080>'.code'</font> code writeable executable 
+ 
+ 
+<font color=#008000>; to keep FPU state </font>
+ORIG_87_STATE_94bytes  <font color=#000064>db</font> 94 dup(<font color=#800080>' '</font>) 
+<font color=#000064>db</font> <font color=#800080>"            emu8086               microprocessor emulator    "</font>   <font color=#008000>; jic buffer :) </font>
+<font color=#000064>db</font> <font color=#800080>"                                         "</font> 
+   
+   
+ 
+ 
+ 
+<font color=#0000FF>proc</font> DllEntryPoint hinstDLL,fdwReason,lpvReserved 
+	<font color=#0000FF>mov</font>	<font color=#C80000>eax</font>,TRUE 
+	<font color=#0000FF>ret</font> 
+endp 
+ 
+ 
+<font color=#008000>; it appears that we get "dll not found" message in VB if this sub does not exist: </font>
+<font color=#008000>; so we'll keep it, maybe it'll be useful one day too :) </font>
+<font color=#0000FF>proc</font> ShowErrorMessage hWnd,dwError 
+  local lpBuffer:DWORD 
+	<font color=#0000FF>lea</font>	<font color=#C80000>eax</font>,<font color=#0064C8>[</font>lpBuffer<font color=#0064C8>]</font> 
+	invoke	FormatMessage,FORMAT_MESSAGE_ALLOCATE_BUFFER<font color=#0064C8>+</font>FORMAT_MESSAGE_FROM_SYSTEM,0,<font color=#0064C8>[</font>dwError<font color=#0064C8>]</font>,LANG_NEUTRAL,<font color=#C80000>eax</font>,0,0 
+	invoke	MessageBox,<font color=#0064C8>[</font>hWnd<font color=#0064C8>]</font>,<font color=#0064C8>[</font>lpBuffer<font color=#0064C8>]</font>,NULL,MB_ICONERROR<font color=#0064C8>+</font>MB_OK 
+	invoke	LocalFree,<font color=#0064C8>[</font>lpBuffer<font color=#0064C8>]</font> 
+	<font color=#0000FF>ret</font> 
+endp 
+ 
+ 
+<font color=#008000>; VOID ShowLastError(HWND hWnd); </font>
+ 
+<font color=#0000FF>proc</font> ShowLastError hWnd 
+	invoke	GetLastError 
+	stdcall ShowErrorMessage,<font color=#0064C8>[</font>hWnd<font color=#0064C8>]</font>,<font color=#C80000>eax</font> 
+	<font color=#0000FF>ret</font> 
+endp 
+ 
+ 
+<font color=#008000>; just a test function and copyright message :) </font>
+<font color=#0000FF>proc</font> Copyright_emu8086 par1 
+	<font color=#0000FF>mov</font> <font color=#C80000>eax</font>, 0FFFFFFFFh 
+	<font color=#0000FF>xor</font> <font color=#0064C8>[</font>par1<font color=#0064C8>]</font>, <font color=#C80000>eax</font> 
+	<font color=#0000FF>ret</font>                           
+	<font color=#000064>db</font> <font color=#800080>"                                                             "</font> 
+	<font color=#000064>db</font> <font color=#800080>"             Copyright emu8086.com        All rights reserved       "</font> 
+	<font color=#000064>db</font> <font color=#800080>"                                                             "</font> 
+endp 
+ 
+ 
+ 
+ 
+ 
+<font color=#008000>; 32 bits (Long/DWORD) max value: 4,294,967,295 = ~ 4 GB of adressable memory.... </font>
+<font color=#008000>; just a test fucntion </font>
+<font color=#0000FF>proc</font> MicroAsm_T par1,par2              <font color=#008000>; does PUSH BP   // MOV BP, SP  -&gt;&gt;  55 89 E5   (probably it's EBP).	 	 </font>
+    <font color=#008000>;local tEDX:DWORD,   tEBX:DWORD </font>
+	<font color=#0000FF>mov</font> <font color=#0064C8>[</font>tEDX<font color=#0064C8>]</font>, <font color=#C80000>edx</font>   <font color=#008000>; jic... </font>
+	<font color=#0000FF>mov</font> <font color=#0064C8>[</font>tEBX<font color=#0064C8>]</font>, <font color=#C80000>ebx</font> 
+      
+ 
+<font color=#008000>; I love VB :) </font>
+<font color=#008000>;XOR ECX,ECX             ;set ecx to zero </font>
+<font color=#008000>;DIV ECX                 ;divide by zero, causing exception	 </font>
+	 
+      
+      
+    <font color=#0000FF>xor</font>	<font color=#C80000>eax</font>, <font color=#C80000>eax</font> 
+	 
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>par1<font color=#0064C8>]</font>      <font color=#008000>; pointer to pointer... seems like [EBP + 8] </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>eax</font>, <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font> 
+	 
+	<font color=#0000FF>mov</font>	<font color=#C80000>ebx</font>, <font color=#0064C8>[</font>par2<font color=#0064C8>]</font>  <font color=#008000>; [EBP + 12] </font>
+	<font color=#0000FF>mov</font>	<font color=#C80000>edx</font>, <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font> 
+	 
+	<font color=#0000FF>add</font>	<font color=#C80000>eax</font>, <font color=#C80000>edx</font>    <font color=#008000>; return is in EAX  (Long) </font>
+	 
+	<font color=#0000FF>mov</font> dword <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font>, 0FFh  <font color=#008000>; modifying ByRef paremeter... </font>
+	 
+	<font color=#0000FF>mov</font> <font color=#C80000>edx</font>, <font color=#0064C8>[</font>tEDX<font color=#0064C8>]</font> 
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>tEBX<font color=#0064C8>]</font>	   
+	 
+	 
+     	 
+	<font color=#0000FF>ret</font>  
+	tEDX <font color=#000064>dd</font> 0 
+	tEBX <font color=#000064>dd</font> 0 
+endp 
+           
+   
+   
+ 
+<font color=#008000>;   </font>
+<font color=#008000>;   </font>
+<font color=#008000>;; NOT USED! </font>
+<font color=#008000>;; DD /6     FSAVE mem94     mem94 := 87 state </font>
+<font color=#008000>;proc MicroAsm_GETSTATE_94 param  </font>
+<font color=#008000>;	push ebx  ; jic </font>
+<font color=#008000>;	mov ebx, [param]   ; pointer to pointer </font>
+<font color=#008000>;    FSAVE [ebx]                       </font>
+<font color=#008000>;    pop ebx </font>
+<font color=#008000>;    xor eax, eax   ; return  </font>
+<font color=#008000>;	ret	 </font>
+<font color=#008000>;endp </font>
+<font color=#008000>; </font>
+<font color=#008000>; </font>
+<font color=#008000>;; NOT USED! </font>
+<font color=#008000>;; DD /4     FRSTOR mem94    87 state := mem94 </font>
+<font color=#008000>;proc MicroAsm_SETSTATE_94 param </font>
+<font color=#008000>;	push ebx  ; jic </font>
+<font color=#008000>;	mov ebx, [param]   ; pointer to pointer </font>
+<font color=#008000>;    FRSTOR [ebx]                       </font>
+<font color=#008000>;    pop ebx                     </font>
+<font color=#008000>;    xor eax, eax   ; return  </font>
+<font color=#008000>;	ret	 </font>
+<font color=#008000>;endp </font>
+<font color=#008000>;   </font>
+<font color=#008000>;    </font>
+<font color=#008000>;    </font>
+    
+ 
+ 
+ 
+ 
+<font color=#008000>; DB E3     FINIT           initialize 87   </font>
+<font color=#0000FF>proc</font> MicroAsm_FINIT virtual87state_94bytes    
+    local tEBX:DWORD 
+	<font color=#0000FF>pushf</font> 
+	<font color=#008000>; cli       </font>
+     
+	<font color=#0000FF>mov</font> <font color=#0064C8>[</font>tEBX<font color=#0064C8>]</font>, <font color=#C80000>ebx</font> <font color=#008000>; jic </font>
+	 
+ 
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>,ORIG_87_STATE_94bytes 
+	<font color=#0000FF>FSAVE</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font>  
+    <font color=#0000FF>fwait</font> 
+     
+ 
+<font color=#008000>; I love VB :) </font>
+<font color=#008000>;XOR ECX,ECX             ;set ecx to zero </font>
+<font color=#008000>;DIV ECX                 ;divide by zero, causing exception	 </font>
+<font color=#008000>; /// crash site ? /// </font>
+<font color=#008000>;  cli	 </font>
+     
+ 
+<font color=#008000>; See also Chapter 5, Interrupt and Exception Handling, in the IA-32 </font>
+<font color=#008000>; Intel Architecture Software Developer's Manual, Volume 3,  </font>
+      
+     
+    <font color=#008000>;;;;;;;;;;;;;;;;;;;;;;;;;;;;  </font>
+     
+    <font color=#0000FF>FINIT</font>  <font color=#008000>; jic... </font>
+     
+    <font color=#008000>; don't know why it crashed around here a few times </font>
+    <font color=#008000>; (vb handling did not help), but now it works...  </font>
+    <font color=#008000>; probably it was because we declared Global/Public/Form variables instead of locals. </font>
+    <font color=#008000>; ' global declaration -&gt; CRASH </font>
+    <font color=#008000>; ''''' Dim FPU_STATE_94bytes As fpu87_STATE </font>
+                     
+                 
+              	       
+	<font color=#008000>;mov ebx, [virtual87state_94bytes]  ; pointer to pointer        </font>
+	<font color=#0000FF>FRSTOR</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font> 
+	<font color=#0000FF>fwait</font> 
+	          
+    <font color=#008000>;;;;;;;;;;;;;;;;;;;;; </font>
+	       
+	<font color=#0000FF>FINIT</font>            <font color=#008000>; initialise virutual FPU </font>
+	<font color=#0000FF>fwait</font> 
+	 
+	<font color=#008000>;;;;;;;;;;;;;;;;;;;;; </font>
+	  
+    <font color=#008000>; get newly initialisied FPU state </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>virtual87state_94bytes<font color=#0064C8>]</font>  <font color=#008000>; pointer to pointer       </font>
+	<font color=#0000FF>FSAVE</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font>   
+	<font color=#0000FF>fwait</font> 
+	 
+	 
+	<font color=#0000FF>FCLEX</font> 
+	   
+           
+    <font color=#008000>; restore....       </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>,ORIG_87_STATE_94bytes  
+	<font color=#0000FF>FRSTOR</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font>  
+    <font color=#0000FF>fwait</font>       
+     
+     
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>tEBX<font color=#0064C8>]</font>     
+         
+     
+    <font color=#0000FF>mov</font> <font color=#C80000>eax</font>, 7   
+     
+    <font color=#0000FF>popf</font> 
+     
+	<font color=#0000FF>ret</font>   
+endp 
+	 
+ 
+ 
+ 
+	     
+	 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+          
+<font color=#0000FF>proc</font> MicroAsm_D8_TAB lEA_TAB, mem4r, virtual87state_94bytes 
+    local tEBX:DWORD, tESI:DWORD 
+	<font color=#0000FF>pushf</font> 
+	<font color=#008000>;cli  </font>
+	     
+     
+	<font color=#0000FF>mov</font> <font color=#0064C8>[</font>tEBX<font color=#0064C8>]</font>, <font color=#C80000>ebx</font> <font color=#008000>; jic  </font>
+	<font color=#0000FF>mov</font> <font color=#0064C8>[</font>tESI<font color=#0064C8>]</font>, <font color=#C80000>esi</font> <font color=#008000>; jic </font>
+	    
+	 
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>,ORIG_87_STATE_94bytes 
+	<font color=#0000FF>FSAVE</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font>  
+    <font color=#0000FF>fwait</font> 
+           	       
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>virtual87state_94bytes<font color=#0064C8>]</font>  <font color=#008000>; pointer to pointer        </font>
+	<font color=#0000FF>FRSTOR</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font> 
+	<font color=#0000FF>fwait</font> 
+	 
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>lEA_TAB<font color=#0064C8>]</font>      <font color=#008000>; pointer to pointer </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>esi</font>, <font color=#0064C8>[</font>mem4r<font color=#0064C8>]</font>        <font color=#008000>; pointer to pointer    </font>
+     
+       
+	<font color=#0000FF>mov</font> <font color=#C80000>eax</font>, <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font> 	 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0 
+    <font color=#0000FF>je</font>  D8_0   
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+    <font color=#0000FF>je</font>  D8_1 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+    <font color=#0000FF>je</font>  D8_2 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+    <font color=#0000FF>je</font>  D8_3 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+    <font color=#0000FF>je</font>  D8_4 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+    <font color=#0000FF>je</font>  D8_5 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+    <font color=#0000FF>je</font>  D8_6   
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+    <font color=#0000FF>je</font>  D8_7      
+    <font color=#0000FF>jmp</font> special_processing_D8 
+D8_0:    
+<font color=#008000>;	    D8 /0     FADD mem4r      0 := 0 + mem4r </font>
+     <font color=#0000FF>FADD</font> dword <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_D8_TAB          
+D8_1:         
+<font color=#008000>;	    D8 /1     FMUL mem4r      0 := 0 * mem4r </font>
+     <font color=#0000FF>FMUL</font> dword <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_D8_TAB  
+D8_2:   
+<font color=#008000>;	    D8 /2     FCOM mem4r      compare 0 - mem4r </font>
+     <font color=#0000FF>FCOM</font> dword <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_D8_TAB  
+D8_3:    
+<font color=#008000>;	    D8 /3     FCOMP mem4r     compare 0 - mem4r, pop </font>
+     <font color=#0000FF>FCOMP</font> dword <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_D8_TAB  
+D8_4:     
+<font color=#008000>;	    D8 /4     FSUB mem4r      0 := 0 - mem4r </font>
+     <font color=#0000FF>FSUB</font> dword <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_D8_TAB  
+D8_5:    
+<font color=#008000>;	    D8 /5     FSUBR mem4r     0 := mem4r - 0 </font>
+     <font color=#0000FF>FSUBR</font> dword <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font>  
+<font color=#0000FF>jmp</font> end_D8_TAB  
+D8_6:   
+<font color=#008000>;	    D8 /6     FDIV mem4r      0 := 0 / mem4r </font>
+     <font color=#0000FF>FDIV</font> dword <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font>  
+<font color=#0000FF>jmp</font> end_D8_TAB  
+D8_7:  
+<font color=#008000>;	    D8 /7     FDIVR mem4r     0 := mem4r / 0  </font>
+     <font color=#0000FF>FDIVR</font> dword <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font>   
+<font color=#0000FF>jmp</font> end_D8_TAB  
+  
+  
+<font color=#008000>; generally EA byte: C0 and up   </font>
+<font color=#008000>; it this case instead of TAB index, actual byte value from the RAM is passed </font>
+special_processing_D8:         
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0C8h 
+    <font color=#0000FF>jb</font>  D8_C0_i   
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0D0h 
+    <font color=#0000FF>jb</font>  D8_C8_i   
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0D8h 
+    <font color=#0000FF>jb</font>  D8_D0_i   
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0E0h 
+    <font color=#0000FF>jb</font>  D8_D8_i   
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0E8h 
+    <font color=#0000FF>jb</font>  D8_E0_i   
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0F0h 
+    <font color=#0000FF>jb</font>  D8_E8_i   
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0F8h 
+    <font color=#0000FF>jb</font>  D8_F0_i  
+    <font color=#0000FF>jmp</font> D8_F8_i     <font color=#008000>; &gt;= F8  </font>
+                 
+         
+D8_C0_i: 
+<font color=#008000>;	    D8 C0+i   FADD 0,i        0 := i + 0   </font>
+        <font color=#0000FF>SUB</font> <font color=#C80000>eax</font>, 0C0h   <font color=#008000>; get index </font>
+        <font color=#0000FF>jZ</font>  FADD_0_0 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+        <font color=#0000FF>je</font>  FADD_0_1 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+        <font color=#0000FF>je</font>  FADD_0_2 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+        <font color=#0000FF>je</font>  FADD_0_3 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+        <font color=#0000FF>je</font>  FADD_0_4 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+        <font color=#0000FF>je</font>  FADD_0_5 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+        <font color=#0000FF>je</font>  FADD_0_6 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+        <font color=#0000FF>je</font>  FADD_0_7         
+        <font color=#0000FF>fnop</font>            <font color=#008000>; wrong index </font>
+        <font color=#0000FF>jmp</font> end_D8_SP   
+FADD_0_0:           
+        <font color=#0000FF>FADD</font> <font color=#C80000>st0</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FADD_0_1:                      
+        <font color=#0000FF>FADD</font> <font color=#C80000>st0</font>, <font color=#C80000>st1</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FADD_0_2:           
+        <font color=#0000FF>FADD</font> <font color=#C80000>st0</font>, <font color=#C80000>st2</font>   
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FADD_0_3:         
+        <font color=#0000FF>FADD</font> <font color=#C80000>st0</font>, <font color=#C80000>st3</font>                   
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FADD_0_4:         
+        <font color=#0000FF>FADD</font> <font color=#C80000>st0</font>, <font color=#C80000>st4</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FADD_0_5:         
+        <font color=#0000FF>FADD</font> <font color=#C80000>st0</font>, <font color=#C80000>st5</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FADD_0_6:         
+        <font color=#0000FF>FADD</font> <font color=#C80000>st0</font>, <font color=#C80000>st6</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FADD_0_7:         
+        <font color=#0000FF>FADD</font> <font color=#C80000>st0</font>, <font color=#C80000>st7</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP  
+         
+         
+D8_C8_i: 
+<font color=#008000>;	    D8 C8+i   FMUL 0,i        0 := 0 * i </font>
+        <font color=#0000FF>SUB</font> <font color=#C80000>eax</font>, 0C8h   <font color=#008000>; get index </font>
+        <font color=#0000FF>jZ</font>  FMUL_0_0 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+        <font color=#0000FF>je</font>  FMUL_0_1 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+        <font color=#0000FF>je</font>  FMUL_0_2 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+        <font color=#0000FF>je</font>  FMUL_0_3 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+        <font color=#0000FF>je</font>  FMUL_0_4 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+        <font color=#0000FF>je</font>  FMUL_0_5 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+        <font color=#0000FF>je</font>  FMUL_0_6 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+        <font color=#0000FF>je</font>  FMUL_0_7         
+        <font color=#0000FF>fnop</font>            <font color=#008000>; wrong index </font>
+        <font color=#0000FF>jmp</font> end_D8_SP   
+FMUL_0_0:           
+        <font color=#0000FF>FMUL</font> <font color=#C80000>st0</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FMUL_0_1:                      
+        <font color=#0000FF>FMUL</font> <font color=#C80000>st0</font>, <font color=#C80000>st1</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FMUL_0_2:           
+        <font color=#0000FF>FMUL</font> <font color=#C80000>st0</font>, <font color=#C80000>st2</font>   
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FMUL_0_3:         
+        <font color=#0000FF>FMUL</font> <font color=#C80000>st0</font>, <font color=#C80000>st3</font>                   
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FMUL_0_4:         
+        <font color=#0000FF>FMUL</font> <font color=#C80000>st0</font>, <font color=#C80000>st4</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FMUL_0_5:         
+        <font color=#0000FF>FMUL</font> <font color=#C80000>st0</font>, <font color=#C80000>st5</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FMUL_0_6:         
+        <font color=#0000FF>FMUL</font> <font color=#C80000>st0</font>, <font color=#C80000>st6</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FMUL_0_7:         
+        <font color=#0000FF>FMUL</font> <font color=#C80000>st0</font>, <font color=#C80000>st7</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP  
+ 
+ 
+                
+D8_D0_i:                
+<font color=#008000>;	    D8 D0+i   FCOM 0,i        compare 0 - i  </font>
+        <font color=#0000FF>SUB</font> <font color=#C80000>eax</font>, 0D0h   <font color=#008000>; get index </font>
+        <font color=#0000FF>jZ</font>  FCOM_0_0 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+        <font color=#0000FF>je</font>  FCOM_0_1 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+        <font color=#0000FF>je</font>  FCOM_0_2 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+        <font color=#0000FF>je</font>  FCOM_0_3 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+        <font color=#0000FF>je</font>  FCOM_0_4 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+        <font color=#0000FF>je</font>  FCOM_0_5 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+        <font color=#0000FF>je</font>  FCOM_0_6 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+        <font color=#0000FF>je</font>  FCOM_0_7         
+        <font color=#0000FF>fnop</font>            <font color=#008000>; wrong index </font>
+        <font color=#0000FF>jmp</font> end_D8_SP   
+FCOM_0_0:           
+        <font color=#0000FF>FCOM</font> <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FCOM_0_1:                      
+        <font color=#0000FF>FCOM</font> <font color=#C80000>st1</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FCOM_0_2:           
+        <font color=#0000FF>FCOM</font> <font color=#C80000>st2</font>   
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FCOM_0_3:         
+        <font color=#0000FF>FCOM</font> <font color=#C80000>st3</font>                   
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FCOM_0_4:         
+        <font color=#0000FF>FCOM</font> <font color=#C80000>st4</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FCOM_0_5:         
+        <font color=#0000FF>FCOM</font> <font color=#C80000>st5</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FCOM_0_6:         
+        <font color=#0000FF>FCOM</font> <font color=#C80000>st6</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FCOM_0_7:         
+        <font color=#0000FF>FCOM</font> <font color=#C80000>st7</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+ 
+ 
+         
+D8_D8_i:         
+<font color=#008000>;	    D8 D8+i   FCOMP 0,i       compare 0 - i, pop </font>
+        <font color=#0000FF>SUB</font> <font color=#C80000>eax</font>, 0D8h   <font color=#008000>; get index </font>
+        <font color=#0000FF>jZ</font>  FCOMP_0_0 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+        <font color=#0000FF>je</font>  FCOMP_0_1 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+        <font color=#0000FF>je</font>  FCOMP_0_2 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+        <font color=#0000FF>je</font>  FCOMP_0_3 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+        <font color=#0000FF>je</font>  FCOMP_0_4 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+        <font color=#0000FF>je</font>  FCOMP_0_5 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+        <font color=#0000FF>je</font>  FCOMP_0_6 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+        <font color=#0000FF>je</font>  FCOMP_0_7         
+        <font color=#0000FF>fnop</font>            <font color=#008000>; wrong index </font>
+        <font color=#0000FF>jmp</font> end_D8_SP   
+FCOMP_0_0:           
+        <font color=#0000FF>FCOMP</font> <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FCOMP_0_1:                      
+        <font color=#0000FF>FCOMP</font> <font color=#C80000>st1</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FCOMP_0_2:           
+        <font color=#0000FF>FCOMP</font> <font color=#C80000>st2</font>   
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FCOMP_0_3:         
+        <font color=#0000FF>FCOMP</font> <font color=#C80000>st3</font>                   
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FCOMP_0_4:         
+        <font color=#0000FF>FCOMP</font> <font color=#C80000>st4</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FCOMP_0_5:         
+        <font color=#0000FF>FCOMP</font> <font color=#C80000>st5</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FCOMP_0_6:         
+        <font color=#0000FF>FCOMP</font> <font color=#C80000>st6</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FCOMP_0_7:         
+        <font color=#0000FF>FCOMP</font> <font color=#C80000>st7</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+ 
+ 
+ 
+D8_E0_i: 
+<font color=#008000>;	    D8 E0+i   FSUB 0,i        0 := 0 - i  </font>
+        <font color=#0000FF>SUB</font> <font color=#C80000>eax</font>, 0E0h   <font color=#008000>; get index </font>
+        <font color=#0000FF>jZ</font>  FSUB_0_0 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+        <font color=#0000FF>je</font>  FSUB_0_1 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+        <font color=#0000FF>je</font>  FSUB_0_2 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+        <font color=#0000FF>je</font>  FSUB_0_3 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+        <font color=#0000FF>je</font>  FSUB_0_4 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+        <font color=#0000FF>je</font>  FSUB_0_5 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+        <font color=#0000FF>je</font>  FSUB_0_6 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+        <font color=#0000FF>je</font>  FSUB_0_7         
+        <font color=#0000FF>fnop</font>            <font color=#008000>; wrong index </font>
+        <font color=#0000FF>jmp</font> end_D8_SP   
+FSUB_0_0:           
+        <font color=#0000FF>FSUB</font> <font color=#C80000>st0</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FSUB_0_1:                      
+        <font color=#0000FF>FSUB</font> <font color=#C80000>st0</font>, <font color=#C80000>st1</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FSUB_0_2:           
+        <font color=#0000FF>FSUB</font> <font color=#C80000>st0</font>, <font color=#C80000>st2</font>   
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FSUB_0_3:         
+        <font color=#0000FF>FSUB</font> <font color=#C80000>st0</font>, <font color=#C80000>st3</font>                   
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FSUB_0_4:         
+        <font color=#0000FF>FSUB</font> <font color=#C80000>st0</font>, <font color=#C80000>st4</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FSUB_0_5:         
+        <font color=#0000FF>FSUB</font> <font color=#C80000>st0</font>, <font color=#C80000>st5</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FSUB_0_6:         
+        <font color=#0000FF>FSUB</font> <font color=#C80000>st0</font>, <font color=#C80000>st6</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FSUB_0_7:         
+        <font color=#0000FF>FSUB</font> <font color=#C80000>st0</font>, <font color=#C80000>st7</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+         
+         
+         
+D8_E8_i: 
+<font color=#008000>;	    D8 E8+i   FSUBR 0,i       0 := i - 0  </font>
+        <font color=#0000FF>SUB</font> <font color=#C80000>eax</font>, 0E8h   <font color=#008000>; get index </font>
+        <font color=#0000FF>jZ</font>  FSUBR_0_0 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+        <font color=#0000FF>je</font>  FSUBR_0_1 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+        <font color=#0000FF>je</font>  FSUBR_0_2 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+        <font color=#0000FF>je</font>  FSUBR_0_3 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+        <font color=#0000FF>je</font>  FSUBR_0_4 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+        <font color=#0000FF>je</font>  FSUBR_0_5 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+        <font color=#0000FF>je</font>  FSUBR_0_6 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+        <font color=#0000FF>je</font>  FSUBR_0_7         
+        <font color=#0000FF>fnop</font>            <font color=#008000>; wrong index </font>
+        <font color=#0000FF>jmp</font> end_D8_SP   
+FSUBR_0_0:           
+        <font color=#0000FF>FSUBR</font> <font color=#C80000>st0</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FSUBR_0_1:                      
+        <font color=#0000FF>FSUBR</font> <font color=#C80000>st0</font>, <font color=#C80000>st1</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FSUBR_0_2:           
+        <font color=#0000FF>FSUBR</font> <font color=#C80000>st0</font>, <font color=#C80000>st2</font>   
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FSUBR_0_3:         
+        <font color=#0000FF>FSUBR</font> <font color=#C80000>st0</font>, <font color=#C80000>st3</font>                   
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FSUBR_0_4:         
+        <font color=#0000FF>FSUBR</font> <font color=#C80000>st0</font>, <font color=#C80000>st4</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FSUBR_0_5:         
+        <font color=#0000FF>FSUBR</font> <font color=#C80000>st0</font>, <font color=#C80000>st5</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FSUBR_0_6:         
+        <font color=#0000FF>FSUBR</font> <font color=#C80000>st0</font>, <font color=#C80000>st6</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FSUBR_0_7:         
+        <font color=#0000FF>FSUBR</font> <font color=#C80000>st0</font>, <font color=#C80000>st7</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+         
+D8_F0_i: 
+<font color=#008000>;	    D8 F0+i   FDIV 0,i        0 := 0 / i </font>
+        <font color=#0000FF>SUB</font> <font color=#C80000>eax</font>, 0F0h   <font color=#008000>; get index </font>
+        <font color=#0000FF>jZ</font>  FDIV_0_0 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+        <font color=#0000FF>je</font>  FDIV_0_1 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+        <font color=#0000FF>je</font>  FDIV_0_2 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+        <font color=#0000FF>je</font>  FDIV_0_3 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+        <font color=#0000FF>je</font>  FDIV_0_4 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+        <font color=#0000FF>je</font>  FDIV_0_5 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+        <font color=#0000FF>je</font>  FDIV_0_6 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+        <font color=#0000FF>je</font>  FDIV_0_7         
+        <font color=#0000FF>fnop</font>            <font color=#008000>; wrong index </font>
+        <font color=#0000FF>jmp</font> end_D8_SP   
+FDIV_0_0:           
+        <font color=#0000FF>FDIV</font> <font color=#C80000>st0</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FDIV_0_1:                      
+        <font color=#0000FF>FDIV</font> <font color=#C80000>st0</font>, <font color=#C80000>st1</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FDIV_0_2:           
+        <font color=#0000FF>FDIV</font> <font color=#C80000>st0</font>, <font color=#C80000>st2</font>   
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FDIV_0_3:         
+        <font color=#0000FF>FDIV</font> <font color=#C80000>st0</font>, <font color=#C80000>st3</font>                   
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FDIV_0_4:         
+        <font color=#0000FF>FDIV</font> <font color=#C80000>st0</font>, <font color=#C80000>st4</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FDIV_0_5:         
+        <font color=#0000FF>FDIV</font> <font color=#C80000>st0</font>, <font color=#C80000>st5</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FDIV_0_6:         
+        <font color=#0000FF>FDIV</font> <font color=#C80000>st0</font>, <font color=#C80000>st6</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FDIV_0_7:         
+        <font color=#0000FF>FDIV</font> <font color=#C80000>st0</font>, <font color=#C80000>st7</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP   
+         
+         
+D8_F8_i: 
+<font color=#008000>;	    D8 F8+i   FDIVR 0,i       0 := i / 0 </font>
+        <font color=#0000FF>SUB</font> <font color=#C80000>eax</font>, 0F8h   <font color=#008000>; get index </font>
+        <font color=#0000FF>jZ</font>  FDIVR_0_0 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+        <font color=#0000FF>je</font>  FDIVR_0_1 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+        <font color=#0000FF>je</font>  FDIVR_0_2 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+        <font color=#0000FF>je</font>  FDIVR_0_3 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+        <font color=#0000FF>je</font>  FDIVR_0_4 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+        <font color=#0000FF>je</font>  FDIVR_0_5 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+        <font color=#0000FF>je</font>  FDIVR_0_6 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+        <font color=#0000FF>je</font>  FDIVR_0_7         
+        <font color=#0000FF>fnop</font>            <font color=#008000>; wrong index </font>
+        <font color=#0000FF>jmp</font> end_D8_SP   
+FDIVR_0_0:           
+        <font color=#0000FF>FDIVR</font> <font color=#C80000>st0</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FDIVR_0_1:                      
+        <font color=#0000FF>FDIVR</font> <font color=#C80000>st0</font>, <font color=#C80000>st1</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FDIVR_0_2:           
+        <font color=#0000FF>FDIVR</font> <font color=#C80000>st0</font>, <font color=#C80000>st2</font>   
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FDIVR_0_3:         
+        <font color=#0000FF>FDIVR</font> <font color=#C80000>st0</font>, <font color=#C80000>st3</font>                   
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FDIVR_0_4:         
+        <font color=#0000FF>FDIVR</font> <font color=#C80000>st0</font>, <font color=#C80000>st4</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FDIVR_0_5:         
+        <font color=#0000FF>FDIVR</font> <font color=#C80000>st0</font>, <font color=#C80000>st5</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FDIVR_0_6:         
+        <font color=#0000FF>FDIVR</font> <font color=#C80000>st0</font>, <font color=#C80000>st6</font> 
+        <font color=#0000FF>jmp</font> end_D8_SP 
+FDIVR_0_7:         
+        <font color=#0000FF>FDIVR</font> <font color=#C80000>st0</font>, <font color=#C80000>st7</font> 
+        <font color=#008000>; NR ; jmp end_D8_SP </font>
+ 
+ 
+     
+end_D8_SP:      
+end_D8_TAB:	  
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>virtual87state_94bytes<font color=#0064C8>]</font>  <font color=#008000>; pointer to pointer       </font>
+	<font color=#0000FF>FSAVE</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font>     
+    <font color=#0000FF>fwait</font> 
+     
+     
+    <font color=#0000FF>FCLEX</font>  
+     
+           
+    <font color=#008000>; restore....       </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>,ORIG_87_STATE_94bytes  
+	<font color=#0000FF>FRSTOR</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font>  
+    <font color=#0000FF>fwait</font>   
+      
+    <font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>tEBX<font color=#0064C8>]</font> 
+	<font color=#0000FF>mov</font> <font color=#C80000>esi</font>, <font color=#0064C8>[</font>tESI<font color=#0064C8>]</font> 
+	 
+	<font color=#0000FF>popf</font> 
+	 
+	<font color=#008000>; return lEA_TAB (as it was passed to the function) </font>
+	<font color=#008000>;xor eax, eax     ; return </font>
+	<font color=#0000FF>ret</font>   
+endp 
+ 
+           
+ 
+ 
+ 
+ 
+ 
+<font color=#0000FF>proc</font> MicroAsm_D9_TAB lEA_TAB, mem4r, mem14, mem2i, virtual87state_94bytes 
+    local tEBX:DWORD,  tESI:DWORD,   tEDX:DWORD,  tECX:DWORD  
+	<font color=#0000FF>pushf</font> 
+	<font color=#008000>;cli  </font>
+	     
+     
+    <font color=#008000>; store                                                                   </font>
+    <font color=#0000FF>mov</font> <font color=#0064C8>[</font>tEBX<font color=#0064C8>]</font>, <font color=#C80000>ebx</font> 
+    <font color=#0000FF>mov</font> <font color=#0064C8>[</font>tESI<font color=#0064C8>]</font>, <font color=#C80000>esi</font> 
+    <font color=#0000FF>mov</font> <font color=#0064C8>[</font>tEDX<font color=#0064C8>]</font>, <font color=#C80000>edx</font> 
+    <font color=#0000FF>mov</font> <font color=#0064C8>[</font>tECX<font color=#0064C8>]</font>, <font color=#C80000>ecx</font> 
+	 
+	<font color=#008000>; FPU -&gt; </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>,ORIG_87_STATE_94bytes 
+	<font color=#0000FF>FSAVE</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font>  
+    <font color=#0000FF>fwait</font> 
+      
+    <font color=#008000>; FPU &lt;-       	       </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>virtual87state_94bytes<font color=#0064C8>]</font>  <font color=#008000>; pointer to pointer        </font>
+	<font color=#0000FF>FRSTOR</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font> 
+	<font color=#0000FF>fwait</font> 
+	 
+	<font color=#008000>;;;;;;;;;;;;;;  </font>
+	  
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>lEA_TAB<font color=#0064C8>]</font>      <font color=#008000>; pointer to pointer </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>esi</font>, <font color=#0064C8>[</font>mem4r<font color=#0064C8>]</font>        <font color=#008000>; pointer to pointer    </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>edx</font>, <font color=#0064C8>[</font>mem14<font color=#0064C8>]</font>        <font color=#008000>; pointer to pointer </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>ecx</font>, <font color=#0064C8>[</font>mem2i<font color=#0064C8>]</font>        <font color=#008000>; pointer to pointer </font>
+       
+	<font color=#0000FF>mov</font> <font color=#C80000>eax</font>, <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font> 	 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0 
+    <font color=#0000FF>je</font>  D9_0   
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+    <font color=#0000FF>je</font>  D9_1 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+    <font color=#0000FF>je</font>  D9_2 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+    <font color=#0000FF>je</font>  D9_3 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+    <font color=#0000FF>je</font>  D9_4 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+    <font color=#0000FF>je</font>  D9_5 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+    <font color=#0000FF>je</font>  D9_6   
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+    <font color=#0000FF>je</font>  D9_7      
+    <font color=#0000FF>jmp</font> special_processing_D9 
+D9_0:    
+<font color=#008000>;	    D9 /0     FLD mem4r       push, 0 := mem4r </font>
+     <font color=#0000FF>FLD</font> dword <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_D9_TAB          
+D9_1: 
+<font color=#008000>;       RESERVED   </font>
+     <font color=#0000FF>FNOP</font> 
+<font color=#0000FF>jmp</font> end_D9_TAB  
+D9_2:      
+<font color=#008000>;	    D9 /2     FST mem4r       mem4r := 0 </font>
+     <font color=#0000FF>FST</font> dword <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_D9_TAB  
+D9_3:        
+<font color=#008000>;	    D9 /3     FSTP mem4r      mem4r := 0, pop </font>
+     <font color=#0000FF>FSTP</font> dword <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_D9_TAB  
+D9_4:    
+<font color=#008000>;	    D9 /4     FLDENV mem14    environment := mem14 </font>
+     <font color=#0000FF>FLDENV</font> <font color=#0064C8>[</font><font color=#C80000>edx</font><font color=#0064C8>]</font>   <font color=#008000>; 14 bit pointer </font>
+<font color=#0000FF>jmp</font> end_D9_TAB  
+D9_5:      
+<font color=#008000>;	    D9 /5     FLDCW mem2i     control word := mem2i </font>
+     <font color=#0000FF>FLDCW</font> <font color=#000064>word</font> <font color=#0064C8>[</font><font color=#C80000>ecx</font><font color=#0064C8>]</font>  
+<font color=#0000FF>jmp</font> end_D9_TAB  
+D9_6:          
+<font color=#008000>;	    D9 /6     FSTENV mem14    mem14 := environment </font>
+     <font color=#0000FF>FSTENV</font> <font color=#0064C8>[</font><font color=#C80000>edx</font><font color=#0064C8>]</font>   <font color=#008000>; 14 bit pointer </font>
+<font color=#0000FF>jmp</font> end_D9_TAB  
+D9_7:   
+<font color=#008000>;	    D9 /7     FSTCW mem2i     mem2i := control word </font>
+     <font color=#0000FF>FSTCW</font> <font color=#000064>word</font> <font color=#0064C8>[</font><font color=#C80000>ecx</font><font color=#0064C8>]</font>   
+<font color=#0000FF>jmp</font> end_D9_TAB 
+ 
+    <font color=#008000>;;;;;;;;;;;;;;;;;;;; special processing ;;;;;;;;;;;;;; </font>
+     
+<font color=#008000>; generally EA byte: C0 and up   </font>
+<font color=#008000>; it this case instead of TAB index, actual byte value from the RAM is passed </font>
+special_processing_D9:         
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0C8h 
+    <font color=#0000FF>jb</font>  D9_C0_i   
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0D0h 
+    <font color=#0000FF>jb</font>  D9_C8_i  
+      
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0D0h 
+    <font color=#0000FF>je</font>  D9_D0  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0D1h 
+    <font color=#0000FF>je</font>  D9_D1  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0D2h 
+    <font color=#0000FF>je</font>  D9_D2  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0D3h 
+    <font color=#0000FF>je</font>  D9_D3  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0D4h 
+    <font color=#0000FF>je</font>  D9_D4  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0D5h 
+    <font color=#0000FF>je</font>  D9_D5  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0D6h 
+    <font color=#0000FF>je</font>  D9_D6  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0D7h 
+    <font color=#0000FF>je</font>  D9_D7  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0D8h 
+    <font color=#0000FF>je</font>  D9_D8  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0D9h 
+    <font color=#0000FF>je</font>  D9_D9  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0DAh 
+    <font color=#0000FF>je</font>  D9_DA  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0DBh 
+    <font color=#0000FF>je</font>  D9_DB  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0DCh 
+    <font color=#0000FF>je</font>  D9_DC  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0DDh 
+    <font color=#0000FF>je</font>  D9_DD  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0DEh 
+    <font color=#0000FF>je</font>  D9_DE  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0DFh 
+    <font color=#0000FF>je</font>  D9_DF  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0E0h 
+    <font color=#0000FF>je</font>  D9_E0  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0E1h 
+    <font color=#0000FF>je</font>  D9_E1  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0E2h 
+    <font color=#0000FF>je</font>  D9_E2  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0E3h 
+    <font color=#0000FF>je</font>  D9_E3  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0E4h 
+    <font color=#0000FF>je</font>  D9_E4  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0E5h 
+    <font color=#0000FF>je</font>  D9_E5  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0E6h 
+    <font color=#0000FF>je</font>  D9_E6  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0E7h 
+    <font color=#0000FF>je</font>  D9_E7  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0E8h 
+    <font color=#0000FF>je</font>  D9_E8  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0E9h 
+    <font color=#0000FF>je</font>  D9_E9  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0EAh 
+    <font color=#0000FF>je</font>  D9_EA  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0EBh 
+    <font color=#0000FF>je</font>  D9_EB  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0ECh 
+    <font color=#0000FF>je</font>  D9_EC  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0EDh 
+    <font color=#0000FF>je</font>  D9_ED  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0EEh 
+    <font color=#0000FF>je</font>  D9_EE  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0F0h 
+    <font color=#0000FF>je</font>  D9_F0  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0F1h 
+    <font color=#0000FF>je</font>  D9_F1  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0F2h 
+    <font color=#0000FF>je</font>  D9_F2  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0F3h 
+    <font color=#0000FF>je</font>  D9_F3  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0F4h 
+    <font color=#0000FF>je</font>  D9_F4  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0F5h 
+    <font color=#0000FF>je</font>  D9_F5  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0F6h 
+    <font color=#0000FF>je</font>  D9_F6  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0F7h 
+    <font color=#0000FF>je</font>  D9_F7  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0F8h 
+    <font color=#0000FF>je</font>  D9_F8  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0F9h 
+    <font color=#0000FF>je</font>  D9_F9  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0FAh 
+    <font color=#0000FF>je</font>  D9_FA  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0FBh 
+    <font color=#0000FF>je</font>  D9_FB  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0FCh 
+    <font color=#0000FF>je</font>  D9_FC  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0FDh 
+    <font color=#0000FF>je</font>  D9_FD  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0FEh 
+    <font color=#0000FF>je</font>  D9_FE       
+    <font color=#0000FF>jmp</font> D9_FF     <font color=#008000>; == FF </font>
+                 
+         
+D9_C0_i: 
+<font color=#008000>;	    D9 C0+i   FLD i           push, 0 := old i  </font>
+        <font color=#0000FF>SUB</font> <font color=#C80000>eax</font>, 0C0h   <font color=#008000>; get index </font>
+        <font color=#0000FF>jZ</font>  FLD_0 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+        <font color=#0000FF>je</font>  FLD_1 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+        <font color=#0000FF>je</font>  FLD_2 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+        <font color=#0000FF>je</font>  FLD_3 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+        <font color=#0000FF>je</font>  FLD_4 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+        <font color=#0000FF>je</font>  FLD_5 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+        <font color=#0000FF>je</font>  FLD_6 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+        <font color=#0000FF>je</font>  FLD_7         
+        <font color=#0000FF>fnop</font>            <font color=#008000>; wrong index </font>
+        <font color=#0000FF>jmp</font> end_D9_SP   
+FLD_0:           
+        <font color=#0000FF>FLD</font> <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_D9_SP 
+FLD_1:                      
+        <font color=#0000FF>FLD</font> <font color=#C80000>st1</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+FLD_2:           
+        <font color=#0000FF>FLD</font> <font color=#C80000>st2</font>   
+        <font color=#0000FF>jmp</font> end_D9_SP 
+FLD_3:         
+        <font color=#0000FF>FLD</font> <font color=#C80000>st3</font>                   
+        <font color=#0000FF>jmp</font> end_D9_SP 
+FLD_4:         
+        <font color=#0000FF>FLD</font> <font color=#C80000>st4</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+FLD_5:         
+        <font color=#0000FF>FLD</font> <font color=#C80000>st5</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+FLD_6:         
+        <font color=#0000FF>FLD</font> <font color=#C80000>st6</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+FLD_7:         
+        <font color=#0000FF>FLD</font> <font color=#C80000>st7</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP  
+         
+         
+D9_C8_i: 
+<font color=#008000>;	    D9 C8+i   FXCH 0,i        exchange 0 and i </font>
+        <font color=#0000FF>SUB</font> <font color=#C80000>eax</font>, 0C8h   <font color=#008000>; get index </font>
+        <font color=#0000FF>jZ</font>  FXCH_0_0 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+        <font color=#0000FF>je</font>  FXCH_0_1 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+        <font color=#0000FF>je</font>  FXCH_0_2 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+        <font color=#0000FF>je</font>  FXCH_0_3 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+        <font color=#0000FF>je</font>  FXCH_0_4 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+        <font color=#0000FF>je</font>  FXCH_0_5 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+        <font color=#0000FF>je</font>  FXCH_0_6 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+        <font color=#0000FF>je</font>  FXCH_0_7         
+        <font color=#0000FF>fnop</font>            <font color=#008000>; wrong index </font>
+        <font color=#0000FF>jmp</font> end_D9_SP   
+FXCH_0_0:           
+        <font color=#0000FF>FXCH</font> <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_D9_SP 
+FXCH_0_1:                      
+        <font color=#0000FF>FXCH</font> <font color=#C80000>st1</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+FXCH_0_2:           
+        <font color=#0000FF>FXCH</font> <font color=#C80000>st2</font>   
+        <font color=#0000FF>jmp</font> end_D9_SP 
+FXCH_0_3:         
+        <font color=#0000FF>FXCH</font> <font color=#C80000>st3</font>                   
+        <font color=#0000FF>jmp</font> end_D9_SP 
+FXCH_0_4:         
+        <font color=#0000FF>FXCH</font> <font color=#C80000>st4</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+FXCH_0_5:         
+        <font color=#0000FF>FXCH</font> <font color=#C80000>st5</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+FXCH_0_6:         
+        <font color=#0000FF>FXCH</font> <font color=#C80000>st6</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+FXCH_0_7:         
+        <font color=#0000FF>FXCH</font> <font color=#C80000>st7</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP  
+ 
+ 
+                
+D9_D0:                
+<font color=#008000>;	    D9 D0     FNOP            no operation  </font>
+        <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP   
+D9_D1:           
+        <font color=#008000>; there are no known 8087 instructions from D1 to DF </font>
+        <font color=#008000>; probably Pentium has something..... </font>
+ 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_D2:           
+         <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_D3:           
+         <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_D4:           
+         <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_D5:           
+         <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_D6:           
+         <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_D7:           
+ 
+         <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_D8:           
+ 
+         <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_D9:           
+         <font color=#0000FF>FNOP</font>   
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_DA:           
+ 
+         <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_DB:           
+ 
+         <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_DC:           
+ 
+         <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_DD:           
+ 
+         <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_DE:           
+ 
+         <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_DF:           
+ 
+         <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_E0:           
+<font color=#008000>;       D9 E0     FCHS            0 := -0 </font>
+        <font color=#0000FF>FCHS</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_E1:           
+<font color=#008000>;	    D9 E1     FABS            0 := |0| </font>
+        <font color=#0000FF>FABS</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_E2:           
+<font color=#008000>;       NO OP </font>
+        <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_E3:           
+<font color=#008000>;       NO OP </font>
+        <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_E4:           
+<font color=#008000>;       D9 E4     FTST            compare 0 - 0.0 </font>
+        <font color=#0000FF>FTST</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_E5:           
+<font color=#008000>;       D9 E5     FXAM            C3 -- C0 := type of 0 </font>
+        <font color=#0000FF>FXAM</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_E6:           
+<font color=#008000>;       NO OP </font>
+        <font color=#0000FF>FNOP</font>  
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_E7:           
+<font color=#008000>;       NO OP </font>
+        <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_E8:           
+<font color=#008000>;	    D9 E8     FLD1            push, 0 := 1.0 </font>
+        <font color=#0000FF>FLD1</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_E9:           
+<font color=#008000>;	    D9 E9     FLDL2T          push, 0 := log base 2.0 of 10.0 </font>
+        <font color=#0000FF>FLDL2T</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_EA:           
+<font color=#008000>;	    D9 EA     FLDL2E          push, 0 := log base 2.0 of e </font>
+        <font color=#0000FF>FLDL2E</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_EB:           
+<font color=#008000>;	    D9 EB     FLDPI           push, 0 := Pi </font>
+        <font color=#0000FF>FLDPI</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_EC:           
+<font color=#008000>;	    D9 EC     FLDLG2          push, 0 := log base 10.0 of 2.0 </font>
+        <font color=#0000FF>FLDLG2</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_ED:           
+<font color=#008000>;	    D9 ED     FLDLN2          push, 0 := log base e of 2.0 </font>
+        <font color=#0000FF>FLDLN2</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_EE:           
+<font color=#008000>;	    D9 EE     FLDZ            push, 0 := +0.0 </font>
+        <font color=#0000FF>FLDZ</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_EF:           
+        <font color=#0000FF>FNOP</font>      <font color=#008000>; NO SUCH OP </font>
+  
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_F0:           
+<font color=#008000>;	    D9 F0     F2XM1           0 := (2.0 ** 0) - 1.0 </font>
+        <font color=#0000FF>F2XM1</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_F1:           
+<font color=#008000>;	    D9 F1     FYL2X           0 := 1 * log base 2.0 of 0, pop </font>
+        <font color=#0000FF>FYL2X</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_F2:           
+<font color=#008000>;	    D9 F2     FPTAN           push, 1/0 := tan(old 0) </font>
+        <font color=#0000FF>FPTAN</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_F3:           
+<font color=#008000>;	    D9 F3     FPATAN          0 := arctan(1/0), pop </font>
+        <font color=#0000FF>FPATAN</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_F4:           
+<font color=#008000>;	    D9 F4     FXTRACT         push, 1 := expo, 0 := sig </font>
+        <font color=#0000FF>FXTRACT</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_F5:           
+<font color=#008000>;	    D9 F5     FPREM1          387 only: 0 := REPEAT(0 - 1) IEEE compat. </font>
+        <font color=#0000FF>FPREM1</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_F6:           
+<font color=#008000>;	    D9 F6     FDECSTP         decrement stack pointer </font>
+        <font color=#0000FF>FDECSTP</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_F7:           
+<font color=#008000>;	    D9 F7     FINCSTP         increment stack pointer </font>
+        <font color=#0000FF>FINCSTP</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_F8:           
+<font color=#008000>;	    D9 F8     FPREM           0 := REPEAT(0 - 1) </font>
+        <font color=#0000FF>FPREM</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_F9:           
+<font color=#008000>;	    D9 F9     FYL2XP1         0 := 1 * log base 2.0 of (0+1.0), pop </font>
+        <font color=#0000FF>FYL2XP1</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_FA:           
+<font color=#008000>;	    D9 FA     FSQRT           0 := square root of 0 </font>
+        <font color=#0000FF>FSQRT</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_FB:           
+<font color=#008000>;	    D9 FB     FSINCOS         387 only: push, 1 := sine, 0 := cos(old 0) </font>
+        <font color=#0000FF>FSINCOS</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_FC:           
+<font color=#008000>;	    D9 FC     FRNDINT         0 := round(0) </font>
+        <font color=#0000FF>FRNDINT</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_FD:           
+<font color=#008000>;	    D9 FD     FSCALE          0 := 0 * 2.0 ** 1 </font>
+        <font color=#0000FF>FSCALE</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_FE:           
+<font color=#008000>;	    D9 FE     FSIN            387 only: 0 := sine(0) </font>
+        <font color=#0000FF>FSIN</font> 
+        <font color=#0000FF>jmp</font> end_D9_SP 
+D9_FF:           
+<font color=#008000>;	    D9 FF     FCOS            387 only: 0 := cosine(0) </font>
+        <font color=#0000FF>FCOS</font> 
+        <font color=#008000>; NR ; jmp end_D9_SP </font>
+    <font color=#008000>;;;;;;;;;;;;;;;;;;;;; </font>
+      
+end_D9_SP: 
+end_D9_TAB:      
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>virtual87state_94bytes<font color=#0064C8>]</font>  <font color=#008000>; pointer to pointer       </font>
+	<font color=#0000FF>FSAVE</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font>     
+    <font color=#0000FF>fwait</font>  
+     
+    <font color=#0000FF>FCLEX</font> 
+     
+    <font color=#008000>; restore....       </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>,ORIG_87_STATE_94bytes  
+	<font color=#0000FF>FRSTOR</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font>  
+    <font color=#0000FF>fwait</font> 
+     
+    <font color=#008000>; restore </font>
+    <font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>tEBX<font color=#0064C8>]</font> 
+    <font color=#0000FF>mov</font> <font color=#C80000>esi</font>, <font color=#0064C8>[</font>tESI<font color=#0064C8>]</font> 
+    <font color=#0000FF>mov</font> <font color=#C80000>edx</font>, <font color=#0064C8>[</font>tEDX<font color=#0064C8>]</font> 
+    <font color=#0000FF>mov</font> <font color=#C80000>ecx</font>, <font color=#0064C8>[</font>tECX<font color=#0064C8>]</font> 
+  
+    <font color=#0000FF>popf</font> 
+     
+	<font color=#008000>;eax=WHAT EVER </font>
+	<font color=#0000FF>ret</font>   
+endp 
+ 
+ 
+ 
+ 
+        
+        
+        
+        
+        
+        
+ 
+          
+<font color=#0000FF>proc</font> MicroAsm_DA_TAB lEA_TAB, mem4i, virtual87state_94bytes 
+    local tEBX:DWORD, tESI:DWORD 
+	<font color=#0000FF>pushf</font> 
+	<font color=#008000>;cli  </font>
+ 
+	<font color=#0000FF>mov</font> <font color=#0064C8>[</font>tEBX<font color=#0064C8>]</font>, <font color=#C80000>ebx</font> <font color=#008000>; jic  </font>
+	<font color=#0000FF>mov</font> <font color=#0064C8>[</font>tESI<font color=#0064C8>]</font>, <font color=#C80000>esi</font> <font color=#008000>; jic </font>
+	    
+	 
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>,ORIG_87_STATE_94bytes 
+	<font color=#0000FF>FSAVE</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font>  
+    <font color=#0000FF>fwait</font> 
+           	       
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>virtual87state_94bytes<font color=#0064C8>]</font>  <font color=#008000>; pointer to pointer        </font>
+	<font color=#0000FF>FRSTOR</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font> 
+	<font color=#0000FF>fwait</font> 
+	 
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>lEA_TAB<font color=#0064C8>]</font>      <font color=#008000>; pointer to pointer </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>esi</font>, <font color=#0064C8>[</font>mem4i<font color=#0064C8>]</font>        <font color=#008000>; pointer to pointer    </font>
+     
+       
+	<font color=#0000FF>mov</font> <font color=#C80000>eax</font>, <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font> 	 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0 
+    <font color=#0000FF>je</font>  DA_0   
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+    <font color=#0000FF>je</font>  DA_1 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+    <font color=#0000FF>je</font>  DA_2 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+    <font color=#0000FF>je</font>  DA_3 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+    <font color=#0000FF>je</font>  DA_4 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+    <font color=#0000FF>je</font>  DA_5 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+    <font color=#0000FF>je</font>  DA_6   
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+    <font color=#0000FF>je</font>  DA_7      
+    <font color=#0000FF>jmp</font> special_processing_DA 
+DA_0:    
+<font color=#008000>;	    DA /0     FIADD mem4i     0 := 0 + mem2i </font>
+     <font color=#0000FF>FIADD</font> dword <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_DA_TAB          
+DA_1:         
+<font color=#008000>;       DA /1     FIMUL mem4i     0 := 0 * mem4i </font>
+     <font color=#0000FF>FIMUL</font> dword <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_DA_TAB  
+DA_2:   
+<font color=#008000>;       DA /2     FICOM mem4i     compare 0 - mem4i </font>
+     <font color=#0000FF>FICOM</font> dword <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_DA_TAB  
+DA_3:    
+<font color=#008000>;       DA /3     FICOMP mem4i    compare 0 - mem4i, pop </font>
+     <font color=#0000FF>FICOMP</font> dword <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_DA_TAB  
+DA_4:     
+<font color=#008000>;       DA /4     FISUB mem4i     0 := 0 - mem4i </font>
+     <font color=#0000FF>FISUB</font> dword <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_DA_TAB  
+DA_5:    
+<font color=#008000>;       DA /5     FISUBR mem4i    0 := mem4i - 0 </font>
+     <font color=#0000FF>FISUBR</font> dword <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font>  
+<font color=#0000FF>jmp</font> end_DA_TAB  
+DA_6:   
+<font color=#008000>;       DA /6     FIDIV mem4i     0 := 0 / mem4i </font>
+     <font color=#0000FF>FIDIV</font> dword <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font>  
+<font color=#0000FF>jmp</font> end_DA_TAB  
+DA_7:  
+<font color=#008000>;       DA /7     FIDIVR mem4i    0 := mem4i / 0 </font>
+     <font color=#0000FF>FIDIVR</font> dword <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font>   
+<font color=#0000FF>jmp</font> end_DA_TAB  
+  
+  
+<font color=#008000>; generally EA byte: C0 and up   </font>
+<font color=#008000>; it this case instead of TAB index, actual byte value from the RAM is passed </font>
+special_processing_DA:         
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0E9h 
+    <font color=#0000FF>je</font>  DA_E9   
+    <font color=#008000>; no other instructions... </font>
+    <font color=#0000FF>jmp</font> end_DA_SP      
+                 
+         
+DA_E9: 
+<font color=#008000>;    DA E9     FUCOMPP         387 only: unordered compare 0 - 1, pop both </font>
+    <font color=#0000FF>FUCOMPP</font> 
+    <font color=#008000>; NP ; jmp end_DA_SP </font>
+     
+end_DA_SP:      
+end_DA_TAB:	  
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>virtual87state_94bytes<font color=#0064C8>]</font>  <font color=#008000>; pointer to pointer       </font>
+	<font color=#0000FF>FSAVE</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font>     
+    <font color=#0000FF>fwait</font> 
+     
+     
+    <font color=#0000FF>FCLEX</font>  
+     
+           
+    <font color=#008000>; restore....       </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>,ORIG_87_STATE_94bytes  
+	<font color=#0000FF>FRSTOR</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font>  
+    <font color=#0000FF>fwait</font>   
+      
+    <font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>tEBX<font color=#0064C8>]</font> 
+	<font color=#0000FF>mov</font> <font color=#C80000>esi</font>, <font color=#0064C8>[</font>tESI<font color=#0064C8>]</font> 
+	 
+	<font color=#0000FF>popf</font> 
+	 
+	<font color=#008000>; return lEA_TAB (as it was passed to the function) </font>
+	<font color=#008000>;xor eax, eax     ; return </font>
+	<font color=#0000FF>ret</font>   
+endp 
+<font color=#008000>; MicroAsm_DA_TAB </font>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+<font color=#0000FF>proc</font> MicroAsm_DB_TAB lEA_TAB, mem4i, mem10r, virtual87state_94bytes 
+    local tEBX:DWORD,  tESI:DWORD,   tEDX:DWORD,  tECX:DWORD  
+	<font color=#0000FF>pushf</font> 
+	     
+     
+    <font color=#008000>; store                                                                   </font>
+    <font color=#0000FF>mov</font> <font color=#0064C8>[</font>tEBX<font color=#0064C8>]</font>, <font color=#C80000>ebx</font> 
+    <font color=#0000FF>mov</font> <font color=#0064C8>[</font>tESI<font color=#0064C8>]</font>, <font color=#C80000>esi</font> 
+    <font color=#0000FF>mov</font> <font color=#0064C8>[</font>tEDX<font color=#0064C8>]</font>, <font color=#C80000>edx</font> 
+    <font color=#0000FF>mov</font> <font color=#0064C8>[</font>tECX<font color=#0064C8>]</font>, <font color=#C80000>ecx</font> 
+	 
+	<font color=#008000>; FPU -&gt; </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>,ORIG_87_STATE_94bytes 
+	<font color=#0000FF>FSAVE</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font>  
+    <font color=#0000FF>fwait</font> 
+      
+    <font color=#008000>; FPU &lt;-       	       </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>virtual87state_94bytes<font color=#0064C8>]</font>  <font color=#008000>; pointer to pointer        </font>
+	<font color=#0000FF>FRSTOR</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font> 
+	<font color=#0000FF>fwait</font> 
+	 
+	<font color=#008000>;;;;;;;;;;;;;;  </font>
+	  
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>lEA_TAB<font color=#0064C8>]</font>      <font color=#008000>; pointer to pointer </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>esi</font>, <font color=#0064C8>[</font>mem4i<font color=#0064C8>]</font>        <font color=#008000>; pointer to pointer    </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>edx</font>, <font color=#0064C8>[</font>mem10r<font color=#0064C8>]</font>       <font color=#008000>; pointer to pointer </font>
+ 
+       
+	<font color=#0000FF>mov</font> <font color=#C80000>eax</font>, <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font> 	 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0 
+    <font color=#0000FF>je</font>  DB_0   
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+    <font color=#0000FF>je</font>  DB_1 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+    <font color=#0000FF>je</font>  DB_2 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+    <font color=#0000FF>je</font>  DB_3 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+    <font color=#0000FF>je</font>  DB_4 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+    <font color=#0000FF>je</font>  DB_5 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+    <font color=#0000FF>je</font>  DB_6   
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+    <font color=#0000FF>je</font>  DB_7      
+    <font color=#0000FF>jmp</font> special_processing_DB 
+DB_0:    
+<font color=#008000>;	    DB /0     FILD mem4i      push, 0 := mem4i </font>
+     <font color=#0000FF>FILD</font> dword <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_DB_TAB          
+DB_1: 
+<font color=#008000>;       RESERVED   </font>
+     <font color=#0000FF>FNOP</font> 
+<font color=#0000FF>jmp</font> end_DB_TAB  
+DB_2:      
+<font color=#008000>;	    DB /2     FIST mem4i      mem4i := 0 </font>
+     <font color=#0000FF>FIST</font> dword <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_DB_TAB  
+DB_3:        
+<font color=#008000>;	    DB /3     FISTP mem4i     mem4i := 0, pop </font>
+     <font color=#0000FF>FISTP</font> dword <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_DB_TAB  
+DB_4:    
+<font color=#008000>;	    RESERVED </font>
+     <font color=#0000FF>FNOP</font>      
+<font color=#0000FF>jmp</font> end_DB_TAB  
+DB_5:      
+<font color=#008000>;	    DB /5     FLD mem10r      push, 0 := mem10r </font>
+     <font color=#0000FF>FLD</font> tword <font color=#0064C8>[</font><font color=#C80000>edx</font><font color=#0064C8>]</font>  
+<font color=#0000FF>jmp</font> end_DB_TAB  
+DB_6:          
+<font color=#008000>;	    RESERVED </font>
+     <font color=#0000FF>FNOP</font> 
+<font color=#0000FF>jmp</font> end_DB_TAB  
+DB_7:   
+<font color=#008000>;	    DB /7     FSTP mem10r     mem10r := 0, pop </font>
+     <font color=#0000FF>FSTP</font> tword <font color=#0064C8>[</font><font color=#C80000>edx</font><font color=#0064C8>]</font>   
+<font color=#0000FF>jmp</font> end_DB_TAB 
+ 
+    <font color=#008000>;;;;;;;;;;;;;;;;;;;; special processing ;;;;;;;;;;;;;; </font>
+     
+<font color=#008000>; generally EA byte: C0 and up   </font>
+<font color=#008000>; it this case instead of TAB index, actual byte value from the RAM is passed </font>
+special_processing_DB:         
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0C8h 
+    <font color=#0000FF>jb</font>  DB_C0   
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0D0h 
+    <font color=#0000FF>jb</font>  DB_C8 
+      
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0D0h 
+    <font color=#0000FF>je</font>  DB_D0  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0D1h 
+    <font color=#0000FF>je</font>  DB_D1  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0D2h 
+    <font color=#0000FF>je</font>  DB_D2  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0D3h 
+    <font color=#0000FF>je</font>  DB_D3  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0D4h 
+    <font color=#0000FF>je</font>  DB_D4  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0D5h 
+    <font color=#0000FF>je</font>  DB_D5  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0D6h 
+    <font color=#0000FF>je</font>  DB_D6  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0D7h 
+    <font color=#0000FF>je</font>  DB_D7  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0D8h 
+    <font color=#0000FF>je</font>  DB_D8  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0D9h 
+    <font color=#0000FF>je</font>  DB_D9  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0DAh 
+    <font color=#0000FF>je</font>  DB_DA  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0DBh 
+    <font color=#0000FF>je</font>  DB_DB  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0DCh 
+    <font color=#0000FF>je</font>  DB_DC  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0DDh 
+    <font color=#0000FF>je</font>  DB_DD  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0DEh 
+    <font color=#0000FF>je</font>  DB_DE  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0DFh 
+    <font color=#0000FF>je</font>  DB_DF  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0E0h 
+    <font color=#0000FF>je</font>  DB_E0  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0E1h 
+    <font color=#0000FF>je</font>  DB_E1  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0E2h 
+    <font color=#0000FF>je</font>  DB_E2  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0E3h 
+    <font color=#0000FF>je</font>  DB_E3  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0E4h 
+    <font color=#0000FF>je</font>  DB_E4  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0E5h 
+    <font color=#0000FF>je</font>  DB_E5  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0E6h 
+    <font color=#0000FF>je</font>  DB_E6  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0E7h 
+    <font color=#0000FF>je</font>  DB_E7  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0E8h 
+    <font color=#0000FF>je</font>  DB_E8  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0E9h 
+    <font color=#0000FF>je</font>  DB_E9  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0EAh 
+    <font color=#0000FF>je</font>  DB_EA  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0EBh 
+    <font color=#0000FF>je</font>  DB_EB  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0ECh 
+    <font color=#0000FF>je</font>  DB_EC  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0EDh 
+    <font color=#0000FF>je</font>  DB_ED  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0EEh 
+    <font color=#0000FF>je</font>  DB_EE  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0F0h 
+    <font color=#0000FF>je</font>  DB_F0  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0F1h 
+    <font color=#0000FF>je</font>  DB_F1  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0F2h 
+    <font color=#0000FF>je</font>  DB_F2  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0F3h 
+    <font color=#0000FF>je</font>  DB_F3  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0F4h 
+    <font color=#0000FF>je</font>  DB_F4  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0F5h 
+    <font color=#0000FF>je</font>  DB_F5  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0F6h 
+    <font color=#0000FF>je</font>  DB_F6  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0F7h 
+    <font color=#0000FF>je</font>  DB_F7  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0F8h 
+    <font color=#0000FF>je</font>  DB_F8  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0F9h 
+    <font color=#0000FF>je</font>  DB_F9  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0FAh 
+    <font color=#0000FF>je</font>  DB_FA  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0FBh 
+    <font color=#0000FF>je</font>  DB_FB  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0FCh 
+    <font color=#0000FF>je</font>  DB_FC  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0FDh 
+    <font color=#0000FF>je</font>  DB_FD  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0FEh 
+    <font color=#0000FF>je</font>  DB_FE       
+    <font color=#0000FF>jmp</font> DB_FF     <font color=#008000>; == FF </font>
+                 
+         
+DB_C0: 
+<font color=#008000>; RESERVED      </font>
+        <font color=#0000FF>fnop</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP   
+ 
+         
+         
+DB_C8: 
+<font color=#008000>; RESERVED </font>
+        <font color=#0000FF>fnop</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP   
+ 
+        
+DB_D0:                
+<font color=#008000>; RESERVED ..... </font>
+        <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP   
+DB_D1:           
+        <font color=#008000>; there are no known 8087 instructions from C0 to DF </font>
+        <font color=#008000>; probably Pentium has something..... </font>
+ 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_D2:           
+         <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_D3:           
+         <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_D4:           
+         <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_D5:           
+         <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_D6:           
+         <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_D7:           
+ 
+         <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_D8:           
+ 
+         <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_D9:           
+         <font color=#0000FF>FNOP</font>   
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_DA:           
+ 
+         <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_DB:           
+ 
+         <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_DC:           
+ 
+         <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_DD:           
+ 
+         <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_DE:           
+ 
+         <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_DF:           
+ 
+         <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_E0:           
+<font color=#008000>;       DB E0     FENI            enable interrupts (.287 ignore) </font>
+        <font color=#0000FF>FENI</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_E1:           
+<font color=#008000>;	    DB E1     FDISI           disable interrupts (.287 ignore) </font>
+        <font color=#0000FF>FDISI</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_E2:           
+<font color=#008000>;       DB E2     FCLEX           clear exceptions </font>
+        <font color=#0000FF>FCLEX</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_E3:           
+<font color=#008000>;       DB E3     FINIT           initialize 87 </font>
+        <font color=#0000FF>FINIT</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_E4:           
+<font color=#008000>;       DB E4     FSETPM          set protection mode </font>
+<font color=#008000>;        FSETPM </font>
+        <font color=#0000FF>FNOP</font>  <font color=#008000>; seems like only .286 supports it, </font>
+              <font color=#008000>; and all others: .386 and above replace it with FNOP. </font>
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_E5:           
+<font color=#008000>;       DB E8     FBANK 0         IIT only: set bank pointer to default </font>
+        <font color=#0000FF>FNOP</font>  <font color=#008000>; we have no banks. </font>
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_E6:           
+<font color=#008000>;       DB EA     FBANK 2         IIT only: set bank pointer to bank 2 </font>
+        <font color=#0000FF>FNOP</font>  <font color=#008000>; we have no banks.  </font>
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_E7:           
+<font color=#008000>;       DB EB     FBANK 1         IIT only: set bank pointer to bank 1 </font>
+        <font color=#0000FF>FNOP</font>  <font color=#008000>; we have no banks. </font>
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_E8:           
+<font color=#008000>;	    RESERVED </font>
+        <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_E9:           
+<font color=#008000>;	    RESERVED </font>
+        <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_EA:           
+<font color=#008000>;	    RESERVED </font>
+        <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_EB:           
+<font color=#008000>;	    RESERVED </font>
+        <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_EC:           
+<font color=#008000>;	    RESERVED </font>
+        <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_ED:           
+<font color=#008000>;	    RESERVED </font>
+        <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_EE:           
+<font color=#008000>;	    RESERVED </font>
+        <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_EF:           
+<font color=#008000>;	    RESERVED </font>
+        <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_F0:           
+<font color=#008000>;	    RESERVED </font>
+        <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_F1:           
+<font color=#008000>;	    DB F1     F4X4            IIT only: 4 by 4 matrix multiply </font>
+        <font color=#0000FF>FNOP</font>  <font color=#008000>; don't know :) </font>
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_F2:           
+<font color=#008000>;	    RESERVED </font>
+        <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_F3:           
+<font color=#008000>;	    RESERVED </font>
+        <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_F4:           
+<font color=#008000>;	    RESERVED </font>
+        <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_F5:           
+<font color=#008000>;	    RESERVED </font>
+        <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_F6:           
+<font color=#008000>;	    RESERVED </font>
+        <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_F7:           
+<font color=#008000>;	    RESERVED </font>
+        <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_F8:           
+<font color=#008000>;	    RESERVED </font>
+        <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_F9:           
+<font color=#008000>;	    RESERVED </font>
+        <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_FA:           
+<font color=#008000>;	    RESERVED </font>
+        <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_FB:           
+<font color=#008000>;	    RESERVED </font>
+        <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_FC:           
+<font color=#008000>;	    RESERVED </font>
+        <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_FD:           
+<font color=#008000>;	    RESERVED </font>
+        <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_FE:           
+<font color=#008000>;	    RESERVED </font>
+        <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DB_SP 
+DB_FF:           
+<font color=#008000>;	    RESERVED </font>
+        <font color=#0000FF>FNOP</font> 
+        <font color=#008000>; NR ; jmp end_DB_SP </font>
+    <font color=#008000>;;;;;;;;;;;;;;;;;;;;; </font>
+      
+end_DB_SP: 
+end_DB_TAB:      
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>virtual87state_94bytes<font color=#0064C8>]</font>  <font color=#008000>; pointer to pointer       </font>
+	<font color=#0000FF>FSAVE</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font>     
+    <font color=#0000FF>fwait</font>  
+     
+    <font color=#0000FF>FCLEX</font> 
+     
+    <font color=#008000>; restore....       </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>,ORIG_87_STATE_94bytes  
+	<font color=#0000FF>FRSTOR</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font>  
+    <font color=#0000FF>fwait</font> 
+     
+    <font color=#008000>; restore </font>
+    <font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>tEBX<font color=#0064C8>]</font> 
+    <font color=#0000FF>mov</font> <font color=#C80000>esi</font>, <font color=#0064C8>[</font>tESI<font color=#0064C8>]</font> 
+    <font color=#0000FF>mov</font> <font color=#C80000>edx</font>, <font color=#0064C8>[</font>tEDX<font color=#0064C8>]</font> 
+    <font color=#0000FF>mov</font> <font color=#C80000>ecx</font>, <font color=#0064C8>[</font>tECX<font color=#0064C8>]</font> 
+  
+    <font color=#0000FF>popf</font> 
+     
+	<font color=#008000>;eax=WHAT EVER </font>
+	<font color=#0000FF>ret</font>   
+endp 
+<font color=#008000>;  MicroAsm_DB_TAB </font>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+<font color=#0000FF>proc</font> MicroAsm_DC_TAB lEA_TAB, mem8r, virtual87state_94bytes 
+    local tEBX:DWORD,  tESI:DWORD,   tEDX:DWORD,  tECX:DWORD  
+	<font color=#0000FF>pushf</font> 
+	<font color=#008000>;cli  </font>
+ 
+    <font color=#008000>; store                                                                   </font>
+    <font color=#0000FF>mov</font> <font color=#0064C8>[</font>tEBX<font color=#0064C8>]</font>, <font color=#C80000>ebx</font> 
+    <font color=#0000FF>mov</font> <font color=#0064C8>[</font>tESI<font color=#0064C8>]</font>, <font color=#C80000>esi</font> 
+    <font color=#0000FF>mov</font> <font color=#0064C8>[</font>tEDX<font color=#0064C8>]</font>, <font color=#C80000>edx</font> 
+    <font color=#0000FF>mov</font> <font color=#0064C8>[</font>tECX<font color=#0064C8>]</font>, <font color=#C80000>ecx</font> 
+	 
+	<font color=#008000>; FPU -&gt; </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>,ORIG_87_STATE_94bytes 
+	<font color=#0000FF>FSAVE</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font>  
+    <font color=#0000FF>fwait</font> 
+      
+    <font color=#008000>; FPU &lt;-       	       </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>virtual87state_94bytes<font color=#0064C8>]</font>  <font color=#008000>; pointer to pointer        </font>
+	<font color=#0000FF>FRSTOR</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font> 
+	<font color=#0000FF>fwait</font> 
+	 
+	<font color=#008000>;;;;;;;;;;;;;;  </font>
+	  
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>lEA_TAB<font color=#0064C8>]</font>      <font color=#008000>; pointer to pointer </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>esi</font>, <font color=#0064C8>[</font>mem8r<font color=#0064C8>]</font>        <font color=#008000>; pointer to pointer    </font>
+ 
+       
+	<font color=#0000FF>mov</font> <font color=#C80000>eax</font>, <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font> 	 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0 
+    <font color=#0000FF>je</font>  DC_0   
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+    <font color=#0000FF>je</font>  DC_1 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+    <font color=#0000FF>je</font>  DC_2 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+    <font color=#0000FF>je</font>  DC_3 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+    <font color=#0000FF>je</font>  DC_4 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+    <font color=#0000FF>je</font>  DC_5 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+    <font color=#0000FF>je</font>  DC_6   
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+    <font color=#0000FF>je</font>  DC_7      
+    <font color=#0000FF>jmp</font> special_processing_DC 
+DC_0:    
+<font color=#008000>;	    DC /0     FADD mem8r      0 := 0 + mem8r </font>
+     <font color=#0000FF>FADD</font> qword <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_DC_TAB          
+DC_1: 
+<font color=#008000>;       DC /1     FMUL mem8r      0 := 0 * mem8r   </font>
+     <font color=#0000FF>FADD</font> qword <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_DC_TAB  
+DC_2:      
+<font color=#008000>;	    DC /2     FCOM mem8r      compare 0 - mem8r </font>
+     <font color=#0000FF>FCOM</font> qword <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_DC_TAB  
+DC_3:        
+<font color=#008000>;	    DC /3     FCOMP mem8r     compare 0 - mem8r, pop </font>
+     <font color=#0000FF>FCOMP</font> qword <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_DC_TAB  
+DC_4:    
+<font color=#008000>;	    DC /4     FSUB mem8r      0 := 0 - mem8r </font>
+     <font color=#0000FF>FSUB</font> qword <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_DC_TAB  
+DC_5:      
+<font color=#008000>;	    DC /5     FSUBR mem8r     0 := mem8r - 0 </font>
+     <font color=#0000FF>FSUBR</font> qword <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font>  
+<font color=#0000FF>jmp</font> end_DC_TAB  
+DC_6:          
+<font color=#008000>;	    DC /6     FDIV mem8r      0 := 0 / mem8r </font>
+     <font color=#0000FF>FDIV</font> qword <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_DC_TAB  
+DC_7:   
+<font color=#008000>;	    DC /7     FDIVR mem8r     0 := mem8r / 0 </font>
+     <font color=#0000FF>FDIVR</font> qword <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font>   
+<font color=#0000FF>jmp</font> end_DC_TAB 
+ 
+    <font color=#008000>;;;;;;;;;;;;;;;;;;;; special processing ;;;;;;;;;;;;;; </font>
+     
+<font color=#008000>; generally EA byte: C0 and up   </font>
+<font color=#008000>; it this case instead of TAB index, actual byte value from the RAM is passed </font>
+special_processing_DC:         
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0C8h 
+    <font color=#0000FF>jb</font>  DC_C0_i   
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0D0h 
+    <font color=#0000FF>jb</font>  DC_C8_i       
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0D8h 
+    <font color=#0000FF>jb</font>  DC_D0_i       <font color=#008000>; reserved </font>
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0E0h 
+    <font color=#0000FF>jb</font>  DC_D8_i       <font color=#008000>; reserved </font>
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0E8h 
+    <font color=#0000FF>jb</font>  DC_E0_i   
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0F0h 
+    <font color=#0000FF>jb</font>  DC_E8_i  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0F8h 
+    <font color=#0000FF>jb</font>  DC_F0_i            
+      
+    <font color=#0000FF>jmp</font> DC_F8_i       <font color=#008000>; F8+ </font>
+         
+DC_C0_i: 
+<font color=#008000>;	    DC C0+i   FADD i,0        i := i + 0 </font>
+        <font color=#0000FF>SUB</font> <font color=#C80000>eax</font>, 0C0h   <font color=#008000>; get index </font>
+        <font color=#0000FF>jZ</font>  FADD_0 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+        <font color=#0000FF>je</font>  FADD_1 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+        <font color=#0000FF>je</font>  FADD_2 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+        <font color=#0000FF>je</font>  FADD_3 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+        <font color=#0000FF>je</font>  FADD_4 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+        <font color=#0000FF>je</font>  FADD_5 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+        <font color=#0000FF>je</font>  FADD_6 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+        <font color=#0000FF>je</font>  FADD_7         
+        <font color=#0000FF>fnop</font>            <font color=#008000>; wrong index </font>
+        <font color=#0000FF>jmp</font> end_DC_SP   
+FADD_0:           
+        <font color=#0000FF>FADD</font> <font color=#C80000>st0</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FADD_1:                      
+        <font color=#0000FF>FADD</font> <font color=#C80000>st1</font>, <font color=#C80000>st0</font> 
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FADD_2:           
+        <font color=#0000FF>FADD</font> <font color=#C80000>st2</font>, <font color=#C80000>st0</font>   
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FADD_3:         
+        <font color=#0000FF>FADD</font> <font color=#C80000>st3</font>, <font color=#C80000>st0</font>                   
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FADD_4:         
+        <font color=#0000FF>FADD</font> <font color=#C80000>st4</font>, <font color=#C80000>st0</font> 
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FADD_5:         
+        <font color=#0000FF>FADD</font> <font color=#C80000>st5</font>, <font color=#C80000>st0</font> 
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FADD_6:         
+        <font color=#0000FF>FADD</font> <font color=#C80000>st6</font>, <font color=#C80000>st0</font> 
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FADD_7:         
+        <font color=#0000FF>FADD</font> <font color=#C80000>st7</font>, <font color=#C80000>st0</font> 
+        <font color=#0000FF>jmp</font> end_DC_SP  
+ 
+DC_C8_i: 
+<font color=#008000>;	    DC C8+i   FMUL i,0        i := i * 0 </font>
+        <font color=#0000FF>SUB</font> <font color=#C80000>eax</font>, 0C8h   <font color=#008000>; get index </font>
+        <font color=#0000FF>jZ</font>  FMUL_i_0 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+        <font color=#0000FF>je</font>  FMUL_i_1 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+        <font color=#0000FF>je</font>  FMUL_i_2 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+        <font color=#0000FF>je</font>  FMUL_i_3 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+        <font color=#0000FF>je</font>  FMUL_i_4 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+        <font color=#0000FF>je</font>  FMUL_i_5 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+        <font color=#0000FF>je</font>  FMUL_i_6 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+        <font color=#0000FF>je</font>  FMUL_i_7         
+        <font color=#0000FF>fnop</font>            <font color=#008000>; wrong index </font>
+        <font color=#0000FF>jmp</font> end_DC_SP   
+FMUL_i_0:           
+        <font color=#0000FF>FMUL</font> <font color=#C80000>st0</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FMUL_i_1:                      
+        <font color=#0000FF>FMUL</font> <font color=#C80000>st1</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FMUL_i_2:           
+        <font color=#0000FF>FMUL</font> <font color=#C80000>st2</font>, <font color=#C80000>st0</font>    
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FMUL_i_3:         
+        <font color=#0000FF>FMUL</font> <font color=#C80000>st3</font>, <font color=#C80000>st0</font>                    
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FMUL_i_4:         
+        <font color=#0000FF>FMUL</font> <font color=#C80000>st4</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FMUL_i_5:         
+        <font color=#0000FF>FMUL</font> <font color=#C80000>st5</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FMUL_i_6:         
+        <font color=#0000FF>FMUL</font> <font color=#C80000>st6</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FMUL_i_7:         
+        <font color=#0000FF>FMUL</font> <font color=#C80000>st7</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DC_SP  
+ 
+DC_D0_i: 
+       <font color=#008000>; reserved   </font>
+       <font color=#0000FF>FNOP</font> 
+       <font color=#0000FF>jmp</font> end_DC_SP 
+DC_D8_i: 
+       <font color=#008000>; reserved  </font>
+       <font color=#0000FF>FNOP</font> 
+       <font color=#0000FF>jmp</font> end_DC_SP 
+ 
+DC_E0_i: 
+<font color=#008000>;	    DC E0+i   FSUBR i,0       i := 0 - i </font>
+        <font color=#0000FF>SUB</font> <font color=#C80000>eax</font>, 0E0h   <font color=#008000>; get index </font>
+        <font color=#0000FF>jZ</font>  FSUBR_i_0 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+        <font color=#0000FF>je</font>  FSUBR_i_1 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+        <font color=#0000FF>je</font>  FSUBR_i_2 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+        <font color=#0000FF>je</font>  FSUBR_i_3 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+        <font color=#0000FF>je</font>  FSUBR_i_4 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+        <font color=#0000FF>je</font>  FSUBR_i_5 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+        <font color=#0000FF>je</font>  FSUBR_i_6 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+        <font color=#0000FF>je</font>  FSUBR_i_7         
+        <font color=#0000FF>fnop</font>            <font color=#008000>; wrong index </font>
+        <font color=#0000FF>jmp</font> end_DC_SP   
+FSUBR_i_0:           
+        <font color=#0000FF>FSUBR</font> <font color=#C80000>st0</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FSUBR_i_1:                      
+        <font color=#0000FF>FSUBR</font> <font color=#C80000>st1</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FSUBR_i_2:           
+        <font color=#0000FF>FSUBR</font> <font color=#C80000>st2</font>, <font color=#C80000>st0</font>    
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FSUBR_i_3:         
+        <font color=#0000FF>FSUBR</font> <font color=#C80000>st3</font>, <font color=#C80000>st0</font>                    
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FSUBR_i_4:         
+        <font color=#0000FF>FSUBR</font> <font color=#C80000>st4</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FSUBR_i_5:         
+        <font color=#0000FF>FSUBR</font> <font color=#C80000>st5</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FSUBR_i_6:         
+        <font color=#0000FF>FSUBR</font> <font color=#C80000>st6</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FSUBR_i_7:         
+        <font color=#0000FF>FSUBR</font> <font color=#C80000>st7</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DC_SP  
+  
+DC_E8_i: 
+<font color=#008000>;	    DC E8+i   FSUB i,0        i := i - 0 </font>
+        <font color=#0000FF>SUB</font> <font color=#C80000>eax</font>, 0E8h   <font color=#008000>; get index </font>
+        <font color=#0000FF>jZ</font>  FSUB_i_0 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+        <font color=#0000FF>je</font>  FSUB_i_1 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+        <font color=#0000FF>je</font>  FSUB_i_2 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+        <font color=#0000FF>je</font>  FSUB_i_3 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+        <font color=#0000FF>je</font>  FSUB_i_4 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+        <font color=#0000FF>je</font>  FSUB_i_5 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+        <font color=#0000FF>je</font>  FSUB_i_6 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+        <font color=#0000FF>je</font>  FSUB_i_7         
+        <font color=#0000FF>fnop</font>            <font color=#008000>; wrong index </font>
+        <font color=#0000FF>jmp</font> end_DC_SP   
+FSUB_i_0:           
+        <font color=#0000FF>FSUB</font> <font color=#C80000>st0</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FSUB_i_1:                      
+        <font color=#0000FF>FSUB</font> <font color=#C80000>st1</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FSUB_i_2:           
+        <font color=#0000FF>FSUB</font> <font color=#C80000>st2</font>, <font color=#C80000>st0</font>    
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FSUB_i_3:         
+        <font color=#0000FF>FSUB</font> <font color=#C80000>st3</font>, <font color=#C80000>st0</font>                    
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FSUB_i_4:         
+        <font color=#0000FF>FSUB</font> <font color=#C80000>st4</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FSUB_i_5:         
+        <font color=#0000FF>FSUB</font> <font color=#C80000>st5</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FSUB_i_6:         
+        <font color=#0000FF>FSUB</font> <font color=#C80000>st6</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FSUB_i_7:         
+        <font color=#0000FF>FSUB</font> <font color=#C80000>st7</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DC_SP   
+ 
+DC_F0_i: 
+<font color=#008000>;	    DC F0+i   FDIVR i,0       i := 0 / i </font>
+        <font color=#0000FF>SUB</font> <font color=#C80000>eax</font>, 0F0h   <font color=#008000>; get index </font>
+        <font color=#0000FF>jZ</font>  FDIVR_i_0 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+        <font color=#0000FF>je</font>  FDIVR_i_1 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+        <font color=#0000FF>je</font>  FDIVR_i_2 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+        <font color=#0000FF>je</font>  FDIVR_i_3 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+        <font color=#0000FF>je</font>  FDIVR_i_4 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+        <font color=#0000FF>je</font>  FDIVR_i_5 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+        <font color=#0000FF>je</font>  FDIVR_i_6 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+        <font color=#0000FF>je</font>  FDIVR_i_7         
+        <font color=#0000FF>fnop</font>            <font color=#008000>; wrong index </font>
+        <font color=#0000FF>jmp</font> end_DC_SP   
+FDIVR_i_0:           
+        <font color=#0000FF>FDIVR</font> <font color=#C80000>st0</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FDIVR_i_1:                      
+        <font color=#0000FF>FDIVR</font> <font color=#C80000>st1</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FDIVR_i_2:           
+        <font color=#0000FF>FDIVR</font> <font color=#C80000>st2</font>, <font color=#C80000>st0</font>    
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FDIVR_i_3:         
+        <font color=#0000FF>FDIVR</font> <font color=#C80000>st3</font>, <font color=#C80000>st0</font>                    
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FDIVR_i_4:         
+        <font color=#0000FF>FDIVR</font> <font color=#C80000>st4</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FDIVR_i_5:         
+        <font color=#0000FF>FDIVR</font> <font color=#C80000>st5</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FDIVR_i_6:         
+        <font color=#0000FF>FDIVR</font> <font color=#C80000>st6</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FDIVR_i_7:         
+        <font color=#0000FF>FDIVR</font> <font color=#C80000>st7</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DC_SP   
+ 
+DC_F8_i: 
+<font color=#008000>;	    DC F8+i   FDIV i,0        i := i / 0 </font>
+        <font color=#0000FF>SUB</font> <font color=#C80000>eax</font>, 0F8h   <font color=#008000>; get index </font>
+        <font color=#0000FF>jZ</font>  FDIV_i_0 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+        <font color=#0000FF>je</font>  FDIV_i_1 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+        <font color=#0000FF>je</font>  FDIV_i_2 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+        <font color=#0000FF>je</font>  FDIV_i_3 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+        <font color=#0000FF>je</font>  FDIV_i_4 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+        <font color=#0000FF>je</font>  FDIV_i_5 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+        <font color=#0000FF>je</font>  FDIV_i_6 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+        <font color=#0000FF>je</font>  FDIV_i_7         
+        <font color=#0000FF>fnop</font>            <font color=#008000>; wrong index </font>
+        <font color=#0000FF>jmp</font> end_DC_SP   
+FDIV_i_0:           
+        <font color=#0000FF>FDIV</font> <font color=#C80000>st0</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FDIV_i_1:                      
+        <font color=#0000FF>FDIV</font> <font color=#C80000>st1</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FDIV_i_2:           
+        <font color=#0000FF>FDIV</font> <font color=#C80000>st2</font>, <font color=#C80000>st0</font>    
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FDIV_i_3:         
+        <font color=#0000FF>FDIV</font> <font color=#C80000>st3</font>, <font color=#C80000>st0</font>                    
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FDIV_i_4:         
+        <font color=#0000FF>FDIV</font> <font color=#C80000>st4</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FDIV_i_5:         
+        <font color=#0000FF>FDIV</font> <font color=#C80000>st5</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FDIV_i_6:         
+        <font color=#0000FF>FDIV</font> <font color=#C80000>st6</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DC_SP 
+FDIV_i_7:         
+        <font color=#0000FF>FDIV</font> <font color=#C80000>st7</font>, <font color=#C80000>st0</font>  
+        <font color=#008000>; NR ; jmp end_DC_SP </font>
+    <font color=#008000>;;;;;;;;;;;;;;;;;;;;; </font>
+      
+end_DC_SP: 
+end_DC_TAB:      
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>virtual87state_94bytes<font color=#0064C8>]</font>  <font color=#008000>; pointer to pointer       </font>
+	<font color=#0000FF>FSAVE</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font>     
+    <font color=#0000FF>fwait</font>  
+     
+    <font color=#0000FF>FCLEX</font> 
+     
+    <font color=#008000>; restore....       </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>,ORIG_87_STATE_94bytes  
+	<font color=#0000FF>FRSTOR</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font>  
+    <font color=#0000FF>fwait</font> 
+     
+    <font color=#008000>; restore </font>
+    <font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>tEBX<font color=#0064C8>]</font> 
+    <font color=#0000FF>mov</font> <font color=#C80000>esi</font>, <font color=#0064C8>[</font>tESI<font color=#0064C8>]</font> 
+    <font color=#0000FF>mov</font> <font color=#C80000>edx</font>, <font color=#0064C8>[</font>tEDX<font color=#0064C8>]</font> 
+    <font color=#0000FF>mov</font> <font color=#C80000>ecx</font>, <font color=#0064C8>[</font>tECX<font color=#0064C8>]</font> 
+  
+    <font color=#0000FF>popf</font> 
+     
+	<font color=#008000>;eax=WHAT EVER </font>
+	<font color=#0000FF>ret</font>   
+endp 
+ 
+ 
+ 
+ 
+  
+  
+  
+ 
+ 
+ 
+ 
+ 
+ 
+<font color=#0000FF>proc</font> MicroAsm_DD_TAB lEA_TAB, mem8r, mem94, mem2i, virtual87state_94bytes 
+    local tEBX:DWORD,  tESI:DWORD,   tEDX:DWORD,  tECX:DWORD  
+	<font color=#0000FF>pushf</font> 
+	<font color=#008000>;cli  </font>
+ 
+    <font color=#008000>; store                                                                   </font>
+    <font color=#0000FF>mov</font> <font color=#0064C8>[</font>tEBX<font color=#0064C8>]</font>, <font color=#C80000>ebx</font> 
+    <font color=#0000FF>mov</font> <font color=#0064C8>[</font>tESI<font color=#0064C8>]</font>, <font color=#C80000>esi</font> 
+    <font color=#0000FF>mov</font> <font color=#0064C8>[</font>tEDX<font color=#0064C8>]</font>, <font color=#C80000>edx</font> 
+    <font color=#0000FF>mov</font> <font color=#0064C8>[</font>tECX<font color=#0064C8>]</font>, <font color=#C80000>ecx</font> 
+	 
+	<font color=#008000>; FPU -&gt; </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>,ORIG_87_STATE_94bytes 
+	<font color=#0000FF>FSAVE</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font>  
+    <font color=#0000FF>fwait</font> 
+      
+    <font color=#008000>; FPU &lt;-       	       </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>virtual87state_94bytes<font color=#0064C8>]</font>  <font color=#008000>; pointer to pointer        </font>
+	<font color=#0000FF>FRSTOR</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font> 
+	<font color=#0000FF>fwait</font> 
+	 
+	<font color=#008000>;;;;;;;;;;;;;;  </font>
+	  
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>lEA_TAB<font color=#0064C8>]</font>      <font color=#008000>; pointer to pointer </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>esi</font>, <font color=#0064C8>[</font>mem8r<font color=#0064C8>]</font>        <font color=#008000>; pointer to pointer    </font>
+    <font color=#0000FF>mov</font> <font color=#C80000>edx</font>, <font color=#0064C8>[</font>mem94<font color=#0064C8>]</font>        <font color=#008000>; pointer to pointer </font>
+    <font color=#0000FF>mov</font> <font color=#C80000>ecx</font>, <font color=#0064C8>[</font>mem2i<font color=#0064C8>]</font>        <font color=#008000>; pointer to pointer </font>
+     
+       
+	<font color=#0000FF>mov</font> <font color=#C80000>eax</font>, <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font> 	 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0 
+    <font color=#0000FF>je</font>  DD_0   
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+    <font color=#0000FF>je</font>  DD_1 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+    <font color=#0000FF>je</font>  DD_2 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+    <font color=#0000FF>je</font>  DD_3 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+    <font color=#0000FF>je</font>  DD_4 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+    <font color=#0000FF>je</font>  DD_5 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+    <font color=#0000FF>je</font>  DD_6   
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+    <font color=#0000FF>je</font>  DD_7      
+    <font color=#0000FF>jmp</font> special_processing_DD 
+DD_0:    
+<font color=#008000>;	    DD /0     FLD mem8r       push, 0 := mem8r </font>
+     <font color=#0000FF>FLD</font> qword <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_DD_TAB          
+DD_1: 
+<font color=#008000>;       RESERVED   </font>
+     <font color=#0000FF>FNOP</font> 
+<font color=#0000FF>jmp</font> end_DD_TAB  
+DD_2:      
+<font color=#008000>;	    DD /2     FST mem8r       mem8r := 0 </font>
+     <font color=#0000FF>FST</font> qword <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_DD_TAB  
+DD_3:        
+<font color=#008000>;	    DD /3     FSTP mem8r      mem8r := 0, pop </font>
+     <font color=#0000FF>FSTP</font> qword <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_DD_TAB  
+DD_4:    
+<font color=#008000>;	    DD /4     FRSTOR mem94    87 state := mem94 </font>
+     <font color=#0000FF>FRSTOR</font> <font color=#0064C8>[</font><font color=#C80000>edx</font><font color=#0064C8>]</font>   <font color=#008000>; 94 bit pointer </font>
+<font color=#0000FF>jmp</font> end_DD_TAB  
+DD_5:      
+<font color=#008000>;	    RESERVED </font>
+     <font color=#0000FF>FNOP</font>  
+<font color=#0000FF>jmp</font> end_DD_TAB  
+DD_6:          
+<font color=#008000>;	    DD /6     FSAVE mem94     mem94 := 87 state </font>
+     <font color=#0000FF>FSAVE</font> <font color=#0064C8>[</font><font color=#C80000>edx</font><font color=#0064C8>]</font>   <font color=#008000>; 94 bit pointer </font>
+<font color=#0000FF>jmp</font> end_DD_TAB  
+DD_7:   
+<font color=#008000>;	    DD /7     FSTSW mem2i     mem2i := status word </font>
+     <font color=#0000FF>FSTSW</font> <font color=#000064>word</font> <font color=#0064C8>[</font><font color=#C80000>ecx</font><font color=#0064C8>]</font>   
+<font color=#0000FF>jmp</font> end_DD_TAB 
+ 
+    <font color=#008000>;;;;;;;;;;;;;;;;;;;; special processing ;;;;;;;;;;;;;; </font>
+     
+<font color=#008000>; generally EA byte: C0 and up   </font>
+<font color=#008000>; it this case instead of TAB index, actual byte value from the RAM is passed </font>
+special_processing_DD:         
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0C8h 
+    <font color=#0000FF>jb</font>  DD_C0_i   
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0D0h 
+    <font color=#0000FF>jb</font>  DD_C8_i      <font color=#008000>; RESERVED </font>
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0D8h 
+    <font color=#0000FF>jb</font>  DD_D0_i 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0E0h 
+    <font color=#0000FF>jb</font>  DD_D8_i  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0E8h 
+    <font color=#0000FF>jb</font>  DD_E0_i   
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0F0h 
+    <font color=#0000FF>jb</font>  DD_E8_i  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0F8h 
+    <font color=#0000FF>jb</font>  DD_F0_i            
+      
+    <font color=#0000FF>jmp</font> DD_F8_i       <font color=#008000>; F8+ </font>
+         
+DD_C0_i: 
+<font color=#008000>;	    DD C0+i   FFREE i         empty i </font>
+        <font color=#0000FF>SUB</font> <font color=#C80000>eax</font>, 0C0h   <font color=#008000>; get index </font>
+        <font color=#0000FF>jZ</font>  FFREE_0 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+        <font color=#0000FF>je</font>  FFREE_1 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+        <font color=#0000FF>je</font>  FFREE_2 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+        <font color=#0000FF>je</font>  FFREE_3 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+        <font color=#0000FF>je</font>  FFREE_4 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+        <font color=#0000FF>je</font>  FFREE_5 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+        <font color=#0000FF>je</font>  FFREE_6 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+        <font color=#0000FF>je</font>  FFREE_7         
+        <font color=#0000FF>fnop</font>            <font color=#008000>; wrong index </font>
+        <font color=#0000FF>jmp</font> end_DD_SP   
+FFREE_0:           
+        <font color=#0000FF>FFREE</font> <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FFREE_1:                      
+        <font color=#0000FF>FFREE</font> <font color=#C80000>st1</font> 
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FFREE_2:           
+        <font color=#0000FF>FFREE</font> <font color=#C80000>st2</font>   
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FFREE_3:         
+        <font color=#0000FF>FFREE</font> <font color=#C80000>st3</font>                   
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FFREE_4:         
+        <font color=#0000FF>FFREE</font> <font color=#C80000>st4</font> 
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FFREE_5:         
+        <font color=#0000FF>FFREE</font> <font color=#C80000>st5</font> 
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FFREE_6:         
+        <font color=#0000FF>FFREE</font> <font color=#C80000>st6</font> 
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FFREE_7:         
+        <font color=#0000FF>FFREE</font> <font color=#C80000>st7</font> 
+        <font color=#0000FF>jmp</font> end_DD_SP  
+ 
+DD_C8_i: 
+<font color=#008000>;	    RESERVED    </font>
+        <font color=#0000FF>fnop</font>            <font color=#008000>; wrong index </font>
+        <font color=#0000FF>jmp</font> end_DD_SP   
+DD_D0_i:  
+<font color=#008000>;       DD D0+i   FST i           i := 0 </font>
+        <font color=#0000FF>SUB</font> <font color=#C80000>eax</font>, 0D0h   <font color=#008000>; get index </font>
+        <font color=#0000FF>jZ</font>  FST_i_0 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+        <font color=#0000FF>je</font>  FST_i_1 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+        <font color=#0000FF>je</font>  FST_i_2 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+        <font color=#0000FF>je</font>  FST_i_3 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+        <font color=#0000FF>je</font>  FST_i_4 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+        <font color=#0000FF>je</font>  FST_i_5 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+        <font color=#0000FF>je</font>  FST_i_6 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+        <font color=#0000FF>je</font>  FST_i_7         
+        <font color=#0000FF>fnop</font>            <font color=#008000>; wrong index </font>
+        <font color=#0000FF>jmp</font> end_DD_SP   
+FST_i_0:           
+        <font color=#0000FF>FST</font> <font color=#C80000>st0</font> 
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FST_i_1:                      
+        <font color=#0000FF>FST</font> <font color=#C80000>st1</font>  
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FST_i_2:           
+        <font color=#0000FF>FST</font> <font color=#C80000>st2</font>    
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FST_i_3:         
+        <font color=#0000FF>FST</font> <font color=#C80000>st3</font>                    
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FST_i_4:         
+        <font color=#0000FF>FST</font> <font color=#C80000>st4</font>  
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FST_i_5:         
+        <font color=#0000FF>FST</font> <font color=#C80000>st5</font>  
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FST_i_6:         
+        <font color=#0000FF>FST</font> <font color=#C80000>st6</font>  
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FST_i_7:         
+        <font color=#0000FF>FST</font> <font color=#C80000>st7</font>  
+        <font color=#0000FF>jmp</font> end_DD_SP  
+ 
+ 
+ 
+   
+DD_D8_i: 
+<font color=#008000>;       DD D8+i   FSTP i          i := 0, pop </font>
+        <font color=#0000FF>SUB</font> <font color=#C80000>eax</font>, 0D8h   <font color=#008000>; get index </font>
+        <font color=#0000FF>jZ</font>  FSTP_i_0 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+        <font color=#0000FF>je</font>  FSTP_i_1 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+        <font color=#0000FF>je</font>  FSTP_i_2 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+        <font color=#0000FF>je</font>  FSTP_i_3 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+        <font color=#0000FF>je</font>  FSTP_i_4 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+        <font color=#0000FF>je</font>  FSTP_i_5 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+        <font color=#0000FF>je</font>  FSTP_i_6 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+        <font color=#0000FF>je</font>  FSTP_i_7         
+        <font color=#0000FF>fnop</font>            <font color=#008000>; wrong index </font>
+        <font color=#0000FF>jmp</font> end_DD_SP   
+FSTP_i_0:           
+        <font color=#0000FF>FSTP</font> <font color=#C80000>st0</font> 
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FSTP_i_1:                      
+        <font color=#0000FF>FSTP</font> <font color=#C80000>st1</font>  
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FSTP_i_2:           
+        <font color=#0000FF>FSTP</font> <font color=#C80000>st2</font>    
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FSTP_i_3:         
+        <font color=#0000FF>FSTP</font> <font color=#C80000>st3</font>                    
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FSTP_i_4:         
+        <font color=#0000FF>FSTP</font> <font color=#C80000>st4</font>  
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FSTP_i_5:         
+        <font color=#0000FF>FSTP</font> <font color=#C80000>st5</font>  
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FSTP_i_6:         
+        <font color=#0000FF>FSTP</font> <font color=#C80000>st6</font>  
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FSTP_i_7:         
+        <font color=#0000FF>FSTP</font> <font color=#C80000>st7</font>  
+        <font color=#0000FF>jmp</font> end_DD_SP  
+ 
+ 
+ 
+ 
+ 
+ 
+DD_E0_i: 
+<font color=#008000>;	    DD E0+i   FUCOM i         387 only: unordered compare 0 - i </font>
+        <font color=#0000FF>SUB</font> <font color=#C80000>eax</font>, 0E0h   <font color=#008000>; get index </font>
+        <font color=#0000FF>jZ</font>  FUCOM_i_0 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+        <font color=#0000FF>je</font>  FUCOM_i_1 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+        <font color=#0000FF>je</font>  FUCOM_i_2 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+        <font color=#0000FF>je</font>  FUCOM_i_3 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+        <font color=#0000FF>je</font>  FUCOM_i_4 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+        <font color=#0000FF>je</font>  FUCOM_i_5 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+        <font color=#0000FF>je</font>  FUCOM_i_6 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+        <font color=#0000FF>je</font>  FUCOM_i_7         
+        <font color=#0000FF>fnop</font>            <font color=#008000>; wrong index </font>
+        <font color=#0000FF>jmp</font> end_DD_SP   
+FUCOM_i_0:           
+        <font color=#0000FF>FUCOM</font> <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FUCOM_i_1:                      
+        <font color=#0000FF>FUCOM</font> <font color=#C80000>st1</font> 
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FUCOM_i_2:           
+        <font color=#0000FF>FUCOM</font> <font color=#C80000>st2</font>    
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FUCOM_i_3:         
+        <font color=#0000FF>FUCOM</font> <font color=#C80000>st3</font>                    
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FUCOM_i_4:         
+        <font color=#0000FF>FUCOM</font> <font color=#C80000>st4</font>  
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FUCOM_i_5:         
+        <font color=#0000FF>FUCOM</font> <font color=#C80000>st5</font>  
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FUCOM_i_6:         
+        <font color=#0000FF>FUCOM</font> <font color=#C80000>st6</font>  
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FUCOM_i_7:         
+        <font color=#0000FF>FUCOM</font> <font color=#C80000>st7</font>  
+        <font color=#0000FF>jmp</font> end_DD_SP  
+                  
+                  
+DD_E8_i: 
+<font color=#008000>;	    DD E8+i   FUCOMP i        387 only: unordered compare 0 - i, pop </font>
+        <font color=#0000FF>SUB</font> <font color=#C80000>eax</font>, 0E8h   <font color=#008000>; get index </font>
+        <font color=#0000FF>jZ</font>  FUCOMP_i_0 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+        <font color=#0000FF>je</font>  FUCOMP_i_1 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+        <font color=#0000FF>je</font>  FUCOMP_i_2 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+        <font color=#0000FF>je</font>  FUCOMP_i_3 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+        <font color=#0000FF>je</font>  FUCOMP_i_4 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+        <font color=#0000FF>je</font>  FUCOMP_i_5 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+        <font color=#0000FF>je</font>  FUCOMP_i_6 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+        <font color=#0000FF>je</font>  FUCOMP_i_7         
+        <font color=#0000FF>fnop</font>            <font color=#008000>; wrong index </font>
+        <font color=#0000FF>jmp</font> end_DD_SP   
+FUCOMP_i_0:           
+        <font color=#0000FF>FUCOMP</font> <font color=#C80000>st0</font> 
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FUCOMP_i_1:                      
+        <font color=#0000FF>FUCOMP</font> <font color=#C80000>st1</font>  
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FUCOMP_i_2:           
+        <font color=#0000FF>FUCOMP</font> <font color=#C80000>st2</font>    
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FUCOMP_i_3:         
+        <font color=#0000FF>FUCOMP</font> <font color=#C80000>st3</font>                   
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FUCOMP_i_4:         
+        <font color=#0000FF>FUCOMP</font> <font color=#C80000>st4</font> 
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FUCOMP_i_5:         
+        <font color=#0000FF>FUCOMP</font> <font color=#C80000>st5</font> 
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FUCOMP_i_6:         
+        <font color=#0000FF>FUCOMP</font> <font color=#C80000>st6</font> 
+        <font color=#0000FF>jmp</font> end_DD_SP 
+FUCOMP_i_7:         
+        <font color=#0000FF>FUCOMP</font> <font color=#C80000>st7</font> 
+        <font color=#0000FF>jmp</font> end_DD_SP   
+ 
+DD_F0_i: 
+<font color=#008000>;	    RESERVED </font>
+        <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DD_SP   
+ 
+DD_F8_i: 
+<font color=#008000>;	    RESERVED </font>
+        <font color=#0000FF>FNOP</font> 
+        <font color=#008000>; NR ; jmp end_DD_SP </font>
+    <font color=#008000>;;;;;;;;;;;;;;;;;;;;; </font>
+      
+end_DD_SP: 
+end_DD_TAB:      
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>virtual87state_94bytes<font color=#0064C8>]</font>  <font color=#008000>; pointer to pointer       </font>
+	<font color=#0000FF>FSAVE</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font>     
+    <font color=#0000FF>fwait</font>  
+     
+    <font color=#0000FF>FCLEX</font> 
+     
+    <font color=#008000>; restore....       </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>,ORIG_87_STATE_94bytes  
+	<font color=#0000FF>FRSTOR</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font>  
+    <font color=#0000FF>fwait</font> 
+     
+    <font color=#008000>; restore </font>
+    <font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>tEBX<font color=#0064C8>]</font> 
+    <font color=#0000FF>mov</font> <font color=#C80000>esi</font>, <font color=#0064C8>[</font>tESI<font color=#0064C8>]</font> 
+    <font color=#0000FF>mov</font> <font color=#C80000>edx</font>, <font color=#0064C8>[</font>tEDX<font color=#0064C8>]</font> 
+    <font color=#0000FF>mov</font> <font color=#C80000>ecx</font>, <font color=#0064C8>[</font>tECX<font color=#0064C8>]</font> 
+  
+    <font color=#0000FF>popf</font> 
+     
+	<font color=#008000>;eax=WHAT EVER </font>
+	<font color=#0000FF>ret</font>   
+endp 
+  
+  
+ 
+ 
+   
+   
+   
+   
+   
+   
+ 
+ 
+<font color=#0000FF>proc</font> MicroAsm_DE_TAB lEA_TAB, mem2i, virtual87state_94bytes 
+    local tEBX:DWORD,  tESI:DWORD,   tEDX:DWORD,  tECX:DWORD  
+	<font color=#0000FF>pushf</font> 
+	<font color=#008000>;cli  </font>
+ 
+    <font color=#008000>; store                                                                   </font>
+    <font color=#0000FF>mov</font> <font color=#0064C8>[</font>tEBX<font color=#0064C8>]</font>, <font color=#C80000>ebx</font> 
+    <font color=#0000FF>mov</font> <font color=#0064C8>[</font>tESI<font color=#0064C8>]</font>, <font color=#C80000>esi</font> 
+    <font color=#0000FF>mov</font> <font color=#0064C8>[</font>tEDX<font color=#0064C8>]</font>, <font color=#C80000>edx</font> 
+    <font color=#0000FF>mov</font> <font color=#0064C8>[</font>tECX<font color=#0064C8>]</font>, <font color=#C80000>ecx</font> 
+	 
+	<font color=#008000>; FPU -&gt; </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>,ORIG_87_STATE_94bytes 
+	<font color=#0000FF>FSAVE</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font>  
+    <font color=#0000FF>fwait</font> 
+      
+    <font color=#008000>; FPU &lt;-       	       </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>virtual87state_94bytes<font color=#0064C8>]</font>  <font color=#008000>; pointer to pointer        </font>
+	<font color=#0000FF>FRSTOR</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font> 
+	<font color=#0000FF>fwait</font> 
+	 
+	<font color=#008000>;;;;;;;;;;;;;;  </font>
+	  
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>lEA_TAB<font color=#0064C8>]</font>      <font color=#008000>; pointer to pointer </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>esi</font>, <font color=#0064C8>[</font>mem2i<font color=#0064C8>]</font>        <font color=#008000>; pointer to pointer    </font>
+ 
+       
+	<font color=#0000FF>mov</font> <font color=#C80000>eax</font>, <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font> 	 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0 
+    <font color=#0000FF>je</font>  DE_0   
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+    <font color=#0000FF>je</font>  DE_1 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+    <font color=#0000FF>je</font>  DE_2 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+    <font color=#0000FF>je</font>  DE_3 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+    <font color=#0000FF>je</font>  DE_4 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+    <font color=#0000FF>je</font>  DE_5 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+    <font color=#0000FF>je</font>  DE_6   
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+    <font color=#0000FF>je</font>  DE_7      
+    <font color=#0000FF>jmp</font> special_processing_DE 
+DE_0:    
+<font color=#008000>;A86:	DE /0     FIADD mem2i     0 := 0 + mem4i    (??????)   should be + mem2i </font>
+<font color=#008000>;INTEL: DE /0     FIADD m16int    Add   m16int to ST(0)      and store result in ST(0).  ; mem16i = word </font>
+     <font color=#0000FF>FIADD</font> <font color=#000064>word</font> <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_DE_TAB          
+DE_1: 
+<font color=#008000>;       DE /1     FIMUL mem2i     0 := 0 * mem2i   </font>
+     <font color=#0000FF>FIMUL</font> <font color=#000064>word</font> <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_DE_TAB  
+DE_2:      
+<font color=#008000>;	    DE /2     FICOM mem2i     compare 0 - mem2i </font>
+     <font color=#0000FF>FICOM</font> <font color=#000064>word</font> <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_DE_TAB  
+DE_3:        
+<font color=#008000>;	    DE /3     FICOMP mem2i    compare 0 - mem2i, pop </font>
+     <font color=#0000FF>FICOMP</font> <font color=#000064>word</font> <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_DE_TAB  
+DE_4:    
+<font color=#008000>;	    DE /4     FISUB mem2i     0 := 0 - mem2i </font>
+     <font color=#0000FF>FISUB</font> <font color=#000064>word</font> <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_DE_TAB  
+DE_5:      
+<font color=#008000>;	    DE /5     FISUBR mem2i    0 := mem2i - 0 </font>
+     <font color=#0000FF>FISUBR</font> <font color=#000064>word</font> <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font>  
+<font color=#0000FF>jmp</font> end_DE_TAB  
+DE_6:          
+<font color=#008000>;	    DE /6     FIDIV mem2i     0 := 0 / mem2i </font>
+     <font color=#0000FF>FIDIV</font> <font color=#000064>word</font> <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_DE_TAB  
+DE_7:   
+<font color=#008000>;	    DE /7     FIDIVR mem2i    0 := mem2i / 0 </font>
+     <font color=#0000FF>FIDIVR</font> <font color=#000064>word</font> <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font>   
+<font color=#0000FF>jmp</font> end_DE_TAB 
+ 
+    <font color=#008000>;;;;;;;;;;;;;;;;;;;; special processing ;;;;;;;;;;;;;; </font>
+     
+<font color=#008000>; generally EA byte: C0 and up   </font>
+<font color=#008000>; it this case instead of TAB index, actual byte value from the RAM is passed </font>
+special_processing_DE:         
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0C8h 
+    <font color=#0000FF>jb</font>  DE_C0_i   
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0D0h 
+    <font color=#0000FF>jb</font>  DE_C8_i       
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0D8h 
+    <font color=#0000FF>jb</font>  DE_D0_i 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0E0h 
+    <font color=#0000FF>jb</font>  DE_D8_i        
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0E8h 
+    <font color=#0000FF>jb</font>  DE_E0_i   
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0F0h 
+    <font color=#0000FF>jb</font>  DE_E8_i  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0F8h 
+    <font color=#0000FF>jb</font>  DE_F0_i            
+      
+    <font color=#0000FF>jmp</font> DE_F8_i       <font color=#008000>; F8+ </font>
+         
+DE_C0_i: 
+<font color=#008000>;	    DE C0+i   FADDP i,0       i := i + 0, pop </font>
+        <font color=#0000FF>SUB</font> <font color=#C80000>eax</font>, 0C0h   <font color=#008000>; get index </font>
+        <font color=#0000FF>jZ</font>  FADDP_0 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+        <font color=#0000FF>je</font>  FADDP_1 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+        <font color=#0000FF>je</font>  FADDP_2 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+        <font color=#0000FF>je</font>  FADDP_3 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+        <font color=#0000FF>je</font>  FADDP_4 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+        <font color=#0000FF>je</font>  FADDP_5 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+        <font color=#0000FF>je</font>  FADDP_6 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+        <font color=#0000FF>je</font>  FADDP_7         
+        <font color=#0000FF>fnop</font>            <font color=#008000>; wrong index </font>
+        <font color=#0000FF>jmp</font> end_DE_SP   
+FADDP_0:           
+        <font color=#0000FF>FADDP</font> <font color=#C80000>st0</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FADDP_1:                      
+        <font color=#0000FF>FADDP</font> <font color=#C80000>st1</font>, <font color=#C80000>st0</font> 
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FADDP_2:           
+        <font color=#0000FF>FADDP</font> <font color=#C80000>st2</font>, <font color=#C80000>st0</font>   
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FADDP_3:         
+        <font color=#0000FF>FADDP</font> <font color=#C80000>st3</font>, <font color=#C80000>st0</font>                   
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FADDP_4:         
+        <font color=#0000FF>FADDP</font> <font color=#C80000>st4</font>, <font color=#C80000>st0</font> 
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FADDP_5:         
+        <font color=#0000FF>FADDP</font> <font color=#C80000>st5</font>, <font color=#C80000>st0</font> 
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FADDP_6:         
+        <font color=#0000FF>FADDP</font> <font color=#C80000>st6</font>, <font color=#C80000>st0</font> 
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FADDP_7:         
+        <font color=#0000FF>FADDP</font> <font color=#C80000>st7</font>, <font color=#C80000>st0</font> 
+        <font color=#0000FF>jmp</font> end_DE_SP  
+ 
+DE_C8_i: 
+<font color=#008000>;	    DE C8+i   FMULP i,0       i := i * 0, pop </font>
+        <font color=#0000FF>SUB</font> <font color=#C80000>eax</font>, 0C8h   <font color=#008000>; get index </font>
+        <font color=#0000FF>jZ</font>  FMULP_i_0 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+        <font color=#0000FF>je</font>  FMULP_i_1 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+        <font color=#0000FF>je</font>  FMULP_i_2 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+        <font color=#0000FF>je</font>  FMULP_i_3 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+        <font color=#0000FF>je</font>  FMULP_i_4 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+        <font color=#0000FF>je</font>  FMULP_i_5 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+        <font color=#0000FF>je</font>  FMULP_i_6 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+        <font color=#0000FF>je</font>  FMULP_i_7         
+        <font color=#0000FF>fnop</font>            <font color=#008000>; wrong index </font>
+        <font color=#0000FF>jmp</font> end_DE_SP   
+FMULP_i_0:           
+        <font color=#0000FF>FMULP</font> <font color=#C80000>st0</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FMULP_i_1:                      
+        <font color=#0000FF>FMULP</font> <font color=#C80000>st1</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FMULP_i_2:           
+        <font color=#0000FF>FMULP</font> <font color=#C80000>st2</font>, <font color=#C80000>st0</font>    
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FMULP_i_3:         
+        <font color=#0000FF>FMULP</font> <font color=#C80000>st3</font>, <font color=#C80000>st0</font>                    
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FMULP_i_4:         
+        <font color=#0000FF>FMULP</font> <font color=#C80000>st4</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FMULP_i_5:         
+        <font color=#0000FF>FMULP</font> <font color=#C80000>st5</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FMULP_i_6:         
+        <font color=#0000FF>FMULP</font> <font color=#C80000>st6</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FMULP_i_7:         
+        <font color=#0000FF>FMULP</font> <font color=#C80000>st7</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DE_SP  
+ 
+DE_D0_i: 
+<font color=#008000>;       reserved   </font>
+        <font color=#0000FF>FNOP</font> 
+        <font color=#0000FF>jmp</font> end_DE_SP  
+           
+           
+           
+           
+DE_D8_i:   
+       <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0D9h 
+       <font color=#0000FF>JE</font>  DE_D9 
+       <font color=#0000FF>jmp</font> end_DE_SP     <font color=#008000>; ALL OTHERS RESERVED. </font>
+DE_D9: 
+<font color=#008000>;      DE D9     FCOMPP          compare 0 - 1, pop both </font>
+       <font color=#0000FF>FCOMPP</font>                                          
+       <font color=#0000FF>jmp</font> end_DE_SP 
+             
+             
+             
+             
+             
+DE_E0_i: 
+<font color=#008000>;	    DE E0+i   FSUBRP i,0      i := 0 - i, pop </font>
+        <font color=#0000FF>SUB</font> <font color=#C80000>eax</font>, 0E0h   <font color=#008000>; get index </font>
+        <font color=#0000FF>jZ</font>  FSUBRP_i_0 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+        <font color=#0000FF>je</font>  FSUBRP_i_1 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+        <font color=#0000FF>je</font>  FSUBRP_i_2 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+        <font color=#0000FF>je</font>  FSUBRP_i_3 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+        <font color=#0000FF>je</font>  FSUBRP_i_4 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+        <font color=#0000FF>je</font>  FSUBRP_i_5 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+        <font color=#0000FF>je</font>  FSUBRP_i_6 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+        <font color=#0000FF>je</font>  FSUBRP_i_7         
+        <font color=#0000FF>fnop</font>            <font color=#008000>; wrong index </font>
+        <font color=#0000FF>jmp</font> end_DE_SP   
+FSUBRP_i_0:           
+        <font color=#0000FF>FSUBRP</font> <font color=#C80000>st0</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FSUBRP_i_1:                      
+        <font color=#0000FF>FSUBRP</font> <font color=#C80000>st1</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FSUBRP_i_2:           
+        <font color=#0000FF>FSUBRP</font> <font color=#C80000>st2</font>, <font color=#C80000>st0</font>    
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FSUBRP_i_3:         
+        <font color=#0000FF>FSUBRP</font> <font color=#C80000>st3</font>, <font color=#C80000>st0</font>                    
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FSUBRP_i_4:         
+        <font color=#0000FF>FSUBRP</font> <font color=#C80000>st4</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FSUBRP_i_5:         
+        <font color=#0000FF>FSUBRP</font> <font color=#C80000>st5</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FSUBRP_i_6:         
+        <font color=#0000FF>FSUBRP</font> <font color=#C80000>st6</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FSUBRP_i_7:         
+        <font color=#0000FF>FSUBRP</font> <font color=#C80000>st7</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DE_SP  
+  
+DE_E8_i: 
+<font color=#008000>;	    DE E8+i   FSUBP i,0       i := i - 0, pop </font>
+        <font color=#0000FF>SUB</font> <font color=#C80000>eax</font>, 0E8h   <font color=#008000>; get index </font>
+        <font color=#0000FF>jZ</font>  FSUBP_i_0 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+        <font color=#0000FF>je</font>  FSUBP_i_1 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+        <font color=#0000FF>je</font>  FSUBP_i_2 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+        <font color=#0000FF>je</font>  FSUBP_i_3 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+        <font color=#0000FF>je</font>  FSUBP_i_4 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+        <font color=#0000FF>je</font>  FSUBP_i_5 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+        <font color=#0000FF>je</font>  FSUBP_i_6 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+        <font color=#0000FF>je</font>  FSUBP_i_7         
+        <font color=#0000FF>fnop</font>            <font color=#008000>; wrong index </font>
+        <font color=#0000FF>jmp</font> end_DE_SP   
+FSUBP_i_0:           
+        <font color=#0000FF>FSUBP</font> <font color=#C80000>st0</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FSUBP_i_1:                      
+        <font color=#0000FF>FSUBP</font> <font color=#C80000>st1</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FSUBP_i_2:           
+        <font color=#0000FF>FSUBP</font> <font color=#C80000>st2</font>, <font color=#C80000>st0</font>    
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FSUBP_i_3:         
+        <font color=#0000FF>FSUBP</font> <font color=#C80000>st3</font>, <font color=#C80000>st0</font>                    
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FSUBP_i_4:         
+        <font color=#0000FF>FSUBP</font> <font color=#C80000>st4</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FSUBP_i_5:         
+        <font color=#0000FF>FSUBP</font> <font color=#C80000>st5</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FSUBP_i_6:         
+        <font color=#0000FF>FSUBP</font> <font color=#C80000>st6</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FSUBP_i_7:         
+        <font color=#0000FF>FSUBP</font> <font color=#C80000>st7</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DE_SP   
+ 
+DE_F0_i: 
+<font color=#008000>;	    DE F0+i   FDIVRP i,0      i := 0 / i, pop </font>
+        <font color=#0000FF>SUB</font> <font color=#C80000>eax</font>, 0F0h   <font color=#008000>; get index </font>
+        <font color=#0000FF>jZ</font>  FDIVRP_i_0 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+        <font color=#0000FF>je</font>  FDIVRP_i_1 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+        <font color=#0000FF>je</font>  FDIVRP_i_2 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+        <font color=#0000FF>je</font>  FDIVRP_i_3 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+        <font color=#0000FF>je</font>  FDIVRP_i_4 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+        <font color=#0000FF>je</font>  FDIVRP_i_5 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+        <font color=#0000FF>je</font>  FDIVRP_i_6 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+        <font color=#0000FF>je</font>  FDIVRP_i_7         
+        <font color=#0000FF>fnop</font>            <font color=#008000>; wrong index </font>
+        <font color=#0000FF>jmp</font> end_DE_SP   
+FDIVRP_i_0:           
+        <font color=#0000FF>FDIVRP</font> <font color=#C80000>st0</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FDIVRP_i_1:                      
+        <font color=#0000FF>FDIVRP</font> <font color=#C80000>st1</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FDIVRP_i_2:           
+        <font color=#0000FF>FDIVRP</font> <font color=#C80000>st2</font>, <font color=#C80000>st0</font>    
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FDIVRP_i_3:         
+        <font color=#0000FF>FDIVRP</font> <font color=#C80000>st3</font>, <font color=#C80000>st0</font>                    
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FDIVRP_i_4:         
+        <font color=#0000FF>FDIVRP</font> <font color=#C80000>st4</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FDIVRP_i_5:         
+        <font color=#0000FF>FDIVRP</font> <font color=#C80000>st5</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FDIVRP_i_6:         
+        <font color=#0000FF>FDIVRP</font> <font color=#C80000>st6</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FDIVRP_i_7:         
+        <font color=#0000FF>FDIVRP</font> <font color=#C80000>st7</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DE_SP   
+ 
+DE_F8_i: 
+<font color=#008000>;	    DE F8+i   FDIVP i,0       i := i / 0, pop </font>
+        <font color=#0000FF>SUB</font> <font color=#C80000>eax</font>, 0F8h   <font color=#008000>; get index </font>
+        <font color=#0000FF>jZ</font>  FDIVP_i_0 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+        <font color=#0000FF>je</font>  FDIVP_i_1 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+        <font color=#0000FF>je</font>  FDIVP_i_2 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+        <font color=#0000FF>je</font>  FDIVP_i_3 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+        <font color=#0000FF>je</font>  FDIVP_i_4 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+        <font color=#0000FF>je</font>  FDIVP_i_5 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+        <font color=#0000FF>je</font>  FDIVP_i_6 
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+        <font color=#0000FF>je</font>  FDIVP_i_7         
+        <font color=#0000FF>fnop</font>            <font color=#008000>; wrong index </font>
+        <font color=#0000FF>jmp</font> end_DE_SP   
+FDIVP_i_0:           
+        <font color=#0000FF>FDIVP</font> <font color=#C80000>st0</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FDIVP_i_1:                      
+        <font color=#0000FF>FDIVP</font> <font color=#C80000>st1</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FDIVP_i_2:           
+        <font color=#0000FF>FDIVP</font> <font color=#C80000>st2</font>, <font color=#C80000>st0</font>    
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FDIVP_i_3:         
+        <font color=#0000FF>FDIVP</font> <font color=#C80000>st3</font>, <font color=#C80000>st0</font>                    
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FDIVP_i_4:         
+        <font color=#0000FF>FDIVP</font> <font color=#C80000>st4</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FDIVP_i_5:         
+        <font color=#0000FF>FDIVP</font> <font color=#C80000>st5</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FDIVP_i_6:         
+        <font color=#0000FF>FDIVP</font> <font color=#C80000>st6</font>, <font color=#C80000>st0</font>  
+        <font color=#0000FF>jmp</font> end_DE_SP 
+FDIVP_i_7:         
+        <font color=#0000FF>FDIVP</font> <font color=#C80000>st7</font>, <font color=#C80000>st0</font>  
+        <font color=#008000>; NR ; jmp end_DE_SP </font>
+    <font color=#008000>;;;;;;;;;;;;;;;;;;;;; </font>
+      
+end_DE_SP: 
+end_DE_TAB:      
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>virtual87state_94bytes<font color=#0064C8>]</font>  <font color=#008000>; pointer to pointer       </font>
+	<font color=#0000FF>FSAVE</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font>     
+    <font color=#0000FF>fwait</font>  
+     
+    <font color=#0000FF>FCLEX</font> 
+     
+    <font color=#008000>; restore....       </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>,ORIG_87_STATE_94bytes  
+	<font color=#0000FF>FRSTOR</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font>  
+    <font color=#0000FF>fwait</font> 
+     
+    <font color=#008000>; restore </font>
+    <font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>tEBX<font color=#0064C8>]</font> 
+    <font color=#0000FF>mov</font> <font color=#C80000>esi</font>, <font color=#0064C8>[</font>tESI<font color=#0064C8>]</font> 
+    <font color=#0000FF>mov</font> <font color=#C80000>edx</font>, <font color=#0064C8>[</font>tEDX<font color=#0064C8>]</font> 
+    <font color=#0000FF>mov</font> <font color=#C80000>ecx</font>, <font color=#0064C8>[</font>tECX<font color=#0064C8>]</font> 
+  
+    <font color=#0000FF>popf</font> 
+     
+	<font color=#008000>;eax=WHAT EVER </font>
+	<font color=#0000FF>ret</font>   
+endp 
+ 
+   
+ 
+ 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+<font color=#008000>; AX = mem2i for FSTSW AX </font>
+<font color=#008000>; (all passed by ref)  </font>
+ 
+<font color=#0000FF>proc</font> MicroAsm_DF_TAB lEA_TAB, mem2i, mem8d, mem10i,  virtual87state_94bytes 
+    local tEBX:DWORD,  tESI:DWORD,   tEDX:DWORD,  tECX:DWORD  
+	<font color=#0000FF>pushf</font> 
+	<font color=#008000>;cli  </font>
+ 
+    <font color=#008000>; store                                                                   </font>
+    <font color=#0000FF>mov</font> <font color=#0064C8>[</font>tEBX<font color=#0064C8>]</font>, <font color=#C80000>ebx</font> 
+    <font color=#0000FF>mov</font> <font color=#0064C8>[</font>tESI<font color=#0064C8>]</font>, <font color=#C80000>esi</font> 
+    <font color=#0000FF>mov</font> <font color=#0064C8>[</font>tEDX<font color=#0064C8>]</font>, <font color=#C80000>edx</font> 
+    <font color=#0000FF>mov</font> <font color=#0064C8>[</font>tECX<font color=#0064C8>]</font>, <font color=#C80000>ecx</font> 
+	 
+	<font color=#008000>; FPU -&gt; </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>,ORIG_87_STATE_94bytes 
+	<font color=#0000FF>FSAVE</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font>  
+    <font color=#0000FF>fwait</font> 
+      
+    <font color=#008000>; FPU &lt;-       	       </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>virtual87state_94bytes<font color=#0064C8>]</font>  <font color=#008000>; pointer to pointer        </font>
+	<font color=#0000FF>FRSTOR</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font> 
+	<font color=#0000FF>fwait</font> 
+	 
+	<font color=#008000>;;;;;;;;;;;;;;  </font>
+	  
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>lEA_TAB<font color=#0064C8>]</font>      <font color=#008000>; pointer to pointer </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>esi</font>, <font color=#0064C8>[</font>mem2i<font color=#0064C8>]</font>        <font color=#008000>; pointer to pointer    </font>
+    <font color=#0000FF>mov</font> <font color=#C80000>edx</font>, <font color=#0064C8>[</font>mem8d<font color=#0064C8>]</font>        <font color=#008000>; pointer to pointer </font>
+    <font color=#0000FF>mov</font> <font color=#C80000>ecx</font>, <font color=#0064C8>[</font>mem10i<font color=#0064C8>]</font>       <font color=#008000>; pointer to pointer </font>
+     
+     
+       
+	<font color=#0000FF>mov</font> <font color=#C80000>eax</font>, <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font> 	 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0 
+    <font color=#0000FF>je</font>  DF_0   
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 1 
+    <font color=#0000FF>je</font>  DF_1 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 2 
+    <font color=#0000FF>je</font>  DF_2 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 3 
+    <font color=#0000FF>je</font>  DF_3 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 4 
+    <font color=#0000FF>je</font>  DF_4 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 5 
+    <font color=#0000FF>je</font>  DF_5 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 6 
+    <font color=#0000FF>je</font>  DF_6   
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 7 
+    <font color=#0000FF>je</font>  DF_7      
+    <font color=#0000FF>jmp</font> special_processing_DF 
+DF_0:    
+<font color=#008000>;       DF /0     FILD mem2i      push, 0 := mem2i </font>
+     <font color=#0000FF>FILD</font> <font color=#000064>word</font> <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_DF_TAB          
+DF_1: 
+<font color=#008000>;       DE /1     RESERVED   </font>
+     <font color=#0000FF>FNOP</font> 
+<font color=#0000FF>jmp</font> end_DF_TAB  
+DF_2:      
+<font color=#008000>;	    DF /2     FIST mem2i      mem2i := 0 </font>
+     <font color=#0000FF>FIST</font> <font color=#000064>word</font> <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_DF_TAB  
+DF_3:        
+<font color=#008000>;	    DF /3     FISTP mem2i     mem2i := 0, pop </font>
+     <font color=#0000FF>FISTP</font> <font color=#000064>word</font> <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_DF_TAB  
+DF_4:    
+<font color=#008000>;	    DF /4     FBLD mem10d     push, 0 := mem10d </font>
+     <font color=#0000FF>FBLD</font> tword <font color=#0064C8>[</font><font color=#C80000>ecx</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_DF_TAB  
+DF_5:      
+<font color=#008000>;	    DF /5     FILD mem8i      push, 0 := mem8i </font>
+     <font color=#0000FF>FILD</font> qword <font color=#0064C8>[</font><font color=#C80000>edx</font><font color=#0064C8>]</font>  
+<font color=#0000FF>jmp</font> end_DF_TAB  
+DF_6:          
+<font color=#008000>;	    DF /6     FBSTP mem10d    mem10d := 0, pop </font>
+     <font color=#0000FF>FBSTP</font> tword <font color=#0064C8>[</font><font color=#C80000>ecx</font><font color=#0064C8>]</font> 
+<font color=#0000FF>jmp</font> end_DF_TAB  
+DF_7:   
+<font color=#008000>;	    DF /7     FISTP mem8i     mem8i := 0, pop </font>
+     <font color=#0000FF>FISTP</font> qword <font color=#0064C8>[</font><font color=#C80000>edx</font><font color=#0064C8>]</font>   
+<font color=#0000FF>jmp</font> end_DF_TAB 
+ 
+    <font color=#008000>;;;;;;;;;;;;;;;;;;;; special processing ;;;;;;;;;;;;;; </font>
+     
+<font color=#008000>; generally EA byte: C0 and up   </font>
+<font color=#008000>; it this case instead of TAB index, actual byte value from the RAM is passed </font>
+special_processing_DF:         
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0C8h 
+    <font color=#0000FF>jb</font>  DF_C0_i   
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0D0h 
+    <font color=#0000FF>jb</font>  DF_C8_i       
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0D8h 
+    <font color=#0000FF>jb</font>  DF_D0_i 
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0E0h 
+    <font color=#0000FF>jb</font>  DF_D8_i        
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0E8h 
+    <font color=#0000FF>jb</font>  DF_E0_i   
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0F0h 
+    <font color=#0000FF>jb</font>  DF_E8_i  
+    <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0F8h 
+    <font color=#0000FF>jb</font>  DF_F0_i            
+      
+    <font color=#0000FF>jmp</font> DF_F8_i       <font color=#008000>; F8+ </font>
+ 
+         
+DF_C0_i: 
+        <font color=#0000FF>jmp</font> end_DF_SP   
+DF_C8_i: 
+        <font color=#0000FF>jmp</font> end_DF_SP  
+DF_D0_i: 
+        <font color=#0000FF>jmp</font> end_DF_SP  
+DF_D8_i:   
+        <font color=#0000FF>jmp</font> end_DF_SP      
+DF_D9: 
+        <font color=#0000FF>jmp</font> end_DF_SP 
+DF_E0_i:          
+        <font color=#0000FF>cmp</font> <font color=#C80000>eax</font>, 0E0h 
+        <font color=#0000FF>je</font>  DF_E0         <font color=#008000>; ALL OTHERS RESERVED.  </font>
+        <font color=#0000FF>jmp</font> end_DF_SP 
+DF_E0: 
+<font color=#008000>;        DF E0     FSTSW AX        AX := status word </font>
+        <font color=#0000FF>FSTSW</font> <font color=#C80000>AX</font> 
+        <font color=#0000FF>mov</font> <font color=#0064C8>[</font><font color=#C80000>esi</font><font color=#0064C8>]</font>, <font color=#C80000>AX</font> 
+         
+        <font color=#0000FF>jmp</font> end_DF_SP  
+DF_E8_i: 
+        <font color=#0000FF>jmp</font> end_DF_SP   
+DF_F0_i: 
+        <font color=#0000FF>jmp</font> end_DF_SP   
+DF_F8_i: 
+        <font color=#008000>; NR ; jmp end_DF_SP </font>
+    <font color=#008000>;;;;;;;;;;;;;;;;;;;;; </font>
+      
+end_DF_SP: 
+end_DF_TAB:      
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>virtual87state_94bytes<font color=#0064C8>]</font>  <font color=#008000>; pointer to pointer       </font>
+	<font color=#0000FF>FSAVE</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font>     
+    <font color=#0000FF>fwait</font>  
+     
+    <font color=#0000FF>FCLEX</font> 
+     
+    <font color=#008000>; restore....       </font>
+	<font color=#0000FF>mov</font> <font color=#C80000>ebx</font>,ORIG_87_STATE_94bytes  
+	<font color=#0000FF>FRSTOR</font> <font color=#0064C8>[</font><font color=#C80000>ebx</font><font color=#0064C8>]</font>  
+    <font color=#0000FF>fwait</font> 
+     
+    <font color=#008000>; restore </font>
+    <font color=#0000FF>mov</font> <font color=#C80000>ebx</font>, <font color=#0064C8>[</font>tEBX<font color=#0064C8>]</font> 
+    <font color=#0000FF>mov</font> <font color=#C80000>esi</font>, <font color=#0064C8>[</font>tESI<font color=#0064C8>]</font> 
+    <font color=#0000FF>mov</font> <font color=#C80000>edx</font>, <font color=#0064C8>[</font>tEDX<font color=#0064C8>]</font> 
+    <font color=#0000FF>mov</font> <font color=#C80000>ecx</font>, <font color=#0064C8>[</font>tECX<font color=#0064C8>]</font> 
+  
+    <font color=#0000FF>popf</font> 
+     
+	<font color=#008000>;eax=WHAT EVER </font>
+	<font color=#0000FF>ret</font>   
+endp 
+ 
+   
+ 
+ 
+ 
+ 
+ 
+        
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+section <font color=#800080>'.idata'</font> import data readable writeable 
+ 
+  library kernel,<font color=#800080>'KERNEL32.DLL'</font>,\ 
+	  user,<font color=#800080>'USER32.DLL'</font> 
+ 
+  import kernel,\ 
+	 GetLastError,<font color=#800080>'GetLastError'</font>,\ 
+	 SetLastError,<font color=#800080>'SetLastError'</font>,\ 
+	 FormatMessage,<font color=#800080>'FormatMessageA'</font>,\ 
+	 LocalFree,<font color=#800080>'LocalFree'</font> 
+ 
+  import user,\ 
+	 MessageBox,<font color=#800080>'MessageBoxA'</font> 
+ 
+section <font color=#800080>'.edata'</font> export data readable 
+ 
+  export <font color=#800080>'MICROASM.DLL'</font>,\ 
+	 ShowErrorMessage,<font color=#800080>'ShowErrorMessage'</font>,\  
+	 ShowLastError,<font color=#800080>'ShowLastError'</font>,\   
+	 Copyright_emu8086, <font color=#800080>'Copyright_emu8086'</font>,\ 
+	 MicroAsm_T,<font color=#800080>'MicroAsm_T'</font>,\ 
+	 MicroAsm_FINIT, <font color=#800080>'MicroAsm_FINIT'</font>,    \ 
+	 MicroAsm_D8_TAB, <font color=#800080>'MicroAsm_D8_TAB'</font>,  \ 
+	 MicroAsm_D9_TAB, <font color=#800080>'MicroAsm_D9_TAB'</font>,  \ 
+	 MicroAsm_DA_TAB, <font color=#800080>'MicroAsm_DA_TAB'</font>,  \ 
+	 MicroAsm_DB_TAB, <font color=#800080>'MicroAsm_DB_TAB'</font>,  \ 
+	 MicroAsm_DC_TAB, <font color=#800080>'MicroAsm_DC_TAB'</font>,  \ 
+	 MicroAsm_DD_TAB, <font color=#800080>'MicroAsm_DD_TAB'</font>,  \ 
+	 MicroAsm_DE_TAB, <font color=#800080>'MicroAsm_DE_TAB'</font>,  \ 
+	 MicroAsm_DF_TAB, <font color=#800080>'MicroAsm_DF_TAB'</font> 
+	  
+ 
+section <font color=#800080>'.reloc'</font> fixups data discardable 
+ 
+ 
+ 
+<font color=#008000>;    MicroAsm_FINIT, 'MicroAsm_FINIT',\  </font>
+<font color=#008000>;	 MicroAsm_GETSTATE_94, 'MicroAsm_GETSTATE_94',\ </font>
+<font color=#008000>;	 MicroAsm_SETSTATE_94, 'MicroAsm_SETSTATE_94',\ </font>
+ 
+</font></pre>
+<center> <font color=#FFFFFF>;</font> <a href="http://www.emu8086.com" target="_blank"><font face=verdana size=1 color=#000000> - asm2html - </font></a> </center>
+<!-- emu8086 version 4.00-Beta-20    -->
+<!-- STOP AUTOMATIC ASM TO HTML EXPORT -->
+
+
+
+
+ 
+ 
+<!-- *** -->
+ 
+ 
+</body>
+</html>

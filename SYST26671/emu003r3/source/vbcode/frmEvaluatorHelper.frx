@@ -1,0 +1,11 @@
+ò~       not (inverts all bits).
+*       multiply.
+/       divide.
+%       modulus.
++       sum.
+-       subtract (and unary -).
+<<      shift left.
+>>      shift right.
+&       bitwise AND.
+^       bitwise XOR.
+|       bitwise OR.

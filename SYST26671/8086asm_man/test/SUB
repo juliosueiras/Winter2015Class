@@ -1,0 +1,46 @@
+^I^I^I&nbsp;
+
+
+
+
+
+
+
+
+
+
+
+SUB
+
+
+
+
+^I
+^IREG, memory
+^Imemory, REG
+^IREG, REG
+^Imemory, immediate
+^IREG, immediate
+^I
+
+
+
+
+Subtract.
+Algorithm:
+
+operand1 = operand1 - operand2
+
+
+Example:MOV AL, 5
+SUB AL, 1         ; AL = 4
+
+RET
+
+
+
+ C Z S O P A 
+ r r r r r r 
+
+
+TOP

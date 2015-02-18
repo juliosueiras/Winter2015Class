@@ -1,0 +1,50 @@
+			&nbsp;
+
+
+
+
+
+
+
+
+
+JNS
+
+
+
+
+	label
+
+
+
+
+Short Jump if Not Signed (if positive).
+Set by CMP, SUB, ADD, TEST, AND, OR, XOR instructions.
+Algorithm:
+
+
+	if SF = 0 then jump
+
+
+	
+	example for emu8086 emulator:
+
+   include 'emu8086.inc'
+   ORG 100h
+   MOV AL, 00000111b   ; AL = 7
+   OR  AL, 0           ; just set flags.
+   JNS label1
+   PRINT 'signed.'
+   JMP exit
+label1:
+   PRINT 'not signed.'
+exit:
+   RET
+
+
+
+ C Z S O P A 
+ unchanged 
+
+
+TOP

@@ -1,0 +1,129 @@
+
+<HTML>
+
+<HEAD>
+
+<title>compiling the  assembly code</title>
+
+<META name="description" content="Compiling Assembly Code">
+
+</HEAD>
+
+<BODY>
+
+
+<FONT FACE="Courier" SIZE=3>
+
+<FONT SIZE=+2>
+<b>Compiling the Assembly Code</b>
+</font>
+
+<BR><BR>
+
+<BR>
+
+<HR>
+
+<BR>
+<b>Directives:</b>
+<BR><BR>
+<UL>
+	<LI>
+	<B>ORG 100h</B> - single segment executable file
+	<BR><BR><BR>
+    </LI>
+
+	<LI>
+	<B>#make_bin#</B> - binary file
+	<BR><BR><BR>
+	bin file specific directives:
+	<BR><BR>
+    <TABLE BORDER=1 CELLPADDING=10 WIDTH=80%><TR><TD>
+    <PRE><FONT FACE="Courier">	#make_bin#
+	#LOAD_SEGMENT=1234#
+	#LOAD_OFFSET=0000#
+	#AL=12#
+	#AH=34#
+	#BH=00#
+	#BL=00#
+	#CH=00#
+	#CL=00#
+	#DH=00#
+	#DL=00#
+	#DS=0000#
+	#ES=0000#
+	#SI=0000#
+	#DI=0000#
+	#BP=0000#
+	#CS=1234#
+	#IP=0000#
+	#SS=0000#
+	#SP=0000#
+	<!--
+	#MEM=0100:FFFE,00FF-0100:FF00,F4# --></FONT></PRE>
+	</TABLE>
+
+<BR>
+	
+<!--
+use #MEM# directive to set memory values prior the execution:<BR><BR>
+ <b>#MEM=address,{hex digits} - segment:offset,{hex digits}# </b><BR><BR>
+ 
+ Address can be physical or logical<br><br>
+ Example: #MEM=1005,AAAABBB - 100:008, 77777# <BR><BR>
+ 
+ [<font size=+1><b>-</b></font>] separates the entries 
+ <BR><BR>
+-->
+
+<BR>
+
+   <BR><BR>
+    </LI>
+
+</UL>
+
+<!--
+size of a boot sector is 512 bytes and it is loaded at 7C00h 
+-->
+
+<HR>
+
+
+<BR><BR>
+
+Complimentary output:
+
+<BR><BR>
+
+<UL>
+
+<LI> <B>*.~asm</B> - backup of the original source code.<BR><BR></LI>
+
+<LI> <B>*.debug</B> - binary information used for debugging.<BR><BR></LI>
+
+<LI> <B>*.symbol</B> - text file: symbol table.
+						<BR><BR></LI>
+
+<LI> <B>*.binf</B> - text file: emulator specific settings for loading a bin file.
+						<BR><BR></LI>
+
+
+</UL>
+
+
+
+
+
+<BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
+<BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>
+
+</FONT>
+
+
+<BR>
+
+
+</BODY>
+
+</HTML>

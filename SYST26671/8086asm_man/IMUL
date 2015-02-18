@@ -1,0 +1,47 @@
+ 			&nbsp;
+
+
+
+
+
+
+
+
+
+IMUL
+
+
+
+
+	
+	REG
+	memory
+	
+
+
+
+
+Signed multiply.
+Algorithm:
+ 
+	 when operand is a byte:
+	 AX = AL * operand.
+ 
+
+ 
+	when operand is a word:
+	(DX AX) = AX * operand.
+ 
+  Example:MOV AL, -2
+MOV BL, -4
+IMUL BL      ; AX = 8
+RET
+
+
+
+ C Z S O P A 
+ r ? ? r ? ? 
+
+CF=OF=0 when result fits into operand of IMUL.
+
+TOP

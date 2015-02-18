@@ -1,0 +1,22 @@
+0100   ; code segment
+0000   ; code offset
+00     ;   AL
+00     ;   AH
+00     ;   BL
+00     ;   BH
+00     ;   CL
+00     ;   CH
+00     ;   DL
+00     ;   DH
+0100   ;   DS
+0100   ;   ES
+0000   ;   SI
+0000   ;   DI
+0000   ;   BP
+0100   ;   CS
+0000   ;   IP
+0100   ;   SS
+FFFE   ;   SP
+
+MEM=0100:FFFE,00FF-0100:FF00,F4
+

@@ -1,0 +1,40 @@
+			&nbsp;
+
+
+
+
+
+
+
+
+
+SAHF
+
+
+No operands
+
+
+Store AH register into low 8 bits of Flags register.
+Algorithm:
+
+
+	flags register = AH
+
+
+AH bit:   7    6   5    4   3    2   1    0
+        [SF] [ZF] [0] [AF] [0] [PF] [1] [CF]
+
+bits 1, 3, 5 are reserved.
+
+
+
+
+
+
+
+ C Z S O P A 
+ r r r r r r 
+
+
+
+TOP

@@ -1,0 +1,77 @@
+^I^I^I&nbsp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+LES
+
+
+
+
+^I
+^IREG, memory
+^I
+
+
+
+
+Load memory double word into word register and ES.
+Algorithm:
+
+
+    REG = first word
+^IES = second word
+
+
+
+Example:
+
+
+
+ORG 100h
+
+LES AX, m
+
+RET
+
+m  DW  1234h
+   DW  5678h
+
+END
+
+
+AX is set to 1234h, ES is set to 5678h.
+
+
+
+
+
+ C Z S O P A 
+ unchanged 
+
+
+
+TOP

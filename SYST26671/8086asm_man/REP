@@ -1,0 +1,46 @@
+			&nbsp;
+
+
+
+
+
+
+
+
+
+REP
+
+
+
+
+	chain instruction
+
+
+
+
+Repeat following MOVSB, MOVSW, LODSB, LODSW, STOSB, STOSW instructions
+CX times.
+Algorithm:
+
+check_cx:
+if CX &lt;> 0 then
+
+	do following chain instruction
+	CX = CX - 1
+	go back to check_cx
+
+else
+
+	exit from REP cycle
+
+
+
+
+
+
+
+ Z 
+ r  
+
+
+TOP
