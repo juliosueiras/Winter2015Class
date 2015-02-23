@@ -3,8 +3,7 @@
     <head>
         <title>Question 2</title>
         <link rel="stylesheet" href="css/style.css" />
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script type="text/javascript" src="js/script.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <!-- <script type="text/javascript"> -->
         <!--     $("h1").click(function () { -->
 
@@ -38,5 +37,21 @@
             </tr>
         </table>
         <img id="flowerImage" src="http://hdwallpapervault.com/wp-content/uploads/2013/05/Rose-Flower-Wallpaper.jpg" alt="" />
+    <script>
+
+        $("#flowerImage").hover( function () {
+            var width = $(this).css("width");
+            var height = $(this).css("height");
+            $(this).css("width", width*200 );
+            $(this).css("height", height*200 );
+        }, function(){
+            var width = $(this).css("width");
+            var height = $(this).css("height");
+            $(this).css("width", width/200 );
+            $(this).css("height", height/200 );
+        });
+
+
+    </script>
     </body>
 </html>
