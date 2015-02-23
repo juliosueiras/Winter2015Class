@@ -1,0 +1,718 @@
+Mobile Web-based Application
+Development
+SYST24444
+Week 1
+
+About me
+Prem Parashar, PhD(Computer Science)
+prem.parashar@sheridanc.on.ca
+prem.parashar@sheridancollege.ca
+(905) 459 7533 ext. 37273
+
+Course Outline
+For week wise class plan, please refer to:
+Class Plan24444
+
+Objectives
+• Describe the important characteristics of
+mobile web browsing platforms
+• Explain three strategies for effectively
+handling mobile clients
+• Describe significant mobile web protocols
+• Describe several common mobile
+operating systems and web browsers
+• Explain best principles for design content
+for mobile web clients
+
+Mobile Web Landscape
+• Mobile web browsers have characteristics
+that are different from desktop browsers
+– Screen Size
+– Bandwidth
+– Signal Quality
+– Protocol Support
+– Client-Side Processing Capability
+
+Screen Size
+• A mobile device
+screen is typically a
+fraction of the size
+of a desktop
+monitor screen
+• Content must be
+adapted
+accordingly
+
+Bandwidth
+• Mobile devices operate on cellular or
+satellite radios that provide much less
+bandwidth than stationary networks
+
+Web
+
+Signal Quality
+• Mobile communications are subject to
+intermittent outages due to interference
+and dead zones
+
+Protocol Support
+• Mobile browser support for HTML
+elements may be limited
+• Not all HTML elements are supported by
+all browsers
+Tables
+Frames
+Applets
+
+Scripts
+Styles
+etc.
+
+Client-Side Processing
+Capability
+• Mobile platforms have smaller processors
+and limited battery life
+• Scripts and plug-ins (flash, applets, pdf,
+etc.) that require extra processing may be
+disabled
+
+Solutions for Mobile Browsers
+• Solutions for providing content to mobile
+browsers include
+– Content Differentiation
+– Portal Differentiation
+– Content Adaptation
+
+Content Differentiation
+• The HTTP User-Agent header can be used to
+provide customized content
+– Header from a Windows CE platform:
+User-Agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows CE;
+IEMobile M.N)
+
+– Header from Firefox (desktop):
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB;
+rv:1.9.1.3) Gecko/20090824 Firefox/3.5.3 (.NET CLR 3.5.30729)
+
+• The webapp can then respond with a resource
+that is appropriate for that client
+
+Portal Differentiation
+• Different websites are maintained for
+different clients
+– For example:
+www.mywebapp.com
+www.mywebapp.mobi
+
+for desktop clients
+for mobile clients
+
+• There are objections to this approach,
+however, since it could lead to separate
+desktop and mobile webs
+
+Content Adaptation
+• A proxy server automatically adapts web
+content to fit the limitations of a mobile
+client
+
+• Proxy servers may not be able to deal
+effectively with all content, however
+
+Mobile Device Protocols
+• Mobile Web Protocols include
+– XHTML Basic
+– Wireless Application Protocol (WAP)
+– iMode
+
+XHTML Basic
+• Adopted by W3C in 2000 as a standard for
+creating XHTML docs for limited clients
+• Some HTML elements are excluded from
+XHTML Basic/1.1:
+– Frames
+– Image Maps
+– Nested Tables
+– Bidirectional Text
+– Text Editing (<ins> and <del> tags)
+
+Wireless Access Protocol
+(WAP)
+• Developed in 1998 by WAP Forum
+• Uses proxy servers
+to interface with
+clients
+• Clients implement
+the WAP protocol
+stack with proxies
+• Protocols include
+"push" content
+
+iMode
+• Developed by Japan's DoCoMo phone co.
+• Used for browsing, e-commerce, bill
+paying, etc.
+• Uses compact HTML
+(cHTML) and a modified
+web protocol stack
+
+Mobile Web Software
+Micro Operating Systems
+• Android: open source, by Google and the
+Open Handset Alliance
+• PalmOS: developed for PalmPilot
+Personal Digital Assistant(PDA)
+• Symbian: proprietary OS for smart mobile
+phones; widely used
+• Windows Mobile: proprietary; mini version
+of MS Windows
+
+Mobile Web Software
+Micro-Browsers
+• Blazer: developed for PalmOS devices
+• Internet Explorer Mobile: lightweight
+version of Internet Explorer
+• Opera Mini: lightweight version of Opera
+browser; uses a proxy server system
+– proxies execute JavaScript in advance
+– content forwarded in binary for faster
+response
+
+Best Practices – General
+• Provide a consistent user experience,
+regardless of client. Users should feel at
+home with either desktop or mobile.
+• Use correct markup for mobile clients.
+• Be aware of device limitations. Consult
+databases of device profiles.
+• Use request header information, if
+available, to customize responses.
+
+Best Practices
+Client Limitations (1/2)
+• Don't use unsupported features, such as
+– Image maps
+– Pop-up windows
+– Nested tables
+
+• Avoid large graphics that exceed size
+limitations for mobile browsers
+• Send only content that the client device
+supports
+
+Best Practices
+Client Limitations (2/2)
+• Design applications to fail gracefully when
+features are not supported
+– Style sheets
+– Tables
+– Cookies
+– Fonts and colors
+
+Best Practices
+Layout Adaptation
+• Divide large pages into smaller sections if
+possible
+• Use headings to indicate page structure so
+that proxies can adapt content
+• Do not use tables to layout pages
+• Use relative size measures (em, not px)
+• Use <label> to identify labels for form
+fields
+
+Best Practices
+User Interaction Efficiency (1/2)
+• Keep URIs short to minimize typing
+• Place essential content near the top to
+help users find pages
+• Use a consistent navigation mechanism
+• Balance breadth and depth of page
+hierarchy
+• Provide effective page titles for display
+and bookmarking
+
+Best Practices
+User Interaction Efficiency (2/2)
+• Provide a text equivalent for each non-text
+item (image, applet, script, etc.)
+• Minimize key strokes for data entry:
+provide default entries and menus
+• Use scrolling in one dimension only
+• Provide helpful error messages with links
+(back, retry, home, etc.)
+
+Elements of Web Development
+
+Web Sites Interface
+http://wateronwheels.com
+•http://moodle.org
+•http://www.shmarketing.co.uk/
+•http://gatesnfences.com
+
+•dsbrothersseafoods.com.au/About%20Us.html
+
+Elements of Web Design
+• Interface Design
+• Information Design
+• Navigation Design
+
+The user interface
+• User interfaces should be designed to
+match the skills, experience and
+expectations of its anticipated users.
+• System users often judge a system by its
+interface rather than its functionality.
+• A poorly designed interface can cause a
+user to make catastrophic errors.
+• Poor user interface design is the reason
+why so many software systems are never
+used.
+
+Human factors in interface
+design
+• Limited short-term memory
+– People can instantaneously remember about 7 items of
+information. If you present more than this, they are more liable to
+make mistakes.
+
+• People make mistakes
+– When people make mistakes and systems go wrong,
+inappropriate alarms and messages can increase stress and
+hence the likelihood of more mistakes.
+
+• People are different
+– People have a wide range of physical capabilities. Designers
+should not just design for their own capabilities.
+
+• People have different interaction preferences
+– Some like pictures, some like text.
+
+UI design principles
+• UI design must take account of the needs,
+experience and capabilities of the system
+users.
+• Designers should be aware of people’s
+physical and mental limitations (e.g.
+limited short-term memory) and should
+recognise that people make mistakes.
+• UI design principles underlie interface
+designs although not all principles are
+applicable to all designs.
+
+User interface design principles
+Principle
+
+Description
+
+User familiarity
+
+The interface should use terms and concepts which are drawn
+from the experience of the people who will make most use of the
+system.
+
+Consistency
+
+The interface should be consistent in that, wherever possible,
+comparable operations should be activated in the same way.
+
+Minimal surprise
+
+Users should never be surprised by the behaviour of a system.
+
+Recoverability
+
+The interface should include mechanisms to allow users to
+recover from errors.
+
+User guidance
+
+The interface should provide meaningful feedback when errors
+occur and provide context-sensitive user help facilities.
+
+User diversity
+
+The interface should provide appropriate interaction facilities for
+diffe rent types of system user.
+
+Design issues in UIs
+• Two problems must be addressed in interactive systems
+design
+– How should information from the user be provided to the
+computer system?
+– How should information from the computer system be presented
+to the user?
+
+• User interaction and information presentation may be
+integrated through a coherent framework such as a user
+interface metaphor.
+
+Web-based interfaces
+• Many web-based systems have interfaces
+based on web forms.
+• Form field can be menus, free text input,
+radio buttons, etc.
+• In the LIBSYS example, users make a
+choice of where to search from a menu
+and type the search phrase into a free text
+field.
+
+LIBSYS search form
+LIBSYS: Search
+Choose collection
+
+All
+
+Key word or phrase
+Search using
+
+Title
+
+Adjacent words
+Search
+
+Yes
+Reset
+
+No
+Cancel
+
+Information presentation
+• Information presentation is concerned with
+presenting system information to system
+users.
+• The information may be presented directly
+(e.g. text in a word processor) or may be
+transformed in some way for presentation
+(e.g. in some graphical form).
+
+Information presentation
+
+Information presentation
+• Static information
+– Initialised at the beginning of a session. It
+does not change during the session.
+– May be either numeric or textual.
+
+• Dynamic information
+– Changes during a session and the changes
+must be communicated to the system user.
+– May be either numeric or textual.
+
+Information display factors
+• Is the user interested in precise information or
+data relationships?
+• How quickly do information values change?
+Must the change be indicated immediately?
+• Must the user take some action in response to
+a change?
+• Is there a direct manipulation interface?
+• Is the information textual or numeric? Are relative values
+important?
+
+Analogue or digital
+presentation?
+• Digital presentation
+– Compact - takes up little screen space;
+– Precise values can be communicated.
+
+• Analogue presentation
+– Easier to get an 'at a glance' impression of a
+value;
+– Possible to show relative values;
+– Easier to see exceptional data values.
+
+Presentation methods
+
+1
+4
+
+0
+
+2
+
+10
+
+3
+
+Dial with needle
+
+Pie chart
+
+Ther mometer
+
+Horizontal bar
+
+20
+
+Displaying relative values
+
+Pressur e
+0
+
+1 00
+
+200
+
+Temper atur e
+300
+
+400
+
+0
+
+25
+
+50
+
+75
+
+100
+
+Data visualisation
+• Concerned with techniques for displaying large amounts
+of information.
+• Visualisation can reveal relationships between entities
+and trends in the data.
+• Possible data visualisations are:
+– Weather information collected from a number of sources;
+– The state of a telephone network as a linked set of nodes;
+– Chemical plant visualised by showing pressures and
+temperatures in a linked set of tanks and pipes;
+– A model of a molecule displayed in 3 dimensions;
+– Web pages displayed as a hyperbolic tree.
+
+Colour displays
+• Colour adds an extra dimension to an
+interface and can help the user
+understand complex information
+structures.
+• Colour can be used to highlight
+exceptional events.
+• Common mistakes in the use of colour in
+interface design include:
+– The use of colour to communicate meaning;
+– The over-use of colour in the display.
+
+Colour use guidelines
+• Limit the number of colours used and be
+conservative in their use.
+• Use colour change to show a change in
+system status.
+• Be careful about colour pairings.
+
+Using Colors on Your Page
+Analog Colors
+
+• Rule o’ Thumb: Use 3 Colors
+
+Harmonious
+
+o Primary color: sets tone of design
+o Secondary color: “back up” primary color
+Complementary o Highlight color: emphasis
+Highlight
+
+Triad
+Colorful & Balanced
+
+Split Complementary
+Contrast & Harmony
+
+Error messages
+• Error message design is critically
+important.
+Poor error messages can mean that a
+user rejects rather than accepts a system.
+• Messages should be polite, concise,
+consistent and constructive.
+• The background and experience of users
+should be the determining factor in
+message design.
+
+Be consistent
+• Consistent syntax of input
+
+• Consistent language and graphics
+– same visual appearance across the system (e.g. widgets)
+– same information/controls in same location on all windows
+Ok
+
+Cancel
+
+Cancel
+
+Ok
+
+Ok
+
+Accept
+
+Dismiss
+
+Cancel
+
+• Consistent effects
+– commands, actions have same effect in equivalent situations
+• predictability
+
+Provide feedback
+• Continuously inform the user about
+– what it is doing
+– how it is interpreting the user’s input
+– user should always be aware of what is going on
+What’s it
+doing?
+
+> Doit
+
+> Doit
+This will take
+5 minutes...
+
+Time for
+coffee.
+
+Requirements from the scenario
+• Users may not be aware of appropriate
+search terms so need a way of helping
+them choose terms.
+• Users have to be able to select collections
+to search.
+• Users need to be able to carry out
+searches and request copies of relevant
+material.
+
+Analysis techniques
+• Task analysis
+– Models the steps involved in completing a
+task.
+
+• Interviewing and questionnaires
+– Asks the users about the work they do.
+
+• On-site observation
+– Observes the user at work.
+
+Hierarchical task analysis
+Retrieve pictures
+from remote
+libraries
+do 1, 2,
+3 until pictures found, 4
+1 Discover
+possible
+sources
+
+2
+
+Establish
+search
+terms
+
+3
+
+Search for
+pictures
+
+4.
+
+Request
+photocopies
+of founditems
+
+do 3.1, 3.2,
+3.3 until pictures found,
+3.4 if necessary , 3.5
+3.1
+
+Select
+library
+
+3.2
+Log in to
+catalogue
+
+3.3
+Search for
+pictures
+
+3.4
+Modify
+searchterms
+
+do 3.3.1, 3.3.2, 3.3.3
+3.3.1
+Enter search
+terms
+
+3.3.2
+Initiate
+search
+
+3.3.3
+Review
+results
+
+3.5
+
+Record
+relevant
+items
+
+Interviewing
+• Design semi-structured interviews based
+on open-ended questions.
+• Users can then provide information that
+they think is essential; not just information
+that you have thought of collecting.
+• Group interviews or focus groups allow
+users to discuss with each other what they
+do.
+
+On-site Observation
+• Involves an external observer watching
+users at work and questioning them in an
+unscripted way about their work.
+• Valuable because many user tasks are
+intuitive and they find these very difficult to
+describe and explain.
+• Also helps understand the role of social
+and organisational influences on work.
+
+User interface prototyping
+• The aim of prototyping is to allow users to
+gain direct experience with the interface.
+• Without such direct experience, it is
+impossible to judge the usability of an
+interface.
+• Prototyping may be a two-stage process:
+– Early in the process, paper prototypes may be
+used;
+– The design is then refined and increasingly
+sophisticated automated prototypes are then
+developed.
+
+Simple evaluation techniques
+• Questionnaires for user feedback.
+• Video recording of system use and
+subsequent tape evaluation.
+• Instrumentation of code to collect
+information about facility use and user
+errors.
+• The provision of code in the software to
+collect on-line user feedback.
+
+Navigation
+• Every page of a site should let you know:
+– Where am I
+– What’s here
+– Where can I go now
+– Where have I been
+
+Design of methods of finding one’s way
+around the information structure.
+• People don’t always work from the home
+page – they get to a page from a link or
+from a search
+
+
