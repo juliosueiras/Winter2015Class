@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<article>
+    Freely definable
+    <author>Gerhard Weikum</author> tags
+    <title>The Web in Ten Years</title>
+    <text>
+        <abstract>In order to evolve...</abstract>
+        <section number="1" title="Introduction">
+            The <index>Web</index> provides the universal...
+        </section>
+    </text>
+</article>

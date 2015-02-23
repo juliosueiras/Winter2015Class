@@ -199,11 +199,8 @@ In your CSS:
 
 CSS3 & Media Queries
 On the header of your website:
-@begin=html@
-int = 1;
 <link rel="stylesheet" href="this.css"
 media="(min-width: 960px)">
-@end=html@
 
 CSS3 & Media
 Queries
