@@ -1,0 +1,250 @@
+
+Responsive Web Design
+SYST24444
+Week 3
+
+Responsive Web Design
+
+Why Responsive Web Design?
+Almost every new client these days wants
+a mobile version of their website.
+In the next five years, we’ll likely need to
+design for a number of additional
+inventions.
+In the field of Web design and
+development, we’re quickly getting to the
+point of being unable to keep up with the
+endless new resolutions and devices.
+
+Responsive Web Design-Defined
+• Responsive Web design is the
+approach that suggests that design
+and development should respond
+to the user’s behavior and
+environment based on screen size,
+platform and orientation.
+• As the user switches from their
+laptop to iPad, the website should
+automatically switch to
+accommodate for resolution,
+image size and scripting abilities.
+• This would eliminate the need for
+a different design and
+development phase for each new
+gadget on the market.
+
+Responsive Web Design -SEO Benefits
+ One responsive website means
+that you can manage one website
+with one set of links, without
+having to redirect users to
+another website where they will
+have to deal with server loading
+time.
+
+
+A responsive website improves
+SEO and reduces the amount of
+maintenance hassle, meaning
+there won’t be a drop in your
+website speed either. It’s a lot
+more stress free for the owner
+and the visitor.
+
+ADVANTAGES of Responsive Web Design.
+User Experience (UX): Website adjusts to any screen size, making
+it a good longterm solution to UX with the current plethora of devices
+(including mobile/tablet
+hybrids). Hiding elements which aren't crucial for mobile visitors helps
+to achieve
+their goals faster.
+Analytics: One complete view for all the traffic. To get insights on
+the mobile
+visitors, create a "mobile-only" segment (note that by default, Google
+Analytics puts
+all the tablets under "Mobile" segment).
+Sharing/Linking: One URL to accumulate all of the shares, likes,
+tweets, and
+inbound links. Contributes to a better user experience as well: have you
+ever clicked
+on a link in a tweet just to see a mobile version of a page in your full
+browser?
+#badUX
+SEO: Going with the advantage above, one URL accumulates all links,
+PageRank,
+Page Authority, etc. However, as Search Engines get smarter at determining
+the
+relationships between mobile-optimized pages and desktop pages, this
+advantage
+won't matter.
+
+Development: RWD involves no redirects to take care of, no user-agent
+targeting.
+Maintenance: Once your website is responsive, there's very little
+maintenance
+involved, as opposed to up-keeping a separate mobile site. It is not required
+to upkeep a user-agent list with all of the up-to-date mobile devices.
+
+Information Architecture (IA): With a 1-to-1 relationship to the
+desktop site,
+mobile mimics the full site's IA, reducing the learning curve to get
+accustomed to
+using the mobile version.
+
+Why is it relevant?
+• 1.8 billion
+• 6.8 billion
+• 3.4 billion
+
+internet connections in the world today.
+people in the world today.
+people with mobile devices today.
+
+( roughly ½ the population of the planet)
+
+Why is it relevant?
+It’s about people, not devices
+•Yes your iPhone goes to great lengths to
+facilitate browsing full sites, but technology
+should be available to everyone, even those
+without smart phones.
+•The most popular devices aren’t necessarily
+the most used devices.
+
+Why is it relevant?
+• 1.3 billion
+• 1/3
+
+of the
+
+mobile internet users in the world today.
+
+global internet users
+
+access the internet only via mobile
+
+Why is it relevant?
+The future is now:
+•Babies have an easier time interacting with an
+iPad than with a magazine. To them a print
+magazine is just like a broken iPad.
+•Websites are not limited to laptops only.
+
+Top 5 benefits of responsive web design for hotels
+
+
+
+It minimizes manpower
+
+ It’s cost efficient
+
+
+It ages gracefully
+
+ It makes content king
+
+
+
+It’s what the people want
+
+Reasons why should Organizations consider updating their site to
+Responsive Design.
+ Money Saving
+
+ Time Saving
+ Remain on Top in Competition
+ More Relevancy of Webpage
+ Increase in Lead Conversion
+
+ You’ll Stress Less
+
+When To Use It?
+Things to Consider
+ Time & Money
+ Browser Support
+ Performance
+ Content
+
+ Website vs. Web App
+
+Browsers Supporting Responsive Design
+
+Some Examples of RWD
+
+Simon Collision
+
+Food Sense
+
+Clean Air Commute Challen
+
+FlexSlider
+
+Hello Media Queries and CSS3
+In its essence a media
+query consists of a media
+type and an expression to
+check for certain
+conditions of a particular
+media feature. The most
+commonly used media
+feature is width.
+
+CSS3 & Media Queries
+In your CSS:
+@media screen and (min-width: 480px) {
+.content { float: left; }
+.social_icons { display: none }
+// and so on...
+}
+
+CSS3 & Media Queries
+On the header of your website:
+@begin=html@
+int = 1;
+<link rel="stylesheet" href="this.css"
+media="(min-width: 960px)">
+@end=html@
+
+CSS3 & Media
+Queries
+
+By restricting CSS rules to a certain
+width of the device displaying a web
+page, one can tailor the page's
+representation to devices with varying
+screen resolution (view port).
+
+How do we design for RWD
+Simple:
+Use the Mobile First Approach
+and favor Progressive
+Enhancement instead of the
+traditional Graceful
+Degradation
+
+Mobile First
+Approach
+
+Mobile First
+Approach
+
+Graceful
+Degradation
+• Focuses on building the website for the most
+advanced/capable browsers.
+• Older browsers are expected to have a poor,
+but passable experience.
+• Small fixes may be made to accommodate a
+particular browser ( they are not the focus )
+
+Progressive
+Enhancement
+Progressive Enhancement consists of the
+following core principles:
+•basic content and functionality should be accessible to all
+web browsers
+•sparse, semantic markup contains all content
+•enhanced layout  external CSS
+•enhanced behavior  external JavaScript
+•end-user web browser preferences are respected
+
