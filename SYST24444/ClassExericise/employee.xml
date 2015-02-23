@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<company>
+                <employee>
+                    <id>ID-101</id>
+                    <name>
+                        <fname>Chrish</fname>
+                        <lname>Harish</lname>
+                    </name>
+                    <dob>
+                        <month>02</month>
+                        <day>12</day>
+                        <year>1980</year>
+                    </dob>
+                    <dept>Computer</dept>
+                </employee>
+                 
+                <employee>
+                    <id>ID-102</id>
+                    <name>
+                        <fname>Robin</fname>
+                        <lname>Smith</lname>
+                    </name>
+                    <dob>
+                        <month>10</month>
+                        <day>18</day>
+                        <year>1984</year>
+                    </dob>
+                    <dept>Business</dept>
+                </employee>
+                 
+                <employee>
+                    <id>ID-103</id>
+                    <name>
+                        <fname>Jessica</fname>
+                        <lname>Hudson</lname>
+                    </name>
+                    <dob>
+                        <month>05</month>
+                        <day>17</day>
+                        <year>1974</year>
+                    </dob>
+                    <dept>Human resource</dept>
+                </employee>
+  </company>
