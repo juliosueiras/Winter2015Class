@@ -1,7 +1,9 @@
 h1 {
     background-color:blue;
     color:yellow;
+    cursor: pointer;
 }
+
 h2 {
     background-color:green;
     color:grey;

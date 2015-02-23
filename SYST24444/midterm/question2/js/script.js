@@ -12,4 +12,4 @@ function switchColor(targetItem) {
 
 }
 
-$("h1").click(switchColor("h1"));
+$("h1").on("click", switchColor("h1"));
