@@ -2,5 +2,5 @@
 GIT_ROOT="/home/juliosueiras/Documents/Winter2015Class"
 cd $GIT_ROOT
 git add .
-git commit -m "Time committed:$(date)"
+git commit -m "Automated Crontab:$(date)"
 git push
