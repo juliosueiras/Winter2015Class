@@ -1,4 +1,4 @@
-/* globals document:false */
+/*global document:false */
 function readXML()
         {
             var xml=new XMLHttpRequest();
@@ -6,11 +6,13 @@ function readXML()
             xml.send();
             var xmlData=xml.response;
 
+
             document.write('<table border="1">');
             document.write('<tr><th rowspan="2">ID</th><th colspan="2">Name</th>'+
                            '<th colspan="3">Date of Birth</th><th rowspan="2">Department</th>');
             document.write('<tr><th>First name</th><th>Last name</th>' +
                            '<th>Month</th><th>Day</th><th>Year</th></tr>');
+            console.log(xmlData);
 
             if(xmlData)
             {
