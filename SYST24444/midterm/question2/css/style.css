@@ -8,3 +8,9 @@ h2 {
     background-color:green;
     color:grey;
 }
+
+.flowerImg {
+    width:300px;
+    height:200px;
+    border-color:red;
+}
