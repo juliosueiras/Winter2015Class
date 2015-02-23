@@ -1,2 +1,2 @@
-var xml=new XMLHttpRequest;
 
+var xml=new XMLHttpRequest();
