@@ -3,30 +3,44 @@
     <car>
         <serialNumber>1</serialNumber>
         <make>Toyota</make>
-        <model></model>
-        <kilometer></kilometer>
-        <price></price>
+        <model>Corolla</model>
+        <kilometer>25000</kilometer>
+        <price>13000</price>
     </car>
     <car>
         <serialNumber>2</serialNumber>
         <make>Toyota</make>
-        <model></model>
-        <kilometer></kilometer>
-        <price></price>
+        <model>Camry</model>
+        <kilometer>43000</kilometer>
+        <price>15700</price>
     </car>
     <car>
         <serialNumber>3</serialNumber>
-        <make>Toyota</make>
-        <model></model>
-        <kilometer></kilometer>
-        <price></price>
+        <make>Honda</make>
+        <model>Civic</model>
+        <kilometer>13000</kilometer>
+        <price>16000</price>
     </car>
     <car>
         <serialNumber>4</serialNumber>
+        <make>Honda</make>
+        <model>Accord</model>
+        <kilometer>78000</kilometer>
+        <price>9500</price>
+    </car>
+    <car>
+        <serialNumber>5</serialNumber>
         <make>Toyota</make>
-        <model></model>
-        <kilometer></kilometer>
-        <price></price>
+        <model>RAV4</model>
+        <kilometer>37000</kilometer>
+        <price>17000</price>
+    </car>
+    <car>
+        <serialNumber>6</serialNumber>
+        <make>Honda</make>
+        <model>CRV</model>
+        <kilometer>45000</kilometer>
+        <price>15000</price>
     </car>
 
 </carInfo>
