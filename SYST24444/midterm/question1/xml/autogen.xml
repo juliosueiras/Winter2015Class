@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<carInfo>
+    <car>
+        <serialNumber>1</serialNumber>
+        <make>Toyota</make>
+        <model></model>
+        <kilometer></kilometer>
+        <price></price>
+    </car>
+    <car>
+        <serialNumber>2</serialNumber>
+        <make>Toyota</make>
+        <model></model>
+        <kilometer></kilometer>
+        <price></price>
+    </car>
+    <car>
+        <serialNumber>3</serialNumber>
+        <make>Toyota</make>
+        <model></model>
+        <kilometer></kilometer>
+        <price></price>
+    </car>
+    <car>
+        <serialNumber>4</serialNumber>
+        <make>Toyota</make>
+        <model></model>
+        <kilometer></kilometer>
+        <price></price>
+    </car>
+
+</carInfo>
