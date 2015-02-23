@@ -1,0 +1,20 @@
+For installing the build environment, you need to install first:
+    * WINE <http://www.winehq.org/>
+    * DOSBOX <http://www.dosbox.com/>
+
+Then run the "makeenv.sh" script:
+    ./makeenv.sh
+
+For building a program, just copy the "Makefile" file and the "buildenv"
+folder in the source directory:
+    asmsrc/buildenv/
+    asmsrc/Makefile
+    asmsrc/file1.asm
+    asmsrc/file2.asm
+and run the "make" command:
+    make
+
+For launching your compiled program, run the .sh script generated in the
+source directory.
+
+

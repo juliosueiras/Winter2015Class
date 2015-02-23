@@ -1,0 +1,34 @@
+
+.TH DAA 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+DAA
+.SH OPERANDS
+No operands
+
+.SH DESCRIPTION
+
+Decimal adjust After Addition.
+Corrects the result of addition of two packed BCD values. Algorithm:
+
+
+if low nibble of AL > 9 or AF = 1 then:
+
+AL = AL + 6
+AF = 1
+
+if AL > 9Fh or CF = 1 then:
+
+AL = AL + 60h
+CF = 1
+
+
+Example:MOV AL, 0Fh  ; AL = 0Fh (15)
+DAA          ; AL = 15h
+RET
+
+
+
+ C Z S O P A 
+ r r r r r r 
+
+

@@ -1,45 +1,44 @@
-			&nbsp;
+			<A NAME="AND">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 AND
-
-
-
-
-	
-	REG, memory
-	memory, REG
-	REG, REG
-	memory, immediate
+</FONT>
+</TD>
+<TD>
+<FONT FACE="Courier">
+	<NOBR>
+	REG, memory<BR>
+	memory, REG<BR>
+	REG, REG<BR>
+	memory, immediate<BR>
 	REG, immediate
-	
+	</NOBR>
+</FONT>
+</TD>
+<TD>
 
-
-
-
-Logical AND between all bits of two operands. Result is stored in operand1.
-These rules apply:
-
-1 AND 1 = 1
-1 AND 0 = 0
-0 AND 1 = 0
-0 AND 0 = 0
-
-Example:MOV AL, 'a'        ; AL = 01100001b
+Logical AND between all bits of two operands. Result is stored in operand1.<BR><BR>
+These rules apply:<BR><BR>
+<FONT FACE="Courier">
+1 AND 1 = 1<BR>
+1 AND 0 = 0<BR>
+0 AND 1 = 0<BR>
+0 AND 0 = 0<BR>
+</FONT>
+<BR><BR>Example:<PRE><FONT FACE="Courier">MOV AL, 'a'        ; AL = 01100001b
 AND AL, 11011111b  ; AL = 01000001b  ('A')
-RET
+RET</FONT></PRE>
 
-
-
- C Z S O P 
- 0 r r 0 r 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> </TR>
+<TR> <TD>0</TD> <TD>r</TD> <TD>r</TD> <TD>0</TD> <TD>r</TD> </TR>
+</TABLE>
+</FONT>

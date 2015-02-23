@@ -1,0 +1,220 @@
+
+
+
+
+                      Computer Architecture  -  Fall 2014
+                                       
+                                       
+                                Assignment Two
+                                       
+
+
+
+                Name: ________________________________________
+                                       
+                                       
+	Due Dates:	FRI OCT 10 at MIDNIGHT, in the dropbox in your section in SLATE
+ 
+
+
+	Instructions: 	This assignment is to complete individually (This means by 				yourself).
+
+			Show our work in the space provided where appropriate.
+
+   	NOTE: 	 If you print this document from SLATE, you
+                  MUST leave the page breaks in the correct place!
+		
+
+
+			
+   1. 
+   1. Given the following diagram taken from the notes
+
+                                       
+
+ Define	PCI __________________________________________________________________
+ 
+	ISA ___________________________________________________________________
+
+	SCSI __________________________________________________________________ 
+	
+      USB ___________________________________________________________________
+      
+	IDE ___________________________________________________________________
+
+	ISA ___________________________________________________________________ 
+
+In each of the above simply state the meaning of the acronym. 
+
+   2. Briefly explain the difference between a half adder and a full adder
+	
+How many bits are added together in a half adder? ________________________
+
+How many output bits in a half adder? _________________________________
+
+How many bits are added together in a full adder? ________________________
+
+How many output bits in a full adder? _________________________________
+
+
+   3. In the following diagram 
+
+
+      How many control bits are present? ____________
+      
+      How many input bits are present? ______________
+      
+      How many different functions can the unit complete?
+
+____________________
+
+   
+   4. Consider the following diagram.
+
+ 
+	The circuit is called a(n) ____________________________
+
+	Given above input bits (the D's), did a shift right or left occur? ______________
+
+   5. How many 16 bit registers exist on the Intel 8086 processor? ________________
+   
+   6. Give the three classifications of the 8086 registers.
+
+         a.  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - _______________________________________________________ 
+ 
+         b.  ______________________________________________________
+          
+         c. _______________________________________________________
+
+   7. Give the names of the accumulator registers. _____________________________
+   
+   8. Give the names of the segment registers._________________________________
+
+   9. Which two registers combine to give the effective address of an instruction that is stored in memory? ___________	___________________
+
+   10. Give the effective address if the segment register is AB02 and the offset register is 0100.
+                  _________________
+                  
+   11. a) How many bits are contained in the flags register? _________________
+   
+      b) How many bits of the flags register are used? _________________
+      
+   12.  How many different `types' of instructions exist on the 8086? ______________
+      
+
+   13. The 32-bit value 30A79847 is stored starting at memory location 1000.  Fill in the following tables.
+Address
+                                                                          10000
+                                                                          10001
+                                                                          10002
+                                                                          10003
+contents
+                                       
+                                       
+                                        
+ 
+
+	Little Endian
+                                         
+
+Address
+                                                                          10000
+                                                                          10001
+                                                                          10002
+                                                                          10003
+contents
+                                       
+                                       
+                                        
+ 
+   
+   Big Endian
+   
+      
+   9. In class (and in the notes) we discussed a 6 step procedure in executing programs on a Von Neumann computer.  List the steps.
+
+         * _______________________________________________
+         
+         * _______________________________________________
+
+         * _______________________________________________
+
+         * _______________________________________________
+
+         * _______________________________________________
+
+         * _______________________________________________
+
+   10. Give the four `types' of instructions that are required in assembler programming.
+
+         * _______________________________________________
+         
+         * _______________________________________________
+
+         * _______________________________________________
+
+         * _______________________________________________
+
+   11. Write an 8086 assembler program (using the emulator) that will perform the following calculations.  You should attach a printed copy of your code to this assignment.
+
+   a) 3 + ( 4 + 100) + ( 4 -5)  	Place the answer in the AX register
+   
+
+   b)  1001 * ( 1111 * 2)		Where (in which registers) is the answer?
+                            _________
+      
+   12. a) How many software interrupts are possible? ________________________
+
+      b) How many are currently supported by the emulator? __________
+
+   13. Consider the following program:
+   
+org 100h
+mov bx,0005h
+mov ax,bx
+back:
+sub bx,01h
+add ax,bx
+cmp bx,00
+jne back
+hlt
+org 100h
+mov bx,0005h
+mov ax,bx
+back:
+sub bx,01h
+add ax,bx
+cmp bx,00
+jne back
+hlt
+
+
+
+
+
+
+
+
+
+
+
+
+   Single step through the program and answer the following:
+
+   a) Complete the following table:
+   
+                                         
+                                         
+   b) Give the contents of the AX, BX and IP registers just before each execution of the JNE instruction: For example:  The first time the JNE instruction is highlighted the registers look like the following. You fill in the table:
+                                        
+
+                                         
+   c) How many times did the instruction JNE get executed? _________________
+
+
+
+
+   9. Using the emulator write a program that displays your name on the screen.
+
+      (Attach a printed copy of your source code to this assignment)
+      

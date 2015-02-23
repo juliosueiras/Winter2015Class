@@ -1,0 +1,22 @@
+
+.TH STI 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+STI
+.SH OPERANDS
+No operands
+
+.SH DESCRIPTION
+
+Set Interrupt enable flag. This enables hardware interrupts. Algorithm:
+
+
+IF = 1
+
+
+
+
+
+ I 
+ 1 
+
+

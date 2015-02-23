@@ -1,42 +1,41 @@
- 			&nbsp;
+ 			<A NAME="POP">&nbsp;</A>
+</TD>
+</TR>
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 POP
-
-
-
-
-	
-	REG
-	SREG
+</FONT>
+</TD>
+<TD>
+<FONT FACE="Courier">
+	<NOBR>
+	REG<BR>
+	SREG<BR>
 	memory
-	
-
-
-
+	</NOBR>
+</FONT>
+</TD>
+<TD>
 
 Get 16 bit value from the stack.
-Algorithm:
- 
- 
- operand = SS:[SP] (top of the stack)
- SP = SP + 2
- 
- 
- Example:MOV AX, 1234h
+<BR><BR>Algorithm:<BR><BR>
+ <FONT FACE="Courier">
+ <UL>
+ <LI>operand = SS:[SP] (top of the stack)</LI>
+ <LI>SP = SP + 2</LI>
+ </UL>
+ </FONT>
+ <BR>Example:<PRE><FONT FACE="Courier">MOV AX, 1234h
 PUSH AX
 POP  DX     ; DX = 1234h
-RET
+RET</FONT></PRE>
 
-
-
- C Z S O P A 
- unchanged 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD COLSPAN=6>unchanged</TD> </TR>
+</TABLE>
+</FONT>

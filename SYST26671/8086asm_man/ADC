@@ -1,43 +1,42 @@
-			&nbsp;
+			<A NAME="ADC">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 ADC
-
-
-
-
-	
-	REG, memory
-	memory, REG
-	REG, REG
-	memory, immediate
+</FONT>
+</TD>
+<TD>
+<FONT FACE="Courier">
+	<NOBR>
+	REG, memory<BR>
+	memory, REG<BR>
+	REG, REG<BR>
+	memory, immediate<BR>
 	REG, immediate
-	
+	</NOBR>
+</FONT>
+</TD>
+<TD>
 
-
-
-
-Add with Carry.
-Algorithm:
-
+Add with Carry.<BR>
+<BR><BR>Algorithm:<BR><BR>
+<FONT FACE="Courier">
 operand1 = operand1 + operand2 + CF
-
-Example:STC        ; set CF = 1
+</FONT>
+<BR><BR>Example:<PRE><FONT FACE="Courier">STC        ; set CF = 1
 MOV AL, 5  ; AL = 5
 ADC AL, 1  ; AL = 7
-RET
+RET</FONT></PRE>
 
-
-
- C Z S O P A 
- r r r r r r 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD>r</TD> <TD>r</TD> <TD>r</TD> <TD>r</TD> <TD>r</TD> <TD>r</TD> </TR>
+</TABLE>
+</FONT>

@@ -1,30 +1,30 @@
-			&nbsp;
+			<A NAME="XLATB">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 XLATB
+</FONT>
+</TD>
+<TD>No operands</TD>
+<TD>
 
-
-No operands
-
-
-Translate byte from table.
-Copy value of memory byte at DS:[BX + unsigned AL] to
+Translate byte from table.<BR>
+Copy value of memory byte at <NOBR>DS:[BX + unsigned AL]</NOBR> to
 AL register.
-Algorithm:
-
+<BR><BR>Algorithm:<BR><BR>
+<FONT FACE="Courier">
 AL = DS:[BX + unsigned AL]
-
-
-Example:
+</FONT>
+<BR><BR>
+Example:<PRE><FONT FACE="Courier">
 ORG 100h
 LEA BX, dat
 MOV AL, 2
@@ -32,12 +32,11 @@ XLATB     ; AL = 33h
 
 RET
 
-dat DB 11h, 22h, 33h, 44h, 55h
+dat DB 11h, 22h, 33h, 44h, 55h</FONT></PRE>
 
-
-
- C Z S O P A 
- unchanged 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD COLSPAN=6>unchanged</TD> </TR>
+</TABLE>
+</FONT>

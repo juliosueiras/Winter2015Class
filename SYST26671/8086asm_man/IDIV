@@ -1,51 +1,50 @@
- 			&nbsp;
+ 			<A NAME="IDIV">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 IDIV
-
-
-
-
-	
-	REG
-	memory
-	
-
-
-
+</FONT>
+</TD>
+<TD>
+<FONT FACE="Courier">
+	<NOBR>
+	REG<BR>
+	memory<BR>
+	</NOBR>
+</FONT>
+</TD>
+<TD>
 
 Signed divide.
-Algorithm:
- 
-	 when operand is a byte:
-	 AL = AX / operand
+<BR><BR>Algorithm:<BR><BR>
+ <BLOCKQUOTE>
+	 when operand is a <B>byte</B>:<BR>
+	 <FONT FACE="Courier">AL = AX / operand<BR>
 	 AH = remainder (modulus)
-	 
- 
+	 </FONT>
+ </BLOCKQUOTE>
 
- 
-	when operand is a word:
-	AX = (DX AX) / operand
+ <BLOCKQUOTE>
+	when operand is a <B>word</B>:<BR>
+	<FONT FACE="Courier">AX = (DX AX) / operand<BR>
 	DX = remainder (modulus)
-	
- 
- Example:MOV AX, -203 ; AX = 0FF35h
+	</FONT>
+ </BLOCKQUOTE>
+ Example:<PRE><FONT FACE="Courier">MOV AX, -203 ; AX = 0FF35h
 MOV BL, 4
 IDIV BL      ; AL = -50 (0CEh), AH = -3 (0FDh)
-RET
+RET</FONT></PRE>
 
-
-
- C Z S O P A 
- ? ? ? ? ? ? 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD>?</TD> <TD>?</TD> <TD>?</TD> <TD>?</TD> <TD>?</TD> <TD>?</TD> </TR>
+</TABLE>
+</FONT>

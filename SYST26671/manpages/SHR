@@ -1,0 +1,38 @@
+
+.TH SHR 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+SHR
+.SH OPERANDS
+
+
+	memory, immediate
+	REG, immediate
+	memory, CL
+	REG, CL
+
+
+
+.SH DESCRIPTION
+
+Shift operand1 Right. The number of shifts is set by operand2.
+
+Algorithm:
+
+
+	Shift all bits right, the bit that goes off is set to CF.
+	Zero bit is inserted to the left-most position.
+
+
+Example:MOV AL, 00000111b
+SHR AL, 1         ; AL = 00000011b,  CF=1.
+
+RET
+
+
+
+ C O 
+ r r 
+
+
+OF=0 if first operand keeps original sign.
+

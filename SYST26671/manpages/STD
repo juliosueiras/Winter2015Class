@@ -1,0 +1,23 @@
+
+.TH STD 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+STD
+.SH OPERANDS
+No operands
+
+.SH DESCRIPTION
+
+Set Direction flag. SI and DI will be decremented by chain
+instructions: CMPSB, CMPSW, LODSB, LODSW, MOVSB, MOVSW, STOSB, STOSW. Algorithm:
+
+
+DF = 1
+
+
+
+
+
+ D 
+ 1 
+
+

@@ -1,0 +1,37 @@
+
+.TH PUSH 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+PUSH
+.SH OPERANDS
+
+
+	
+	REG
+	SREG
+	memory
+	
+
+
+
+.SH DESCRIPTION
+
+Store 16 bit value in the stack.
+
+Algorithm:
+ 
+ 
+ SP = SP - 2
+ SS:[SP] (top of the stack) = operand
+ 
+ 
+Example:MOV AX, 1234h
+PUSH AX
+POP  DX     ; DX = 1234h
+RET
+
+
+
+ C Z S O P A 
+ unchanged 
+
+

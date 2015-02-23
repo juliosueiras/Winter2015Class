@@ -1,0 +1,46 @@
+
+.TH REPNZ 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+REPNZ
+.SH OPERANDS
+
+
+	chain instruction
+
+
+
+.SH DESCRIPTION
+
+Repeat following CMPSB, CMPSW, SCASB, SCASW instructions
+while ZF = 0 (result is Not Zero), maximum CX times.
+Algorithm:
+
+check_cx:
+if CX &lt;> 0 then
+
+	do following chain instruction
+	CX = CX - 1
+	if ZF = 0 then:
+		
+		go back to check_cx
+		
+	else
+		
+		exit from REPNZ cycle
+		
+	
+
+else
+
+	exit from REPNZ cycle
+
+
+
+
+
+
+
+ Z 
+ r  
+
+

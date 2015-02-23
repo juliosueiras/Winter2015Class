@@ -1,32 +1,31 @@
- 			&nbsp;
+ 			<A NAME="POPF">&nbsp;</A>
+</TD>
+</TR>
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 POPF
-
-
-No operands
-
+</FONT>
+</TD>
+<TD>No operands</TD>
+<TD>
 
 Get flags register from the stack.
-Algorithm:
- 
- 
- flags = SS:[SP] (top of the stack)
- SP = SP + 2
- 
- 
+<BR><BR>Algorithm:<BR><BR>
+ <FONT FACE="Courier">
+ <UL>
+ <LI>flags = SS:[SP] (top of the stack)</LI>
+ <LI>SP = SP + 2</LI>
+ </UL>
+ </FONT>
 
+ <BR>
  
- 
- 
- 
-  C Z S O P A 
-  popped 
- 
- 
-TOP
+ <FONT FACE="Courier">
+ <TABLE BORDER=1 NOSHADE>
+ <TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+ <TR> <TD COLSPAN=6><CENTER>popped</CENTER></TD> </TR>
+ </TABLE>
+ </FONT>

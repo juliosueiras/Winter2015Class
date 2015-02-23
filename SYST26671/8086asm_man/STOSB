@@ -1,38 +1,38 @@
-			&nbsp;
+			<A NAME="STOSB">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 STOSB
+</FONT>
+</TD>
+<TD>No operands</TD>
+<TD>
 
-
-No operands
-
-
-Store byte in AL into ES:[DI]. Update DI.Algorithm:
-
-
-
-ES:[DI] = AL
-if DF = 0 then
-	
-	DI = DI + 1
-	
+Store byte in AL into ES:[DI]. Update DI.<BR><BR>Algorithm:
+<BR><BR>
+<FONT FACE="Courier">
+<UL>
+<LI>ES:[DI] = AL<BR></LI>
+<LI>if DF = 0 then
+	<UL>
+	<LI>DI = DI + 1</LI>
+	</UL>
 	else
-	
-	DI = DI - 1
-	
-
-
-
+	<UL>
+	<LI>DI = DI - 1</LI>
+	</UL>
+</LI>
+</UL>
+</FONT>
 Example:
-
-
+<PRE>
+<FONT FACE="Courier">
 ORG 100h
 
 LEA DI, a1
@@ -43,12 +43,11 @@ REP STOSB
 
 RET
 
-a1 DB 5 dup(0)
+a1 DB 5 dup(0)</FONT></PRE>
 
-
-
- C Z S O P A 
- unchanged 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD COLSPAN=6>unchanged</TD> </TR>
+</TABLE>
+</FONT>

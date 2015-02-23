@@ -1,32 +1,31 @@
-			&nbsp;
+			<A NAME="CLD">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 CLD
-
-
-No operands
-
+</FONT>
+</TD>
+<TD>No operands</TD>
+<TD>
 
 Clear Direction flag. SI and DI will be incremented by chain
-instructions: CMPSB, CMPSW, LODSB, LODSW, MOVSB, MOVSW, STOSB, STOSW. Algorithm:
-
-
+instructions: CMPSB, CMPSW, LODSB, LODSW, MOVSB, MOVSW, STOSB, STOSW. <BR><BR>Algorithm:
+<BR><BR>
+<FONT FACE="Courier">
 DF = 0
+</FONT>
 
+<BR><BR>
 
-
-
-
-
- D 
- 0 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>D</TD> </TR>
+<TR> <TD>0</TD> </TR>
+</TABLE>
+</FONT>

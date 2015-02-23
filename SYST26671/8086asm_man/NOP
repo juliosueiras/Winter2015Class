@@ -1,36 +1,35 @@
- 			&nbsp;
+ 			<A NAME="NOP">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 NOP
+</FONT>
+</TD>
+<TD>No operands</TD>
+<TD>
 
-
-No operands
-
-
-No Operation.Algorithm:
-
-
-
-Do nothing
-
-
-    Example:; do nothing, 3 times:
+No Operation.<BR><BR>Algorithm:
+<BR><BR>
+<FONT FACE="Courier">
+<UL>
+<LI>Do nothing<BR></LI>
+</UL>
+</FONT>
+    Example:<PRE><FONT FACE="Courier">; do nothing, 3 times:
 NOP
 NOP
 NOP
-RET
+RET</FONT></PRE>
 
-
-
- C Z S O P A 
- unchanged 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD COLSPAN=6>unchanged</TD> </TR>
+</TABLE>
+</FONT>

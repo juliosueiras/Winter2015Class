@@ -1,55 +1,54 @@
-			&nbsp;
+			<A NAME="REPNZ">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 REPNZ
-
-
-
-
-	chain instruction
-
-
-
+</FONT>
+</TD>
+<TD>
+<FONT FACE="Courier">
+	<NOBR>chain instruction</NOBR><BR>
+</FONT>
+</TD>
+<TD>
 
 Repeat following CMPSB, CMPSW, SCASB, SCASW instructions
 while ZF = 0 (result is Not Zero), maximum CX times.
-Algorithm:
-
-check_cx:
+<BR><BR>Algorithm:<BR><BR>
+<FONT FACE="Courier">
+check_cx:<BR><BR>
 if CX &lt;> 0 then
-
-	do following chain instruction
-	CX = CX - 1
-	if ZF = 0 then:
-		
-		go back to check_cx
-		
+<UL>
+	<LI>do following <U>chain instruction</U></LI>
+	<LI>CX = CX - 1</LI>
+	<LI>if ZF = 0 then:
+		<UL>
+		<LI>go back to check_cx</LI>
+		</UL>
 	else
-		
-		exit from REPNZ cycle
-		
-	
-
+		<UL>
+		<LI>exit from REPNZ cycle</LI>
+		</UL>
+	</LI>
+</UL>
 else
+<UL>
+	<LI>exit from REPNZ cycle</LI>
+</UL>
+</FONT>
 
-	exit from REPNZ cycle
+<BR>
 
-
-
-
-
-
-
- Z 
- r  
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>Z</TD> </TR>
+<TR> <TD>r</TD>  </TR>
+</TABLE>
+</FONT>

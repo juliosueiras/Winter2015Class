@@ -1,0 +1,34 @@
+
+.TH ADD 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+ADD
+.SH OPERANDS
+
+
+	
+	REG, memory
+	memory, REG
+	REG, REG
+	memory, immediate
+	REG, immediate
+	
+
+
+
+.SH DESCRIPTION
+
+Add.
+Algorithm:
+
+operand1 = operand1 + operand2
+
+Example:MOV AL, 5   ; AL = 5
+ADD AL, -3  ; AL = 2
+RET
+
+
+
+ C Z S O P A 
+ r r r r r r 
+
+

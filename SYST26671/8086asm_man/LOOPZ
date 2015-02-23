@@ -1,44 +1,44 @@
-			&nbsp;
+			<A NAME="LOOPZ">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 LOOPZ
+</FONT>
+</TD>
+<TD>
+<FONT FACE="Courier">
+	<NOBR>label</NOBR>
+</FONT>
 
+</TD>
+<TD>
 
-
-
-	label
-
-
-
-
-
-Decrease CX, jump to label if CX not zero and ZF = 1. Algorithm:
-
-
-
-CX = CX - 1
-if (CX &lt;> 0) and (ZF = 1) then
-	
-	jump
-	
+Decrease CX, jump to label if CX not zero and ZF = 1. <BR><BR>Algorithm:
+<BR><BR>
+<FONT FACE="Courier">
+<UL>
+<LI>CX = CX - 1<BR></LI>
+<LI>if (CX &lt;> 0) and (ZF = 1) then
+	<UL>
+	<LI>jump</LI>
+	</UL>
 	else
-	
-	no jump, continue
-	
+	<UL>
+	<LI>no jump, continue</LI>
+	</UL>
+</LI>
+</UL>
+</FONT>
+	<BR><BR>
+	example for <a href="http://www.emu8086.com">emu8086 emulator</a>:
 
-
-
-	
-	example for emu8086 emulator:
-
-; Loop until result fits into AL alone,
+<PRE><FONT FACE="Courier">; Loop until result fits into AL alone,
 ; or 5 times. The result will be over 255
 ; on third loop (100+100+100),
 ; so loop will exit.
@@ -51,12 +51,11 @@ label1:
    ADD AX, 100
    CMP AH, 0
    LOOPZ label1
-   RET
+   RET</FONT></PRE>
 
-
-
- C Z S O P A 
- unchanged 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD COLSPAN=6>unchanged</TD> </TR>
+</TABLE>
+</FONT>

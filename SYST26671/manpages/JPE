@@ -1,0 +1,42 @@
+
+.TH JPE 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+JPE
+.SH OPERANDS
+
+
+	label
+
+
+
+.SH DESCRIPTION
+
+Short Jump if Parity Even. Only 8 low bits of result are checked.
+Set by CMP, SUB, ADD, TEST, AND, OR, XOR instructions.
+Algorithm:
+
+
+	if PF = 1 then jump
+
+
+	
+	example for emu8086 emulator:
+
+   include 'emu8086.inc'
+   ORG 100h
+   MOV AL, 00000101b   ; AL = 5
+   OR  AL, 0           ; just set flags.
+   JPE label1
+   PRINT 'parity odd.'
+   JMP exit
+label1:
+   PRINT 'parity even.'
+exit:
+   RET
+
+
+
+ C Z S O P A 
+ unchanged 
+
+

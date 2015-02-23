@@ -1,39 +1,38 @@
- 			&nbsp;
+ 			<A NAME="INC">&nbsp;</A>
+</TD>
+</TR>
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 INC
-
-
-
-
-	
-	REG
-	memory
-	
-
-
-
+</FONT>
+</TD>
+<TD>
+<FONT FACE="Courier">
+	<NOBR>
+	REG<BR>
+	memory<BR>
+	</NOBR>
+</FONT>
+</TD>
+<TD>
 
 Increment.
-Algorithm:
-
+<BR><BR>Algorithm:<BR><BR>
+<FONT FACE="Courier">
 operand = operand + 1
-
-
-Example:MOV AL, 4
+<BR>
+</FONT>
+<BR>Example:<PRE><FONT FACE="Courier">MOV AL, 4
 INC AL       ; AL = 5
-RET
+RET</FONT></PRE>
 
-
-
- Z S O P A 
- r r r r r 
-
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD>r</TD> <TD>r</TD> <TD>r</TD> <TD>r</TD> <TD>r</TD> </TR>
+</TABLE>
 CF - unchanged!
-
-TOP
+</FONT>

@@ -1,0 +1,48 @@
+
+.TH LODSB 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+LODSB
+.SH OPERANDS
+No operands
+
+.SH DESCRIPTION
+
+Load byte at DS:[SI] into AL. Update SI.Algorithm:
+
+
+
+AL = DS:[SI]
+if DF = 0 then
+	
+	SI = SI + 1
+	
+	else
+	
+	SI = SI - 1
+	
+
+
+
+Example:
+
+
+ORG 100h
+
+LEA SI, a1
+MOV CX, 5
+MOV AH, 0Eh
+
+m: LODSB
+INT 10h
+LOOP m
+
+RET
+
+a1 DB 'H', 'e', 'l', 'l', 'o'
+
+
+
+ C Z S O P A 
+ unchanged 
+
+

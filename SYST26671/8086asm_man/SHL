@@ -1,47 +1,46 @@
-			&nbsp;
+			<A NAME="SHL">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 SHL
-
-
-
-
-	memory, immediate
-	REG, immediate
-	memory, CL
-	REG, CL
-
-
-
+</FONT>
+</TD>
+<TD>
+<FONT FACE="Courier">
+	<NOBR>memory, immediate</NOBR><BR>
+	<NOBR>REG, immediate</NOBR><BR><BR>
+	<NOBR>memory, CL</NOBR><BR>
+	<NOBR>REG, CL</NOBR>
+</FONT>
+</TD>
+<TD>
 
 Shift operand1 Left. The number of shifts is set by operand2.
 
-Algorithm:
-
-
-	Shift all bits left, the bit that goes off is set to CF.
-	Zero bit is inserted to the right-most position.
-
-
-Example:MOV AL, 11100000b
+<BR><BR>Algorithm:<BR><BR>
+<FONT FACE="Courier">
+<UL>
+	<LI>Shift all bits left, the bit that goes off is set to CF.</LI>
+	<LI>Zero bit is inserted to the right-most position.</LI>
+</UL>
+</FONT>
+Example:<PRE><FONT FACE="Courier">MOV AL, 11100000b
 SHL AL, 1         ; AL = 11000000b,  CF=1.
 
-RET
+RET</FONT></PRE>
 
-
-
- C O 
- r r 
-
-
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>O</TD> </TR>
+<TR> <TD>r</TD> <TD>r</TD> </TR>
+</TABLE>
+<BR><BR>
 OF=0 if first operand keeps original sign.
-
-TOP
+</FONT>

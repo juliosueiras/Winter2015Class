@@ -1,0 +1,24 @@
+==================================================
+   assign1_julio_tain 0.1: tests/test-suite.log
+==================================================
+
+# TOTAL: 1
+# PASS:  0
+# SKIP:  0
+# XFAIL: 0
+# FAIL:  1
+# XPASS: 0
+# ERROR: 0
+
+.. contents:: :depth: 2
+
+FAIL: check_assign1
+===================
+
+Running suite(s): assign1
+60%: Checks: 10, Failures: 4, Errors: 0
+tests/check_assign1.awk:12:F:assign1:test_convert_to_lower_case:0: Assertion 'test_value==correct_value' failed: test_value=="", correct_value=="hello"
+tests/check_assign1.awk:20:F:assign1:test_convert_to_lower_case_full_sentence:0: Assertion 'test_value==correct_value' failed: test_value=="", correct_value=="hello world"
+tests/check_assign1.awk:28:F:assign1:test_convert_to_upper_case:0: Assertion 'test_value==correct_value' failed: test_value=="", correct_value=="HELLO"
+tests/check_assign1.awk:36:F:assign1:test_convert_to_upper_case_full_sentence:0: Assertion 'test_value==correct_value' failed: test_value=="", correct_value=="HELLO WORLD"
+

@@ -1,0 +1,54 @@
+
+.TH LOOPZ 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+LOOPZ
+.SH OPERANDS
+
+
+	label
+
+
+
+
+.SH DESCRIPTION
+
+Decrease CX, jump to label if CX not zero and ZF = 1. Algorithm:
+
+
+
+CX = CX - 1
+if (CX &lt;> 0) and (ZF = 1) then
+	
+	jump
+	
+	else
+	
+	no jump, continue
+	
+
+
+
+	
+	example for emu8086 emulator:
+
+; Loop until result fits into AL alone,
+; or 5 times. The result will be over 255
+; on third loop (100+100+100),
+; so loop will exit.
+   include 'emu8086.inc'
+   ORG 100h
+   MOV AX, 0
+   MOV CX, 5
+label1:
+   PUTC '*'
+   ADD AX, 100
+   CMP AH, 0
+   LOOPZ label1
+   RET
+
+
+
+ C Z S O P A 
+ unchanged 
+
+

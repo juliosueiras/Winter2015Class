@@ -1,0 +1,20 @@
+
+.TH HLT 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+HLT
+.SH OPERANDS
+No operands
+
+.SH DESCRIPTION
+
+Halt the System.
+
+ Example:MOV AX, 5
+HLT
+
+
+
+ C Z S O P A 
+ unchanged 
+
+

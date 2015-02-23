@@ -1,0 +1,48 @@
+
+.TH MOVSB 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+MOVSB
+.SH OPERANDS
+No operands
+
+.SH DESCRIPTION
+
+Copy byte at DS:[SI] to ES:[DI].
+Update SI and DI.Algorithm:
+
+
+
+ES:[DI] = DS:[SI]
+if DF = 0 then
+	
+	SI = SI + 1
+	DI = DI + 1
+	
+	else
+	
+	SI = SI - 1
+	DI = DI - 1
+	
+
+
+
+Example:
+ORG 100h
+
+CLD
+LEA SI, a1
+LEA DI, a2
+MOV CX, 5
+REP MOVSB
+
+RET
+
+a1 DB 1,2,3,4,5
+a2 DB 5 DUP(0)
+
+
+
+ C Z S O P A 
+ unchanged 
+
+

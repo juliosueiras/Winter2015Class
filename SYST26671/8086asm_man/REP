@@ -1,46 +1,45 @@
-			&nbsp;
+			<A NAME="REP">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 REP
-
-
-
-
-	chain instruction
-
-
-
+</FONT>
+</TD>
+<TD>
+<FONT FACE="Courier">
+	<NOBR>chain instruction</NOBR><BR>
+</FONT>
+</TD>
+<TD>
 
 Repeat following MOVSB, MOVSW, LODSB, LODSW, STOSB, STOSW instructions
 CX times.
-Algorithm:
-
-check_cx:
+<BR><BR>Algorithm:<BR><BR>
+<FONT FACE="Courier">
+check_cx:<BR><BR>
 if CX &lt;> 0 then
-
-	do following chain instruction
-	CX = CX - 1
-	go back to check_cx
-
+<UL>
+	<LI>do following <U>chain instruction</U></LI>
+	<LI>CX = CX - 1</LI>
+	<LI>go back to check_cx</LI>
+</UL>
 else
+<UL>
+	<LI>exit from REP cycle</LI>
+</UL>
+</FONT>
 
-	exit from REP cycle
+<BR>
 
-
-
-
-
-
-
- Z 
- r  
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>Z</TD> </TR>
+<TR> <TD>r</TD>  </TR>
+</TABLE>
+</FONT>

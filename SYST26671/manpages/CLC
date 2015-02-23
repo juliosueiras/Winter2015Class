@@ -1,0 +1,23 @@
+
+.TH CLC 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+CLC
+.SH OPERANDS
+No operands
+
+.SH DESCRIPTION
+
+Clear Carry flag. Algorithm:
+
+
+CF = 0
+
+
+
+
+
+
+ C 
+ 0 
+
+

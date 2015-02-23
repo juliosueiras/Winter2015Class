@@ -1,0 +1,48 @@
+
+.TH RET 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+RET
+.SH OPERANDS
+No operands
+or even immediate
+
+.SH DESCRIPTION
+
+Return from near procedure.
+Algorithm:
+
+
+	
+		Pop from stack:
+		
+		IP
+		
+	
+	
+	if immediate operand is present:
+	SP = SP + operand
+	
+
+
+Example:
+ORG 100h  ; for COM file.
+
+CALL p1
+
+ADD AX, 1
+
+RET         ; return to OS.
+
+p1 PROC     ; procedure declaration.
+    MOV AX, 1234h
+    RET     ; return to caller.
+p1 ENDP
+
+
+
+
+
+ C Z S O P A 
+ unchanged 
+
+

@@ -16,17 +16,9 @@
  * =====================================================================================
  */
 #include <stdio.h>
+
 #include "assign1.h"
 
-int main(void){
-    char user_string[100];
-    char user_input;
-
-    strcpy(user_string,ask_to_input_string());
-
-    display_menu();
-
-    option_selection_for(user_input,user_string);
-
-    return 0;
+void main(){
+    program_run();
 }

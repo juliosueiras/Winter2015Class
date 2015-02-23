@@ -1,48 +1,48 @@
-			&nbsp;
+			<A NAME="MOV">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 MOV
+</FONT>
+</TD>
+<TD>
+<FONT FACE="Courier">
+	<NOBR>
+	REG, memory<BR>
+	memory, REG<BR>
+	REG, REG<BR>
+	memory, immediate<BR>
+	REG, immediate<BR><BR>
 
-
-
-
-	
-	REG, memory
-	memory, REG
-	REG, REG
-	memory, immediate
-	REG, immediate
-
-	SREG, memory
-	memory, SREG
-	REG, SREG
+	SREG, memory<BR>
+	memory, SREG<BR>
+	REG, SREG<BR>
 	SREG, REG
-	
+	</NOBR>
+</FONT>
+</TD>
+<TD>
 
-
-
-
-Copy operand2 to operand1.
-The MOV instruction cannot:
-
-set the value of the CS and IP registers.
-copy value of one segment register to another segment register (should copy to general register first).
-copy immediate value to segment register (should copy to general register first).
-
-Algorithm:
-
-
+Copy operand2 to operand1.<BR><BR>
+The MOV instruction <U>cannot</U>:
+<UL>
+<LI>set the value of the CS and IP registers.</LI>
+<LI>copy value of one segment register to another segment register (should copy to general register first).</LI>
+<LI>copy immediate value to segment register (should copy to general register first).</LI>
+</UL>
+<BR>Algorithm:<BR><BR>
+<FONT FACE="Courier">
+<BLOCKQUOTE>
 operand1 = operand2
-
-
-Example:
+</BLOCKQUOTE>
+</FONT>
+Example:<PRE><FONT FACE="Courier">
 ORG 100h
 MOV AX, 0B800h    ; set AX = B800h (VGA memory).
 MOV DS, AX        ; copy value of AX to DS.
@@ -51,12 +51,11 @@ MOV CH, 01011111b ; CL = color attribute.
 MOV BX, 15Eh      ; BX = position on screen.
 MOV [BX], CX      ; w.[0B800h:015Eh] = CX.
 RET               ; returns to operating system.
+</FONT></PRE>
 
-
-
-
- C Z S O P A 
- unchanged 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD COLSPAN=6>unchanged</TD> </TR>
+</TABLE>
+</FONT>

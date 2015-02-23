@@ -1,32 +1,32 @@
-			&nbsp;
+			<A NAME="CALL">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 CALL
-
-
-
-
-	
-	procedure name
-	label
-	4-byte address
-	
-
-
-
+</FONT>
+</TD>
+<TD>
+<FONT FACE="Courier">
+	<NOBR>
+	procedure name<BR>
+	label<BR>
+	4-byte address<BR>
+	</NOBR>
+</FONT>
+</TD>
+<TD>
 
 Transfers control to procedure, return address is (IP) is pushed to
-stack. 4-byte address may be entered in this form:
-1234h:5678h, first value is a segment second
-value is an offset (this is a far call, so CS is also pushed to stack).
-Example:
+stack. <I>4-byte address</I> may be entered in this form:
+<FONT FACE="Courier">1234h:5678h</FONT>, first value is a segment second
+value is an offset (this is a far call, so CS is also pushed to stack).<BR>
+<BR><BR>Example:<PRE><FONT FACE="Courier">
 ORG 100h  ; for COM file.
 
 CALL p1
@@ -38,12 +38,11 @@ RET         ; return to OS.
 p1 PROC     ; procedure declaration.
     MOV AX, 1234h
     RET     ; return to caller.
-p1 ENDP
+p1 ENDP</FONT></PRE>
 
-
-
- C Z S O P A 
- unchanged 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD COLSPAN=6>unchanged</TD> </TR>
+</TABLE>
+</FONT>

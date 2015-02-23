@@ -1,45 +1,44 @@
-			&nbsp;
+			<A NAME="SBB">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 SBB
-
-
-
-
-	
-	REG, memory
-	memory, REG
-	REG, REG
-	memory, immediate
+</FONT>
+</TD>
+<TD>
+<FONT FACE="Courier">
+	<NOBR>
+	REG, memory<BR>
+	memory, REG<BR>
+	REG, REG<BR>
+	memory, immediate<BR>
 	REG, immediate
-	
-
-
-
+	</NOBR>
+</FONT>
+</TD>
+<TD>
 
 Subtract with Borrow.
-Algorithm:
-
+<BR><BR>Algorithm:<BR><BR>
+<FONT FACE="Courier">
 operand1 = operand1 - operand2 - CF
-
-
-Example:STC
+</FONT>
+<BR><BR>
+Example:<PRE><FONT FACE="Courier">STC
 MOV AL, 5
 SBB AL, 3    ; AL = 5 - 3 - 1 = 1
 
-RET
+RET</FONT></PRE>
 
-
-
- C Z S O P A 
- r r r r r r 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD>r</TD> <TD>r</TD> <TD>r</TD> <TD>r</TD> <TD>r</TD> <TD>r</TD> </TR>
+</TABLE>
+</FONT>

@@ -1,0 +1,39 @@
+
+.TH IMUL 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+IMUL
+.SH OPERANDS
+
+
+	
+	REG
+	memory
+	
+
+
+
+.SH DESCRIPTION
+
+Signed multiply.
+Algorithm:
+ 
+	 when operand is a byte:
+	 AX = AL * operand.
+ 
+
+ 
+	when operand is a word:
+	(DX AX) = AX * operand.
+ 
+  Example:MOV AL, -2
+MOV BL, -4
+IMUL BL      ; AX = 8
+RET
+
+
+
+ C Z S O P A 
+ r ? ? r ? ? 
+
+CF=OF=0 when result fits into operand of IMUL.
+

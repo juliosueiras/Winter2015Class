@@ -1,40 +1,39 @@
-			&nbsp;
+			<A NAME="SAHF">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 SAHF
-
-
-No operands
-
+</FONT>
+</TD>
+<TD>No operands</TD>
+<TD>
 
 Store AH register into low 8 bits of Flags register.
-Algorithm:
-
-
-	flags register = AH
-
-
+<BR><BR>Algorithm:<BR><BR>
+<FONT FACE="Courier">
+<UL>
+	flags register = AH<BR>
+</UL>
+<PRE><FONT FACE="Courier">
 AH bit:   7    6   5    4   3    2   1    0
-        [SF] [ZF] [0] [AF] [0] [PF] [1] [CF]
-
+        [SF] [ZF] [0] [AF] [0] [PF] [1] [CF]</FONT>
+</PRE>
 bits 1, 3, 5 are reserved.
+</FONT>
+
+<BR><BR>
 
 
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD>r</TD> <TD>r</TD> <TD>r</TD> <TD>r</TD> <TD>r</TD> <TD>r</TD> </TR>
+</TABLE>
+</FONT>
 
-
-
-
-
- C Z S O P A 
- r r r r r r 
-
-
-
-TOP

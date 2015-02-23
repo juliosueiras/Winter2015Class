@@ -1,42 +1,42 @@
-			&nbsp;
+			<A NAME="JMP">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 JMP
-
-
-
-
-	
-	label
-	4-byte address
-	
-
-
-
+</FONT>
+</TD>
+<TD>
+<FONT FACE="Courier">
+	<NOBR>
+	label<BR>
+	4-byte address<BR>
+	</NOBR>
+</FONT>
+</TD>
+<TD>
 
 Unconditional Jump.
 Transfers control to another part of the program.
-4-byte address may be entered in this form:
-1234h:5678h, first value is a segment second
-value is an offset.
+<I>4-byte address</I> may be entered in this form:
+<FONT FACE="Courier">1234h:5678h</FONT>, first value is a segment second
+value is an offset.<BR>
 
-Algorithm:
-
-
+<BR><BR>Algorithm:<BR><BR>
+<FONT FACE="Courier">
+<UL>
 	always jump
+</UL>
+</FONT>
+	<BR><BR>
+	example for <a href="http://www.emu8086.com">emu8086 emulator</a>:
 
-
-	
-	example for emu8086 emulator:
-
-   include 'emu8086.inc'
+<PRE><FONT FACE="Courier">   include 'emu8086.inc'
    ORG 100h
    MOV AL, 5
    JMP label1    ; jump over 2 lines!
@@ -44,12 +44,11 @@ Algorithm:
    MOV AL, 0
 label1:
    PRINT 'Got Here!'
-   RET
+   RET</FONT></PRE>
 
-
-
- C Z S O P A 
- unchanged 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD COLSPAN=6>unchanged</TD> </TR>
+</TABLE>
+</FONT>

@@ -1,4 +1,6 @@
-			&nbsp;
+			<A NAME="LEA">&nbsp;</A>
+</TD>
+</TR>
 
 
 
@@ -18,61 +20,58 @@
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 LEA
-
-
-
-
-	
+</FONT>
+</TD>
+<TD>
+<FONT FACE="Courier">
+	<NOBR>
 	REG, memory
-	
-
-
-
+	</NOBR>
+</FONT>
+</TD>
+<TD>
 
 Load Effective Address.
-Algorithm:
-
-
-    REG = address of memory (offset)
-
-
-
+<BR><BR>Algorithm:<BR><BR>
+<FONT FACE="Courier">
+<UL>
+    <LI>REG = address of memory (offset)</LI>
+</UL>
+</FONT>
+<BR><BR>
 Example:
 <!-- START AUTOMATIC ASM TO HTML EXPORT -->
-
-MOV BX, 35h
-MOV DI, 12h
-LEA SI, [BX+DI]    ; SI = 35h + 12h = 47h 
-
+<pre><font size=3 face="Terminal">
+<font color=#0000FF>MOV</font> <font color=#C80000>BX</font>, 35h
+<font color=#0000FF>MOV</font> <font color=#C80000>DI</font>, 12h
+<font color=#0000FF>LEA</font> <font color=#C80000>SI</font>, <font color=#0064C8>[</font><font color=#C80000>BX</font><font color=#0064C8>+</font><font color=#C80000>DI</font><font color=#0064C8>]</font>    <font color=#008000>; SI = 35h + 12h = 47h </font>
+</font></pre>
 <!-- emu8086 version 4.00-Beta-19    -->
 <!-- STOP AUTOMATIC ASM TO HTML EXPORT -->
 
-Note: The integrated 8086 assembler automatically replaces LEA with a
-more efficient MOV where possible.
+Note: The integrated 8086 assembler automatically replaces <b>LEA</b> with a
+more efficient <b>MOV</b> where possible.
 For example:
 <!-- START AUTOMATIC ASM TO HTML EXPORT -->
-
-org 100h
-LEA AX, m       ; AX = offset of m
-RET
-m  dw  1234h
-END
-
+<pre><font size=3 face="Terminal">
+<font color=#000064>org</font> 100h
+<font color=#0000FF>LEA</font> <font color=#C80000>AX</font>, m       <font color=#008000>; AX = offset of m</font>
+<font color=#0000FF>RET</font>
+m  <font color=#000064>dw</font>  1234h
+<font color=#000064>END</font>
+</font></pre>
 <!-- emu8086 version 4.00-Beta-19    -->
 <!-- STOP AUTOMATIC ASM TO HTML EXPORT -->
+<BR><BR>
 
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD COLSPAN=6>unchanged</TD> </TR>
+</TABLE>
+</FONT>
 
-
-
- C Z S O P A 
- unchanged 
-
-
-
-TOP

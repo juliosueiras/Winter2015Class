@@ -1,0 +1,34 @@
+
+.TH NOT 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+NOT
+.SH OPERANDS
+
+
+	
+	REG
+	memory
+	
+
+
+
+.SH DESCRIPTION
+
+Invert each bit of the operand.Algorithm:
+
+
+
+if bit is 1 turn it to 0.
+if bit is 0 turn it to 1.
+
+
+    Example:MOV AL, 00011011b
+NOT AL   ; AL = 11100100b
+RET
+
+
+
+ C Z S O P A 
+ unchanged 
+
+

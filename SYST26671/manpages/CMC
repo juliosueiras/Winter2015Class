@@ -1,0 +1,24 @@
+
+.TH CMC 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+CMC
+.SH OPERANDS
+No operands
+
+.SH DESCRIPTION
+
+Complement Carry flag. Inverts value of CF. Algorithm:
+
+
+if CF = 1 then CF = 0
+if CF = 0 then CF = 1
+
+
+
+
+
+
+ C 
+ r 
+
+

@@ -1,0 +1,34 @@
+
+.TH OUT 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+OUT
+.SH OPERANDS
+
+
+	
+	byte, AL
+	byte, AX
+	DX, AL
+	DX, AX
+	
+
+
+
+.SH DESCRIPTION
+
+Output from AL or AX to port.
+First operand is a port number. If required to access
+port number over 255 - DX register should be used.
+
+Example:MOV AX, 0FFFh 
+OUT 4, AX    
+
+MOV AL, 100b 
+OUT 7, AL    
+
+
+
+ C Z S O P A 
+ unchanged 
+
+

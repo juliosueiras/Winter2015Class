@@ -1,42 +1,41 @@
-			&nbsp;
+			<A NAME="NOT">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 NOT
+</FONT>
+</TD>
+<TD>
+<FONT FACE="Courier">
+	<NOBR>
+	REG<BR>
+	memory<BR>
+	</NOBR>
+</FONT>
+</TD>
+<TD>
 
-
-
-
-	
-	REG
-	memory
-	
-
-
-
-
-Invert each bit of the operand.Algorithm:
-
-
-
-if bit is 1 turn it to 0.
-if bit is 0 turn it to 1.
-
-
-    Example:MOV AL, 00011011b
+Invert each bit of the operand.<BR><BR>Algorithm:
+<BR><BR>
+<FONT FACE="Courier">
+<UL>
+<LI>if bit is 1 turn it to 0.<BR></LI>
+<LI>if bit is 0 turn it to 1.<BR></LI>
+</UL>
+</FONT>
+    Example:<PRE><FONT FACE="Courier">MOV AL, 00011011b
 NOT AL   ; AL = 11100100b
-RET
+RET</FONT></PRE>
 
-
-
- C Z S O P A 
- unchanged 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD COLSPAN=6>unchanged</TD> </TR>
+</TABLE>
+</FONT>

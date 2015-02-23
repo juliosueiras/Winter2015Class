@@ -1,42 +1,41 @@
-			&nbsp;
+			<A NAME="CWD">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 CWD
+</FONT>
+</TD>
+<TD>No operands</TD>
+<TD>
 
-
-No operands
-
-
-Convert Word to Double word. Algorithm:
-
-
+Convert Word to Double word. <BR><BR>Algorithm:
+<BR><BR>
+<FONT FACE="Courier">
 if high bit of AX = 1 then:
-
-DX = 65535 (0FFFFh)
-
-
+<UL>
+<LI>DX = 65535 (0FFFFh)</LI>
+</UL>
+<BR>
 else
-
-DX = 0
-
-
-Example:MOV DX, 0   ; DX = 0
+<UL>
+<LI>DX = 0</LI>
+</UL>
+</FONT>
+<BR>Example:<PRE><FONT FACE="Courier">MOV DX, 0   ; DX = 0
 MOV AX, 0   ; AX = 0
 MOV AX, -5  ; DX AX = 00000h:0FFFBh
 CWD         ; DX AX = 0FFFFh:0FFFBh
-RET
+RET</FONT></PRE>
 
-
-
- C Z S O P A 
- unchanged 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD COLSPAN=6>unchanged</TD> </TR>
+</TABLE>
+</FONT>

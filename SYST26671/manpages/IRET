@@ -1,0 +1,30 @@
+
+.TH IRET 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+IRET
+.SH OPERANDS
+No operands
+
+.SH DESCRIPTION
+
+Interrupt Return.
+Algorithm:
+
+
+	Pop from stack:
+	
+	IP
+	CS
+	flags register
+	
+
+
+
+
+
+
+
+ C Z S O P A 
+ popped 
+
+

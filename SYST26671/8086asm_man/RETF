@@ -1,44 +1,43 @@
-			&nbsp;
+			<A NAME="RETF">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 RETF
-
-
-No operands
-or even immediate
-
+</FONT>
+</TD>
+<TD>No operands<BR>
+or even immediate</TD>
+<TD>
 
 Return from Far procedure.
-Algorithm:
-
-
-	
+<BR><BR>Algorithm:<BR><BR>
+<FONT FACE="Courier">
+<UL>
+	<LI>
 		Pop from stack:
-		
-		IP
-		CS
-		
-	
-	
-	if immediate operand is present:
-	SP = SP + operand
-	
+		<UL>
+		<LI>IP</LI>
+		<LI>CS</LI>
+		</UL>
+	</LI>
+	<LI>
+	if <U>immediate</U> operand is present:
+	<NOBR>SP = SP + operand</NOBR>
+	</LI>
+</UL>
+</FONT>
 
+<BR>
 
-
-
-
-
-
- C Z S O P A 
- unchanged 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD COLSPAN=6>unchanged</TD> </TR>
+</TABLE>
+</FONT>

@@ -1,0 +1,45 @@
+
+.TH STOSW 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+STOSW
+.SH OPERANDS
+No operands
+
+.SH DESCRIPTION
+
+Store word in AX into ES:[DI]. Update DI.Algorithm:
+
+
+
+ES:[DI] = AX
+if DF = 0 then
+	
+	DI = DI + 2
+	
+	else
+	
+	DI = DI - 2
+	
+
+
+
+Example:
+
+ORG 100h
+
+LEA DI, a1
+MOV AX, 1234h
+MOV CX, 5
+
+REP STOSW
+
+RET
+
+a1 DW 5 dup(0)
+
+
+
+ C Z S O P A 
+ unchanged 
+
+

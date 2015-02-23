@@ -1,34 +1,34 @@
-			&nbsp;
+			<A NAME="JCXZ">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 JCXZ
-
-
-
-
-	label
-
-
-
+</FONT>
+</TD>
+<TD>
+<FONT FACE="Courier">
+	<NOBR>label</NOBR>
+</FONT>
+</TD>
+<TD>
 
 Short Jump if CX register is 0.
-Algorithm:
-
-
+<BR><BR>Algorithm:<BR><BR>
+<FONT FACE="Courier">
+<UL>
 	if CX = 0 then jump
+</UL>
+</FONT>
+	<BR><BR>
+	example for <a href="http://www.emu8086.com">emu8086 emulator</a>:
 
-
-	
-	example for emu8086 emulator:
-
-   include 'emu8086.inc'
+<PRE><FONT FACE="Courier">   include 'emu8086.inc'
    ORG 100h
    MOV CX, 0
    JCXZ label1
@@ -37,12 +37,11 @@ Algorithm:
 label1:
    PRINT 'CX is zero.'
 exit:
-   RET
+   RET</FONT></PRE>
 
-
-
- C Z S O P A 
- unchanged 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD COLSPAN=6>unchanged</TD> </TR>
+</TABLE>
+</FONT>

@@ -1,0 +1,31 @@
+
+.TH IN 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+IN
+.SH OPERANDS
+
+
+	
+	AL, byte
+	AL, DX
+	AX, byte
+	AX, DX
+	
+
+
+
+.SH DESCRIPTION
+
+Input from port into AL or AX.
+Second operand is a port number. If required to access
+port number over 255 - DX register should be used.
+Example:IN AX, 4  ; get status of traffic lights.
+IN AL, 7  ; get status of stepper-motor.
+
+
+
+
+ C Z S O P A 
+ unchanged 
+
+

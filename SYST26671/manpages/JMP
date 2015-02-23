@@ -1,0 +1,47 @@
+
+.TH JMP 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+JMP
+.SH OPERANDS
+
+
+	
+	label
+	4-byte address
+	
+
+
+
+.SH DESCRIPTION
+
+Unconditional Jump.
+Transfers control to another part of the program.
+4-byte address may be entered in this form:
+1234h:5678h, first value is a segment second
+value is an offset.
+
+Algorithm:
+
+
+	always jump
+
+
+	
+	example for emu8086 emulator:
+
+   include 'emu8086.inc'
+   ORG 100h
+   MOV AL, 5
+   JMP label1    ; jump over 2 lines!
+   PRINT 'Not Jumped!'
+   MOV AL, 0
+label1:
+   PRINT 'Got Here!'
+   RET
+
+
+
+ C Z S O P A 
+ unchanged 
+
+

@@ -1,54 +1,53 @@
-			&nbsp;
+			<A NAME="LOOP">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 LOOP
+</FONT>
+</TD>
+<TD>
+<FONT FACE="Courier">
+	<NOBR>label</NOBR>
+</FONT>
+</TD>
+<TD>
 
-
-
-
-	label
-
-
-
-
-Decrease CX, jump to label if CX not zero. Algorithm:
-
-
-
-CX = CX - 1
-if CX &lt;> 0 then
-	
-	jump
-	
+Decrease CX, jump to label if CX not zero. <BR><BR>Algorithm:
+<BR><BR>
+<FONT FACE="Courier">
+<UL>
+<LI>CX = CX - 1<BR></LI>
+<LI>if CX &lt;> 0 then
+	<UL>
+	<LI>jump</LI>
+	</UL>
 	else
-	
-	no jump, continue
-	
+	<UL>
+	<LI>no jump, continue</LI>
+	</UL>
+</LI>
+</UL>
+</FONT>
+	<BR><BR>
+	example for <a href="http://www.emu8086.com">emu8086 emulator</a>:
 
-
-
-	
-	example for emu8086 emulator:
-
-   include 'emu8086.inc'
+<PRE><FONT FACE="Courier">   include 'emu8086.inc'
    ORG 100h
    MOV CX, 5
 label1:
    PRINTN 'loop!'
    LOOP label1
-   RET
+   RET</FONT></PRE>
 
-   
-   
-    C Z S O P A 
-    unchanged 
-   
-   
-TOP
+   <FONT FACE="Courier">
+   <TABLE BORDER=1 NOSHADE>
+   <TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+   <TR> <TD COLSPAN=6>unchanged</TD> </TR>
+   </TABLE>
+   </FONT>

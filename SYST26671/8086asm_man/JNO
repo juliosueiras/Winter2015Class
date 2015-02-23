@@ -1,34 +1,34 @@
-			&nbsp;
+			<A NAME="JNO">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 JNO
-
-
-
-
-	label
-
-
-
+</FONT>
+</TD>
+<TD>
+<FONT FACE="Courier">
+	<NOBR>label</NOBR>
+</FONT>
+</TD>
+<TD>
 
 Short Jump if Not Overflow.
-Algorithm:
-
-
+<BR><BR>Algorithm:<BR><BR>
+<FONT FACE="Courier">
+<UL>
 	if OF = 0 then jump
+</UL>
+</FONT>
+	<BR><BR>
+	example for <a href="http://www.emu8086.com">emu8086 emulator</a>:
 
-
-	
-	example for emu8086 emulator:
-
-; -5 - 2 = -7 (inside -128..127)
+<PRE><FONT FACE="Courier">; -5 - 2 = -7 (inside -128..127)
 ; the result of SUB is correct,
 ; so OF = 0:
 include 'emu8086.inc'
@@ -41,12 +41,11 @@ JMP exit
 label1:
   PRINT 'no overflow.'
 exit:
-  RET
+  RET</FONT></PRE>
 
-
-
- C Z S O P A 
- unchanged 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD COLSPAN=6>unchanged</TD> </TR>
+</TABLE>
+</FONT>

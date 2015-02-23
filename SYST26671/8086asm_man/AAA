@@ -1,47 +1,46 @@
-			&nbsp;
+			<A NAME="AAA">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 AAA
+</FONT>
+</TD>
+<TD>No operands</TD>
+<TD>
 
-
-No operands
-
-
-ASCII Adjust after Addition.
+ASCII Adjust after Addition.<BR>
 Corrects result in AH and AL after addition
-when working with BCD values.  It works according to the following Algorithm:
-
-
-if low nibble of AL > 9 or AF = 1 then:
-
-AL = AL + 6
-AH = AH + 1
-AF = 1
-CF = 1
-
+when working with BCD values. <BR><BR> It works according to the following Algorithm:
+<BR><BR>
+<FONT FACE="Courier">
+if low nibble of AL > 9 or AF = 1 then:<BR>
+<UL>
+<LI>AL = AL + 6</LI>
+<LI>AH = AH + 1</LI>
+<LI>AF = 1</LI>
+<LI>CF = 1</LI>
+</UL>
 else
-
-AF = 0
-CF = 0
-
-in both cases:
+<UL>
+<LI>AF = 0</LI>
+<LI>CF = 0</LI>
+</UL>
+in both cases:<BR>
 clear the high nibble of AL.
-
-Example:MOV AX, 15   ; AH = 00, AL = 0Fh
+</FONT>
+<BR><BR>Example:<PRE><FONT FACE="Courier">MOV AX, 15   ; AH = 00, AL = 0Fh
 AAA          ; AH = 01, AL = 05
-RET
+RET</FONT></PRE>
 
-
-
- C Z S O P A 
- r ? ? ? ? r 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD>r</TD> <TD>?</TD> <TD>?</TD> <TD>?</TD> <TD>?</TD> <TD>r</TD> </TR>
+</TABLE>
+</FONT>

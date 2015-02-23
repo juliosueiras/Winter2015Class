@@ -1,0 +1,37 @@
+
+.TH CMPSW 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+CMPSW
+.SH OPERANDS
+No operands
+
+.SH DESCRIPTION
+
+Compare words: ES:[DI] from DS:[SI]. Algorithm:
+
+
+
+DS:[SI] - ES:[DI]
+set flags according to result: OF, SF, ZF, AF, PF, CF
+if DF = 0 then
+	
+	SI = SI + 2
+	DI = DI + 2
+	
+	else
+	
+	SI = SI - 2
+	DI = DI - 2
+	
+
+
+
+
+
+
+
+
+ C Z S O P A 
+ r r r r r r 
+
+

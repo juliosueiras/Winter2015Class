@@ -1,45 +1,44 @@
-			&nbsp;
+			<A NAME="OR">&nbsp;</A>
+</TD>
+</TR>
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 OR
-
-
-
-
-	
-	REG, memory
-	memory, REG
-	REG, REG
-	memory, immediate
+</FONT>
+</TD>
+<TD>
+<FONT FACE="Courier">
+	<NOBR>
+	REG, memory<BR>
+	memory, REG<BR>
+	REG, REG<BR>
+	memory, immediate<BR>
 	REG, immediate
-	
-
-
-
+	</NOBR>
+</FONT>
+</TD>
+<TD>
 
 Logical OR between all bits of two operands.
-Result is stored in first operand.
-These rules apply:
-
-1 OR 1 = 1
-1 OR 0 = 1
-0 OR 1 = 1
-0 OR 0 = 0
-
-Example:MOV AL, 'A'       ; AL = 01000001b
+Result is stored in first operand.<BR><BR>
+These rules apply:<BR><BR>
+<FONT FACE="Courier">
+1 OR 1 = 1<BR>
+1 OR 0 = 1<BR>
+0 OR 1 = 1<BR>
+0 OR 0 = 0<BR>
+</FONT>
+<BR><BR>Example:<PRE><FONT FACE="Courier">MOV AL, 'A'       ; AL = 01000001b
 OR AL, 00100000b  ; AL = 01100001b  ('a')
-RET
+RET</FONT></PRE>
 
-
-
- C Z S O P A 
- 0 r r 0 r ? 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD>0</TD> <TD>r</TD> <TD>r</TD> <TD>0</TD> <TD>r</TD> <TD>?</TD> </TR>
+</TABLE>
+</FONT>

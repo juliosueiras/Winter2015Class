@@ -1,0 +1,37 @@
+
+.TH ROL 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+ROL
+.SH OPERANDS
+
+
+	memory, immediate
+	REG, immediate
+	memory, CL
+	REG, CL
+
+
+
+.SH DESCRIPTION
+
+Rotate operand1 left. The number of rotates is set by operand2.
+
+Algorithm:
+
+
+	shift all bits left, the bit that goes off is set to
+	CF and the same bit is inserted to the right-most position.
+
+
+Example:MOV AL, 1Ch       ; AL = 00011100b
+ROL AL, 1         ; AL = 00111000b,  CF=0.
+RET
+
+
+
+ C O 
+ r r 
+
+
+OF=0 if first operand keeps original sign.
+

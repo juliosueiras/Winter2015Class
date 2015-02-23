@@ -1,0 +1,36 @@
+
+.TH SUB 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+SUB
+.SH OPERANDS
+
+
+	
+	REG, memory
+	memory, REG
+	REG, REG
+	memory, immediate
+	REG, immediate
+	
+
+
+
+.SH DESCRIPTION
+
+Subtract.
+Algorithm:
+
+operand1 = operand1 - operand2
+
+
+Example:MOV AL, 5
+SUB AL, 1         ; AL = 4
+
+RET
+
+
+
+ C Z S O P A 
+ r r r r r r 
+
+

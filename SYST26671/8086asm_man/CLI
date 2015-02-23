@@ -1,31 +1,30 @@
-			&nbsp;
+			<A NAME="CLI">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 CLI
+</FONT>
+</TD>
+<TD>No operands</TD>
+<TD>
 
-
-No operands
-
-
-Clear Interrupt enable flag. This disables hardware interrupts. Algorithm:
-
-
+Clear Interrupt enable flag. This disables hardware interrupts. <BR><BR>Algorithm:
+<BR><BR>
+<FONT FACE="Courier">
 IF = 0
+</FONT>
 
+<BR><BR>
 
-
-
-
-
- I 
- 0 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>I</TD> </TR>
+<TR> <TD>0</TD> </TR>
+</TABLE>
+</FONT>

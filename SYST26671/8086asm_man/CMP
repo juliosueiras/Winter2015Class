@@ -1,46 +1,45 @@
-			&nbsp;
+			<A NAME="CMP">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 CMP
-
-
-
-
-	
-	REG, memory
-	memory, REG
-	REG, REG
-	memory, immediate
+</FONT>
+</TD>
+<TD>
+<FONT FACE="Courier">
+	<NOBR>
+	REG, memory<BR>
+	memory, REG<BR>
+	REG, REG<BR>
+	memory, immediate<BR>
 	REG, immediate
-	
-
-
-
+	</NOBR>
+</FONT>
+</TD>
+<TD>
 
 Compare.
-Algorithm:
-
+<BR><BR>Algorithm:<BR><BR>
+<FONT FACE="Courier">
 operand1 - operand2
-
+<BR><BR>
 result is not stored anywhere, flags are set (OF, SF, ZF, AF, PF, CF) according
 to result.
-
-Example:MOV AL, 5
+</FONT>
+<BR><BR>Example:<PRE><FONT FACE="Courier">MOV AL, 5
 MOV BL, 5
 CMP AL, BL  ; AL = 5, ZF = 1 (so equal!)
-RET
+RET</FONT></PRE>
 
-
-
- C Z S O P A 
- r r r r r r 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD>r</TD> <TD>r</TD> <TD>r</TD> <TD>r</TD> <TD>r</TD> <TD>r</TD> </TR>
+</TABLE>
+</FONT>

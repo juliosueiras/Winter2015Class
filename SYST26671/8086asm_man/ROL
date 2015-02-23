@@ -1,45 +1,44 @@
-			&nbsp;
+			<A NAME="ROL">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 ROL
-
-
-
-
-	memory, immediate
-	REG, immediate
-	memory, CL
-	REG, CL
-
-
-
+</FONT>
+</TD>
+<TD>
+<FONT FACE="Courier">
+	<NOBR>memory, immediate</NOBR><BR>
+	<NOBR>REG, immediate</NOBR><BR><BR>
+	<NOBR>memory, CL</NOBR><BR>
+	<NOBR>REG, CL</NOBR>
+</FONT>
+</TD>
+<TD>
 
 Rotate operand1 left. The number of rotates is set by operand2.
 
-Algorithm:
-
-
+<BR><BR>Algorithm:<BR><BR>
+<FONT FACE="Courier">
+<UL>
 	shift all bits left, the bit that goes off is set to
 	CF and the same bit is inserted to the right-most position.
-
-
-Example:MOV AL, 1Ch       ; AL = 00011100b
+</UL>
+</FONT>
+Example:<PRE><FONT FACE="Courier">MOV AL, 1Ch       ; AL = 00011100b
 ROL AL, 1         ; AL = 00111000b,  CF=0.
-RET
+RET</FONT></PRE>
 
-
-
- C O 
- r r 
-
-
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>O</TD> </TR>
+<TR> <TD>r</TD> <TD>r</TD> </TR>
+</TABLE>
+<BR><BR>
 OF=0 if first operand keeps original sign.
-
-TOP
+</FONT>

@@ -1,31 +1,30 @@
-			&nbsp;
+			<A NAME="CLC">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 CLC
+</FONT>
+</TD>
+<TD>No operands</TD>
+<TD>
 
-
-No operands
-
-
-Clear Carry flag. Algorithm:
-
-
+Clear Carry flag. <BR><BR>Algorithm:
+<BR><BR>
+<FONT FACE="Courier">
 CF = 0
+</FONT>
 
+<BR><BR>
 
-
-
-
-
- C 
- 0 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> </TR>
+<TR> <TD>0</TD> </TR>
+</TABLE>
+</FONT>

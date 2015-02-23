@@ -1,0 +1,35 @@
+
+.TH SCASW 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+SCASW
+.SH OPERANDS
+No operands
+
+.SH DESCRIPTION
+
+Compare words: AX from ES:[DI]. Algorithm:
+
+
+
+AX - ES:[DI]
+set flags according to result: OF, SF, ZF, AF, PF, CF
+if DF = 0 then
+	
+	DI = DI + 2
+	
+	else
+	
+	DI = DI - 2
+	
+
+
+
+
+
+
+
+
+ C Z S O P A 
+ r r r r r r 
+
+

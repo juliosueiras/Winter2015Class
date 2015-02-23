@@ -1,38 +1,37 @@
-			&nbsp;
+			<A NAME="IRET">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 IRET
-
-
-No operands
-
+</FONT>
+</TD>
+<TD>No operands</TD>
+<TD>
 
 Interrupt Return.
-Algorithm:
-
-
+<BR><BR>Algorithm:<BR><BR>
+<FONT FACE="Courier">
+<UL>
 	Pop from stack:
-	
-	IP
-	CS
-	flags register
-	
+	<UL>
+	<LI>IP</LI>
+	<LI>CS</LI>
+	<LI>flags register</LI>
+	</UL>
+</UL>
+</FONT>
 
+<BR>
 
-
-
-
-
-
- C Z S O P A 
- popped 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD COLSPAN=6><CENTER>popped</CENTER></TD> </TR>
+</TABLE>
+</FONT>

@@ -1,39 +1,39 @@
-			&nbsp;
+			<A NAME="MOVSW">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 MOVSW
+</FONT>
+</TD>
+<TD>No operands</TD>
+<TD>
 
-
-No operands
-
-
-Copy word at DS:[SI] to ES:[DI].
-Update SI and DI.Algorithm:
-
-
-
-ES:[DI] = DS:[SI]
-if DF = 0 then
-	
-	SI = SI + 2
-	DI = DI + 2
-	
+Copy <b>word</b> at DS:[SI] to ES:[DI].
+Update SI and DI.<BR><BR>Algorithm:
+<BR><BR>
+<FONT FACE="Courier">
+<UL>
+<LI>ES:[DI] = DS:[SI]<BR></LI>
+<LI>if DF = 0 then
+	<UL>
+	<LI>SI = SI + 2</LI>
+	<LI>DI = DI + 2</LI>
+	</UL>
 	else
-	
-	SI = SI - 2
-	DI = DI - 2
-	
-
-
-
-Example:
+	<UL>
+	<LI>SI = SI - 2</LI>
+	<LI>DI = DI - 2</LI>
+	</UL>
+</LI>
+</UL>
+</FONT>
+Example:<PRE><FONT FACE="Courier">
 ORG 100h
 
 CLD
@@ -45,12 +45,11 @@ REP MOVSW
 RET
 
 a1 DW 1,2,3,4,5
-a2 DW 5 DUP(0)
+a2 DW 5 DUP(0)</FONT></PRE>
 
-
-
- C Z S O P A 
- unchanged 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD COLSPAN=6>unchanged</TD> </TR>
+</TABLE>
+</FONT>

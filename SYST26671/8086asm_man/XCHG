@@ -1,45 +1,44 @@
-			&nbsp;
+			<A NAME="XCHG">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 XCHG
-
-
-
-
-	
-	REG, memory
-	memory, REG
+</FONT>
+</TD>
+<TD>
+<FONT FACE="Courier">
+	<NOBR>
+	REG, memory<BR>
+	memory, REG<BR>
 	REG, REG
-	
-
-
-
+	</NOBR>
+</FONT>
+</TD>
+<TD>
 
 Exchange values of two operands.
-Algorithm:
-
+<BR><BR>Algorithm:<BR><BR>
+<FONT FACE="Courier">
 operand1 &lt; - > operand2
-
-
-Example:MOV AL, 5
+</FONT>
+<BR><BR>
+Example:<PRE><FONT FACE="Courier">MOV AL, 5
 MOV AH, 2
 XCHG AL, AH   ; AL = 2, AH = 5
 XCHG AL, AH   ; AL = 5, AH = 2
-RET
+RET</FONT></PRE>
 
-
-
- C Z S O P A 
- unchanged 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD COLSPAN=6>unchanged</TD> </TR>
+</TABLE>
+</FONT>

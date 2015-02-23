@@ -1,51 +1,50 @@
-			&nbsp;
+			<A NAME="TEST">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 TEST
-
-
-
-
-	
-	REG, memory
-	memory, REG
-	REG, REG
-	memory, immediate
+</FONT>
+</TD>
+<TD>
+<FONT FACE="Courier">
+	<NOBR>
+	REG, memory<BR>
+	memory, REG<BR>
+	REG, REG<BR>
+	memory, immediate<BR>
 	REG, immediate
-	
-
-
-
+	</NOBR>
+</FONT>
+</TD>
+<TD>
 
 Logical AND between all bits of two operands for flags only.
-These flags are effected: ZF, SF, PF.
-Result is not stored anywhere.
-These rules apply:
-
-1 AND 1 = 1
-1 AND 0 = 0
-0 AND 1 = 0
-0 AND 0 = 0
-
-
-Example:MOV AL, 00000101b
+These flags are effected: <B>ZF, SF, PF.</B>
+Result is not stored anywhere.<BR><BR>
+These rules apply:<BR><BR>
+<FONT FACE="Courier">
+1 AND 1 = 1<BR>
+1 AND 0 = 0<BR>
+0 AND 1 = 0<BR>
+0 AND 0 = 0<BR>
+</FONT>
+<BR><BR>
+Example:<PRE><FONT FACE="Courier">MOV AL, 00000101b
 TEST AL, 1         ; ZF = 0.
 TEST AL, 10b       ; ZF = 1.
-RET
+RET</FONT></PRE>
 
-
-
- C Z S O P 
- 0 r r 0 r 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> </TR>
+<TR> <TD>0</TD> <TD>r</TD> <TD>r</TD> <TD>0</TD> <TD>r</TD> </TR>
+</TABLE>
+</FONT>

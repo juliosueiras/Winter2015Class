@@ -1,37 +1,36 @@
- 			&nbsp;
+ 			<A NAME="IN">&nbsp;</A>
+</TD>
+</TR>
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 IN
-
-
-
-
-	
-	AL, byte
-	AL, DX
-	AX, byte
+</FONT>
+</TD>
+<TD>
+<FONT FACE="Courier">
+	<NOBR>
+	AL, byte<BR>
+	AL, DX<BR>
+	AX, byte<BR>
 	AX, DX
-	
+	</NOBR>
+</FONT>
+</TD>
+<TD>
 
-
-
-
-Input from port into AL or AX.
+Input from port into <B>AL</B> or <B>AX</B>.<BR>
 Second operand is a port number. If required to access
-port number over 255 - DX register should be used.
-Example:IN AX, 4  ; get status of traffic lights.
+port number over 255 - <B>DX</B> register should be used.
+<BR>Example:<PRE><FONT FACE="Courier">IN AX, 4  ; get status of traffic lights.
 IN AL, 7  ; get status of stepper-motor.
+</FONT></PRE>
 
-
-
-
- C Z S O P A 
- unchanged 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD COLSPAN=6>unchanged</TD> </TR>
+</TABLE>
+</FONT>

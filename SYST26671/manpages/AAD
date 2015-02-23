@@ -1,0 +1,28 @@
+
+.TH AAD 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+AAD
+.SH OPERANDS
+No operands
+
+.SH DESCRIPTION
+
+ASCII Adjust before Division.
+Prepares two BCD values for division. Algorithm:
+
+
+
+AL = (AH * 10) + AL
+AH = 0
+
+
+Example:MOV AX, 0105h   ; AH = 01, AL = 05
+AAD             ; AH = 00, AL = 0Fh (15)
+RET
+
+
+
+ C Z S O P A 
+ ? r r ? r ? 
+
+

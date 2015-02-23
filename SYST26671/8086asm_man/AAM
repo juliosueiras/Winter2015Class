@@ -1,36 +1,35 @@
-			&nbsp;
+			<A NAME="AAM">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 AAM
+</FONT>
+</TD>
+<TD>No operands</TD>
+<TD>
 
-
-No operands
-
-
-ASCII Adjust after Multiplication.
-Corrects the result of multiplication of two BCD values. Algorithm:
-
-
-
-AH = AL / 10
-AL = remainder
-
-
-Example:MOV AL, 15   ; AL = 0Fh
+ASCII Adjust after Multiplication.<BR>
+Corrects the result of multiplication of two BCD values. <BR><BR>Algorithm:
+<BR><BR>
+<FONT FACE="Courier">
+<UL>
+<LI>AH = AL / 10</LI>
+<LI>AL = remainder</LI>
+</UL>
+</FONT>
+<BR>Example:<PRE><FONT FACE="Courier">MOV AL, 15   ; AL = 0Fh
 AAM          ; AH = 01, AL = 05
-RET
+RET</FONT></PRE>
 
-
-
- C Z S O P A 
- ? r r ? r ? 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD>?</TD> <TD>r</TD> <TD>r</TD> <TD>?</TD> <TD>r</TD> <TD>?</TD> </TR>
+</TABLE>
+</FONT>

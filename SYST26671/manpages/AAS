@@ -1,0 +1,38 @@
+
+.TH AAS 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+AAS
+.SH OPERANDS
+No operands
+
+.SH DESCRIPTION
+
+ASCII Adjust after Subtraction.
+Corrects result in AH and AL after subtraction
+when working with BCD values. Algorithm:
+
+if low nibble of AL > 9 or AF = 1 then:
+
+AL = AL - 6
+AH = AH - 1
+AF = 1
+CF = 1
+
+else
+
+AF = 0
+CF = 0
+
+in both cases:
+clear the high nibble of AL.
+
+Example:MOV AX, 02FFh  ; AH = 02, AL = 0FFh
+AAS            ; AH = 01, AL = 09
+RET
+
+
+
+ C Z S O P A 
+ r ? ? ? ? r 
+
+

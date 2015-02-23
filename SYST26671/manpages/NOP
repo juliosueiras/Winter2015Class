@@ -1,0 +1,28 @@
+
+.TH NOP 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+NOP
+.SH OPERANDS
+No operands
+
+.SH DESCRIPTION
+
+No Operation.Algorithm:
+
+
+
+Do nothing
+
+
+    Example:; do nothing, 3 times:
+NOP
+NOP
+NOP
+RET
+
+
+
+ C Z S O P A 
+ unchanged 
+
+

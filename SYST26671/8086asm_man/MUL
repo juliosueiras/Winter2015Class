@@ -1,47 +1,46 @@
-			&nbsp;
+			<A NAME="MUL">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 MUL
-
-
-
-
-	
-	REG
-	memory
-	
-
-
-
+</FONT>
+</TD>
+<TD>
+<FONT FACE="Courier">
+	<NOBR>
+	REG<BR>
+	memory<BR>
+	</NOBR>
+</FONT>
+</TD>
+<TD>
 
 Unsigned multiply.
-Algorithm:
- 
-	 when operand is a byte:
-	 AX = AL * operand.
- 
+<BR><BR>Algorithm:<BR><BR>
+ <BLOCKQUOTE>
+	 when operand is a <B>byte</B>:<BR>
+	 <FONT FACE="Courier">AX = AL * operand</FONT>.
+ </BLOCKQUOTE>
 
- 
-	when operand is a word:
-	(DX AX) = AX * operand.
- 
-   Example:MOV AL, 200   ; AL = 0C8h
+ <BLOCKQUOTE>
+	when operand is a <B>word</B>:<BR>
+	<FONT FACE="Courier">(DX AX) = AX * operand</FONT>.
+ </BLOCKQUOTE>
+   Example:<PRE><FONT FACE="Courier">MOV AL, 200   ; AL = 0C8h
 MOV BL, 4
 MUL BL        ; AX = 0320h (800)
-RET
+RET</FONT></PRE>
 
-
-
- C Z S O P A 
- r ? ? r ? ? 
-
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD>r</TD> <TD>?</TD> <TD>?</TD> <TD>r</TD> <TD>?</TD> <TD>?</TD> </TR>
+</TABLE>
 CF=OF=0 when high section of the result is zero.
-
-TOP
+</FONT>

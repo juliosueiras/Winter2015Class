@@ -1,0 +1,42 @@
+
+.TH IDIV 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+IDIV
+.SH OPERANDS
+
+
+	
+	REG
+	memory
+	
+
+
+
+.SH DESCRIPTION
+
+Signed divide.
+Algorithm:
+ 
+	 when operand is a byte:
+	 AL = AX / operand
+	 AH = remainder (modulus)
+	 
+ 
+
+ 
+	when operand is a word:
+	AX = (DX AX) / operand
+	DX = remainder (modulus)
+	
+ 
+ Example:MOV AX, -203 ; AX = 0FF35h
+MOV BL, 4
+IDIV BL      ; AL = -50 (0CEh), AH = -3 (0FDh)
+RET
+
+
+
+ C Z S O P A 
+ ? ? ? ? ? ? 
+
+

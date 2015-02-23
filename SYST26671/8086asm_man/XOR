@@ -1,4 +1,6 @@
-			&nbsp;
+			<A NAME="XOR">&nbsp;</A>
+</TD>
+</TR>
 
 
 
@@ -6,47 +8,44 @@
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 XOR
-
-
-
-
-	
-	REG, memory
-	memory, REG
-	REG, REG
-	memory, immediate
+</FONT>
+</TD>
+<TD>
+<FONT FACE="Courier">
+	<NOBR>
+	REG, memory<BR>
+	memory, REG<BR>
+	REG, REG<BR>
+	memory, immediate<BR>
 	REG, immediate
-	
-
-
-
+	</NOBR>
+</FONT>
+</TD>
+<TD>
 
 Logical XOR (Exclusive OR) between all bits of two operands.
-Result is stored in first operand.
-These rules apply:
-
-1 XOR 1 = 0
-1 XOR 0 = 1
-0 XOR 1 = 1
-0 XOR 0 = 0
-
-
-Example:MOV AL, 00000111b
+Result is stored in first operand.<BR><BR>
+These rules apply:<BR><BR>
+<FONT FACE="Courier">
+1 XOR 1 = 0<BR>
+1 XOR 0 = 1<BR>
+0 XOR 1 = 1<BR>
+0 XOR 0 = 0<BR>
+</FONT>
+<BR><BR>
+Example:<PRE><FONT FACE="Courier">MOV AL, 00000111b
 XOR AL, 00000010b    ; AL = 00000101b
-RET
+RET</FONT></PRE>
 
 
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD>0</TD> <TD>r</TD> <TD>r</TD> <TD>0</TD> <TD>r</TD> <TD>?</TD> </TR>
+</TABLE>
+</FONT>
 
-
- C Z S O P A 
- 0 r r 0 r ? 
-
-
-
-TOP

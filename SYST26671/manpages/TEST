@@ -1,0 +1,41 @@
+
+.TH TEST 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+TEST
+.SH OPERANDS
+
+
+	
+	REG, memory
+	memory, REG
+	REG, REG
+	memory, immediate
+	REG, immediate
+	
+
+
+
+.SH DESCRIPTION
+
+Logical AND between all bits of two operands for flags only.
+These flags are effected: ZF, SF, PF.
+Result is not stored anywhere.
+These rules apply:
+
+1 AND 1 = 1
+1 AND 0 = 0
+0 AND 1 = 0
+0 AND 0 = 0
+
+
+Example:MOV AL, 00000101b
+TEST AL, 1         ; ZF = 0.
+TEST AL, 10b       ; ZF = 1.
+RET
+
+
+
+ C Z S O P 
+ 0 r r 0 r 
+
+

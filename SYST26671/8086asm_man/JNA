@@ -1,35 +1,35 @@
-			&nbsp;
+			<A NAME="JNA">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 JNA
-
-
-
-
-	label
-
-
-
+</FONT>
+</TD>
+<TD>
+<FONT FACE="Courier">
+	<NOBR>label</NOBR>
+</FONT>
+</TD>
+<TD>
 
 Short Jump if first operand is Not Above second operand (as set by CMP instruction).
 Unsigned.
-Algorithm:
-
-
+<BR><BR>Algorithm:<BR><BR>
+<FONT FACE="Courier">
+<UL>
 	if CF = 1 or ZF = 1 then jump
+</UL>
+</FONT>
+	<BR><BR>
+	example for <a href="http://www.emu8086.com">emu8086 emulator</a>:
 
-
-	
-	example for emu8086 emulator:
-
-   include 'emu8086.inc'
+<PRE><FONT FACE="Courier">   include 'emu8086.inc'
    ORG 100h
    MOV AL, 2
    CMP AL, 5
@@ -39,12 +39,11 @@ Algorithm:
 label1:
    PRINT 'AL is not above 5.'
 exit:
-   RET
+   RET</FONT></PRE>
 
-
-
- C Z S O P A 
- unchanged 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD COLSPAN=6>unchanged</TD> </TR>
+</TABLE>
+</FONT>

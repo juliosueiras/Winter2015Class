@@ -1,0 +1,38 @@
+
+.TH OR 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+OR
+.SH OPERANDS
+
+
+	
+	REG, memory
+	memory, REG
+	REG, REG
+	memory, immediate
+	REG, immediate
+	
+
+
+
+.SH DESCRIPTION
+
+Logical OR between all bits of two operands.
+Result is stored in first operand.
+These rules apply:
+
+1 OR 1 = 1
+1 OR 0 = 1
+0 OR 1 = 1
+0 OR 0 = 0
+
+Example:MOV AL, 'A'       ; AL = 01000001b
+OR AL, 00100000b  ; AL = 01100001b  ('a')
+RET
+
+
+
+ C Z S O P A 
+ 0 r r 0 r ? 
+
+

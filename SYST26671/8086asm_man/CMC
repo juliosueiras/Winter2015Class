@@ -1,32 +1,31 @@
-			&nbsp;
+			<A NAME="CMC">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 CMC
+</FONT>
+</TD>
+<TD>No operands</TD>
+<TD>
 
+Complement Carry flag. Inverts value of CF. <BR><BR>Algorithm:
+<BR><BR>
+<FONT FACE="Courier">
+if CF = 1 then CF = 0<BR>
+if CF = 0 then CF = 1<BR>
+</FONT>
 
-No operands
+<BR><BR>
 
-
-Complement Carry flag. Inverts value of CF. Algorithm:
-
-
-if CF = 1 then CF = 0
-if CF = 0 then CF = 1
-
-
-
-
-
-
- C 
- r 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> </TR>
+<TR> <TD>r</TD> </TR>
+</TABLE>
+</FONT>

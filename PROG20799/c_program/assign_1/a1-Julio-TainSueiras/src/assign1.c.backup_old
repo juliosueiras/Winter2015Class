@@ -1,0 +1,231 @@
+/*
+ * =====================================================================================
+ *
+ *       Filename:  assign1.c
+ *
+ *    Description:  A Program that display a menu and let the user pick among some basic
+ *                  string manipulation.
+ *
+ *        Version:  1.0
+ *        Created:  2015-02-15 01:23:00 PM
+ *       Revision:  none
+ *       Compiler:  gcc
+ *
+ *         Author:  Julio Tain Sueiras
+ *   Organization:
+ *
+ * =====================================================================================
+ */
+#include <stdio.h>
+#include <string.h>
+
+#include "assign1.h"
+
+int is_true(char value_1, char value_2){
+
+    return (value_1 == value_2);
+
+}
+
+int is_vowels(char input_char){
+
+    return strchr("AEIOUaeiou",input_char);
+
+}
+
+int is_consonants(char input_char){
+
+    return strchr("BCDFGHJKLMNPQRSTVXZWYbcdfghjklmnpqrstvxzwy",input_char);
+
+}
+
+int get_total_vowels(char input_string[]){
+
+    int total_vowels = 0;
+    int char_index;
+
+    for (char_index = 0; char_index < strlen(input_string); char_index++) {
+        total_vowels += (is_vowels(input_string[char_index]))? 1 : 0;
+    }
+
+    return total_vowels;
+
+}
+
+int get_total_consonants(char input_string[]){
+
+    int total_consonants= 0;
+    int char_index;
+
+    for (char_index = 0; char_index < strlen(input_string); char_index++) {
+        total_consonants += (is_consonants(input_string[char_index]))? 1 : 0;
+    }
+
+
+    return total_consonants;
+
+}
+
+const char* convert_to_lower_case(char input_string[]){
+
+    //Linux C Compiler does not have struwc in the library
+    char result_string[strlen(input_string) - 1];
+    strcpy(result_string,input_string);
+    int i;
+
+    for (i = 0; i < strlen(input_string); i++) {
+        result_string[i] = tolower(result_string[i]);
+    }
+
+    strtok(result_string, "\n");
+
+    return result_string;
+
+}
+
+const char* convert_to_upper_case(char input_string[]){
+
+    //Linux C Compiler does not have strlwr in the library
+    char result_string[strlen(input_string) - 1];
+    strcpy(result_string,input_string);
+
+    int i;
+
+    for (i = 0; i < strlen(input_string); i++) {
+        result_string[i] = toupper(result_string[i]);
+    }
+
+    strtok(result_string, "\n");
+
+    return result_string;
+}
+
+void display_string(char input_string[]){
+
+    printf("%s\n", input_string);
+
+}
+
+void display_menu(){
+
+    printf("A) Count the number of vowels in the string\n"
+            "B) Count the number of consonants in the string\n"
+            "C) Convert the string to uppercase\n"
+            "D) Convert the string to lowercase\n"
+            "E) Display the current string\n"
+            "F) Enter another string\n"
+            "\n"
+            "M) Display this menu\n"
+            "X) Exit the program\n");
+
+}
+
+const char* ask_to_input_string(){
+
+    char result_string[200];
+    printf("Please enter String:");
+
+
+    fgets(result_string,sizeof(result_string),stdin);
+    strtok(result_string,"\n");
+    strtok(result_string,"\r");
+    strtok(result_string,"\0");
+
+    return result_string;
+
+}
+void execute_option(char option, char user_string[]) {
+
+    if(is_true('A',option)) {
+
+        printf("\nTotal Vowels:%d\n\n", get_total_vowels(user_string));
+
+    } else if(is_true('B',option))  {
+
+        printf("\nTotal Consonants:%d\n\n", get_total_consonants(user_string));
+
+    } else if(is_true('C',option)){
+
+        printf("\nUpper Case Converted:%s\n\n", convert_to_upper_case(user_string));
+
+    } else if(is_true('D',option)){
+
+        printf("\nLower Case Converted:%s\n\n", convert_to_lower_case(user_string));
+
+    } else if(is_true('E',option)){
+
+        strtok(user_string,"\n");
+        printf("\nCurrent String:\t%s\n\n", user_string);
+
+    } else if(is_true('F',option)){
+
+        strcpy(user_string,ask_to_input_string());
+
+    } else if(is_true('M',option)){
+
+        display_menu();
+
+    } else{
+        printf("\nThe Option is not valid please enter it again\n\n\r");
+    }
+    /* switch (user_input) { */
+
+    /*     case 'A': */
+    /*         printf("\nTotal Vowels:%d\n\n", get_total_vowels(user_string)); */
+    /*         break; */
+
+    /*     case 'B': */
+    /*         printf("\nTotal Consonants:%d\n\n", get_total_consonants(user_string)); */
+    /*         break; */
+
+    /*     case 'C': */
+    /*         printf("\nUpper Case Converted:%s\n\n", convert_to_upper_case(user_string)); */
+    /*         break; */
+
+    /*     case 'D': */
+    /*         printf("\nLower Case Converted:%s\n\n", convert_to_lower_case(user_string)); */
+    /*         break; */
+
+    /*     case 'E': */
+    /*         strtok(user_string,"\n"); */
+    /*         printf("\nCurrent String:\t%s\n\n", user_string); */
+    /*         break; */
+
+    /*     case 'M': */
+    /*         display_menu(); */
+    /*         break; */
+
+    /*     case 'X': */
+    /*         break; */
+
+    /*     default: */
+    /*         printf("\nThe Option is not valid please enter it again\n\n\r"); */
+    /*         break; */
+    /* } */
+}
+
+
+void program_run(){
+
+    char user_string[100];
+    char user_option;
+
+    strcpy(user_string,ask_to_input_string());
+
+    display_menu();
+
+    do{
+
+        printf("Enter the option(lower or upper case letter):");
+
+        fflush(stdin);
+
+        user_option = toupper(getc(stdin));
+
+        execute_selection_of(user_option, user_string);
+
+        getchar();
+
+    }while(is_false(user_option,'X'));
+}
+

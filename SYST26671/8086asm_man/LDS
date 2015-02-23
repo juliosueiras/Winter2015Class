@@ -1,37 +1,37 @@
-			&nbsp;
+			<A NAME="LDS">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 LDS
-
-
-
-
-	
+</FONT>
+</TD>
+<TD>
+<FONT FACE="Courier">
+	<NOBR>
 	REG, memory
-	
-
-
-
+	</NOBR>
+</FONT>
+</TD>
+<TD>
 
 Load memory double word into word register and DS.
-Algorithm:
-
-
-    REG = first word
-	DS = second word
-
-
-
+<BR><BR>Algorithm:<BR><BR>
+<FONT FACE="Courier">
+<UL>
+    <LI>REG = first word</LI>
+	<LI>DS = second word</LI>
+</UL>
+</FONT>
+<BR>
 Example:
-
-
+<PRE>
+<FONT FACE="Courier">
 
 ORG 100h
 
@@ -43,15 +43,14 @@ m  DW  1234h
    DW  5678h
 
 END
-
-
+</FONT>
+</PRE>
 AX is set to 1234h, DS is set to 5678h.
+<BR><BR>
 
-
-
-
- C Z S O P A 
- unchanged 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD COLSPAN=6>unchanged</TD> </TR>
+</TABLE>
+</FONT>

@@ -1,43 +1,42 @@
- 			&nbsp;
+ 			<A NAME="NEG">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 NEG
-
-
-
-
-	
-	REG
-	memory
-	
-
-
-
+</FONT>
+</TD>
+<TD>
+<FONT FACE="Courier">
+	<NOBR>
+	REG<BR>
+	memory<BR>
+	</NOBR>
+</FONT>
+</TD>
+<TD>
 
 Negate. Makes operand negative (two's complement).
-Algorithm:
- 
- 
- Invert all bits of the operand
- Add 1 to inverted operand
- 
- 
-    Example:MOV AL, 5   ; AL = 05h
+<BR><BR>Algorithm:<BR><BR>
+ <FONT FACE="Courier">
+ <UL>
+ <LI>Invert all bits of the operand</LI>
+ <LI>Add 1 to inverted operand</LI>
+ </UL>
+ </FONT>
+    Example:<PRE><FONT FACE="Courier">MOV AL, 5   ; AL = 05h
 NEG AL      ; AL = 0FBh (-5)
 NEG AL      ; AL = 05h (5)
-RET
+RET</FONT></PRE>
 
-
-
- C Z S O P A 
- r r r r r r 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD>r</TD> <TD>r</TD> <TD>r</TD> <TD>r</TD> <TD>r</TD> <TD>r</TD> </TR>
+</TABLE>
+</FONT>

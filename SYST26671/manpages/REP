@@ -1,0 +1,38 @@
+
+.TH REP 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+REP
+.SH OPERANDS
+
+
+	chain instruction
+
+
+
+.SH DESCRIPTION
+
+Repeat following MOVSB, MOVSW, LODSB, LODSW, STOSB, STOSW instructions
+CX times.
+Algorithm:
+
+check_cx:
+if CX &lt;> 0 then
+
+	do following chain instruction
+	CX = CX - 1
+	go back to check_cx
+
+else
+
+	exit from REP cycle
+
+
+
+
+
+
+
+ Z 
+ r  
+
+

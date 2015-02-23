@@ -1,41 +1,40 @@
-			&nbsp;
+			<A NAME="DEC">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 DEC
-
-
-
-
-	
-	REG
-	memory
-	
-
-
-
+</FONT>
+</TD>
+<TD>
+<FONT FACE="Courier">
+	<NOBR>
+	REG<BR>
+	memory<BR>
+	</NOBR>
+</FONT>
+</TD>
+<TD>
 
 Decrement.
-Algorithm:
-
+<BR><BR>Algorithm:<BR><BR>
+<FONT FACE="Courier">
 operand = operand - 1
-
-
-Example:MOV AL, 255  ; AL = 0FFh (255 or -1)
+<BR><BR>
+</FONT>
+<BR>Example:<PRE><FONT FACE="Courier">MOV AL, 255  ; AL = 0FFh (255 or -1)
 DEC AL       ; AL = 0FEh (254 or -2)
-RET
+RET</FONT></PRE>
 
-
-
- Z S O P A 
- r r r r r 
-
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD>r</TD> <TD>r</TD> <TD>r</TD> <TD>r</TD> <TD>r</TD> </TR>
+</TABLE>
 CF - unchanged!
-
-TOP
+</FONT>

@@ -1,0 +1,40 @@
+
+.TH INT 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+INT
+.SH OPERANDS
+
+
+	immediate byte
+
+
+
+.SH DESCRIPTION
+
+Interrupt numbered by immediate byte (0..255).
+Algorithm:
+
+
+	Push to stack:
+	
+	flags register
+	CS
+	IP
+	
+
+	IF = 0
+
+	Transfer control to interrupt procedure
+
+
+Example:MOV AH, 0Eh  ; teletype.
+MOV AL, 'A'
+INT 10h      ; BIOS interrupt.
+RET
+
+
+
+ C Z S O P A I 
+ unchanged 0
+
+

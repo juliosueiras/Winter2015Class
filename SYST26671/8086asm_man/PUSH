@@ -1,45 +1,44 @@
- 			&nbsp;
+ 			<A NAME="PUSH">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 PUSH
+</FONT>
+</TD>
+<TD>
+<FONT FACE="Courier">
+	<NOBR>
+	REG<BR>
+	SREG<BR>
+	memory<BR>
+	</NOBR>
+</FONT>
+</TD>
+<TD>
 
+Store 16 bit value in the stack.<BR><BR>
 
-
-
-	
-	REG
-	SREG
-	memory
-	
-
-
-
-
-Store 16 bit value in the stack.
-
-Algorithm:
- 
- 
- SP = SP - 2
- SS:[SP] (top of the stack) = operand
- 
- 
-Example:MOV AX, 1234h
+<BR><BR>Algorithm:<BR><BR>
+ <FONT FACE="Courier">
+ <UL>
+ <LI>SP = SP - 2</LI>
+ <LI>SS:[SP] (top of the stack) = operand</LI>
+ </UL>
+ </FONT>
+<BR>Example:<PRE><FONT FACE="Courier">MOV AX, 1234h
 PUSH AX
 POP  DX     ; DX = 1234h
-RET
+RET</FONT></PRE>
 
-
-
- C Z S O P A 
- unchanged 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD COLSPAN=6>unchanged</TD> </TR>
+</TABLE>
+</FONT>

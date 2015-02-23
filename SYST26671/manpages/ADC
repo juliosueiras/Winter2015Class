@@ -1,0 +1,35 @@
+
+.TH ADC 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+ADC
+.SH OPERANDS
+
+
+	
+	REG, memory
+	memory, REG
+	REG, REG
+	memory, immediate
+	REG, immediate
+	
+
+
+
+.SH DESCRIPTION
+
+Add with Carry.
+Algorithm:
+
+operand1 = operand1 + operand2 + CF
+
+Example:STC        ; set CF = 1
+MOV AL, 5  ; AL = 5
+ADC AL, 1  ; AL = 7
+RET
+
+
+
+ C Z S O P A 
+ r r r r r r 
+
+

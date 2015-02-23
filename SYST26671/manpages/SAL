@@ -1,0 +1,37 @@
+
+.TH SAL 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+SAL
+.SH OPERANDS
+
+
+	memory, immediate
+	REG, immediate
+	memory, CL
+	REG, CL
+
+
+
+.SH DESCRIPTION
+
+Shift Arithmetic operand1 Left. The number of shifts is set by operand2.
+
+Algorithm:
+
+
+	Shift all bits left, the bit that goes off is set to CF.
+	Zero bit is inserted to the right-most position.
+
+
+Example:MOV AL, 0E0h      ; AL = 11100000b
+SAL AL, 1         ; AL = 11000000b,  CF=1.
+RET
+
+
+
+ C O 
+ r r 
+
+
+OF=0 if first operand keeps original sign.
+

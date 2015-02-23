@@ -1,37 +1,37 @@
-			&nbsp;
+			<A NAME="RET">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 RET
-
-
-No operands
-or even immediate
-
+</FONT>
+</TD>
+<TD>No operands<BR>
+or even immediate</TD>
+<TD>
 
 Return from near procedure.
-Algorithm:
-
-
-	
+<BR><BR>Algorithm:<BR><BR>
+<FONT FACE="Courier">
+<UL>
+	<LI>
 		Pop from stack:
-		
-		IP
-		
-	
-	
-	if immediate operand is present:
-	SP = SP + operand
-	
-
-
-Example:
+		<UL>
+		<LI>IP</LI>
+		</UL>
+	</LI>
+	<LI>
+	if <U>immediate</U> operand is present:
+	<NOBR>SP = SP + operand</NOBR>
+	</LI>
+</UL>
+</FONT>
+Example:<PRE><FONT FACE="Courier">
 ORG 100h  ; for COM file.
 
 CALL p1
@@ -43,14 +43,13 @@ RET         ; return to OS.
 p1 PROC     ; procedure declaration.
     MOV AX, 1234h
     RET     ; return to caller.
-p1 ENDP
+p1 ENDP</FONT></PRE>
 
+<BR>
 
-
-
-
- C Z S O P A 
- unchanged 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD COLSPAN=6>unchanged</TD> </TR>
+</TABLE>
+</FONT>

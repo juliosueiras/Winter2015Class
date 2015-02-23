@@ -1,31 +1,30 @@
-			&nbsp;
+			<A NAME="STD">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 STD
-
-
-No operands
-
+</FONT>
+</TD>
+<TD>No operands</TD>
+<TD>
 
 Set Direction flag. SI and DI will be decremented by chain
-instructions: CMPSB, CMPSW, LODSB, LODSW, MOVSB, MOVSW, STOSB, STOSW. Algorithm:
-
-
+instructions: CMPSB, CMPSW, LODSB, LODSW, MOVSB, MOVSW, STOSB, STOSW. <BR><BR>Algorithm:
+<BR><BR>
+<FONT FACE="Courier">
 DF = 1
+</FONT>
+<BR><BR>
 
-
-
-
-
- D 
- 1 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>D</TD> </TR>
+<TR> <TD>1</TD> </TR>
+</TABLE>
+</FONT>

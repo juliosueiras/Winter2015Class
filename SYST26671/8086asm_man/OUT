@@ -1,39 +1,38 @@
-			&nbsp;
+			<A NAME="OUT">&nbsp;</A>
+</TD>
+</TR>
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 OUT
-
-
-
-
-	
-	byte, AL
-	byte, AX
-	DX, AL
+</FONT>
+</TD>
+<TD>
+<FONT FACE="Courier">
+	<NOBR>
+	byte, AL<BR>
+	byte, AX<BR>
+	DX, AL<BR>
 	DX, AX
-	
+	</NOBR>
+</FONT>
+</TD>
+<TD>
 
-
-
-
-Output from AL or AX to port.
+Output from <B>AL</B> or <B>AX</B> to port.<BR>
 First operand is a port number. If required to access
-port number over 255 - DX register should be used.
+port number over 255 - <B>DX</B> register should be used.
 
-Example:MOV AX, 0FFFh 
+<BR><BR>Example:<PRE><FONT FACE="Courier">MOV AX, 0FFFh 
 OUT 4, AX    
 
 MOV AL, 100b 
-OUT 7, AL    
+OUT 7, AL    </FONT></PRE>
 
-
-
- C Z S O P A 
- unchanged 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD COLSPAN=6>unchanged</TD> </TR>
+</TABLE>
+</FONT>

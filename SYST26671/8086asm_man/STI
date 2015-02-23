@@ -1,32 +1,31 @@
-			&nbsp;
+			<A NAME="STI">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 STI
+</FONT>
+</TD>
+<TD>No operands</TD>
+<TD>
 
-
-No operands
-
-
-Set Interrupt enable flag. This enables hardware interrupts. Algorithm:
-
-
+Set Interrupt enable flag. This enables hardware interrupts. <BR><BR>Algorithm:
+<BR><BR>
+<FONT FACE="Courier">
 IF = 1
+</FONT>
+<BR><BR>
 
-
-
-
-
- I 
- 1 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>I</TD> </TR>
+<TR> <TD>1</TD> </TR>
+</TABLE>
+</FONT>

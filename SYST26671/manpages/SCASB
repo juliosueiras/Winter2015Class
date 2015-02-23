@@ -1,0 +1,35 @@
+
+.TH SCASB 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+SCASB
+.SH OPERANDS
+No operands
+
+.SH DESCRIPTION
+
+Compare bytes: AL from ES:[DI]. Algorithm:
+
+
+
+AL - ES:[DI]
+set flags according to result: OF, SF, ZF, AF, PF, CF
+if DF = 0 then
+	
+	DI = DI + 1
+	
+	else
+	
+	DI = DI - 1
+	
+
+
+
+
+
+
+
+
+ C Z S O P A 
+ r r r r r r 
+
+

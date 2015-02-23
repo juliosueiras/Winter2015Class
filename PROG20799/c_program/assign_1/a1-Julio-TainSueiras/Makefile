@@ -796,6 +796,9 @@ uninstall-am:
 	mostlyclean-libtool pdf pdf-am ps ps-am tags tags-am uninstall \
 	uninstall-am
 
+for_gdb:
+	gcc -g src/main.c src/assign1.c -o main.out
+.PHONY: for_gdb
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

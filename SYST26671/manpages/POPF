@@ -1,0 +1,26 @@
+
+.TH POPF 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+POPF
+.SH OPERANDS
+No operands
+
+.SH DESCRIPTION
+
+Get flags register from the stack.
+Algorithm:
+ 
+ 
+ flags = SS:[SP] (top of the stack)
+ SP = SP + 2
+ 
+ 
+
+ 
+ 
+ 
+ 
+  C Z S O P A 
+  popped 
+ 
+ 

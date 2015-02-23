@@ -1,0 +1,36 @@
+
+.TH RETF 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+RETF
+.SH OPERANDS
+No operands
+or even immediate
+
+.SH DESCRIPTION
+
+Return from Far procedure.
+Algorithm:
+
+
+	
+		Pop from stack:
+		
+		IP
+		CS
+		
+	
+	
+	if immediate operand is present:
+	SP = SP + operand
+	
+
+
+
+
+
+
+
+ C Z S O P A 
+ unchanged 
+
+

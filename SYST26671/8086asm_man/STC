@@ -1,31 +1,30 @@
-			&nbsp;
+			<A NAME="STC">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 STC
+</FONT>
+</TD>
+<TD>No operands</TD>
+<TD>
 
-
-No operands
-
-
-Set Carry flag. Algorithm:
-
-
+Set Carry flag. <BR><BR>Algorithm:
+<BR><BR>
+<FONT FACE="Courier">
 CF = 1
+</FONT>
 
+<BR><BR>
 
-
-
-
-
- C 
- 1 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> </TR>
+<TR> <TD>1</TD> </TR>
+</TABLE>
+</FONT>

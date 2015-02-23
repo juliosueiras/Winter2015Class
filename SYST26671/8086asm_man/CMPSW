@@ -1,45 +1,44 @@
-			&nbsp;
+			<A NAME="CMPSW">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 CMPSW
+</FONT>
+</TD>
+<TD>No operands</TD>
+<TD>
 
-
-No operands
-
-
-Compare words: ES:[DI] from DS:[SI]. Algorithm:
-
-
-
-DS:[SI] - ES:[DI]
-set flags according to result: OF, SF, ZF, AF, PF, CF
-if DF = 0 then
-	
-	SI = SI + 2
-	DI = DI + 2
-	
+Compare words: <NOBR>ES:[DI] from DS:[SI].</NOBR> <BR><BR>Algorithm:
+<BR><BR>
+<FONT FACE="Courier">
+<UL>
+<LI>DS:[SI] - ES:[DI]<BR></LI>
+<LI>set flags according to result:<BR> OF, SF, ZF, AF, PF, CF<BR></LI>
+<LI>if DF = 0 then
+	<UL>
+	<LI>SI = SI + 2</LI>
+	<LI>DI = DI + 2</LI>
+	</UL>
 	else
-	
-	SI = SI - 2
-	DI = DI - 2
-	
+	<UL>
+	<LI>SI = SI - 2</LI>
+	<LI>DI = DI - 2</LI>
+	</UL>
+</LI>
+</UL>
+</FONT>
 
+<BR><BR>
 
-
-
-
-
-
-
- C Z S O P A 
- r r r r r r 
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> </TR>
+<TR> <TD>r</TD> <TD>r</TD> <TD>r</TD> <TD>r</TD> <TD>r</TD> <TD>r</TD> </TR>
+</TABLE>
+</FONT>

@@ -1,48 +1,47 @@
-			&nbsp;
+			<A NAME="INT">&nbsp;</A>
+</TD>
+</TR>
 
 
 
 
-
-
-
-
-
+<TR>
+<TD>
+<FONT FACE="Courier">
 INT
-
-
-
-
-	immediate byte
-
-
-
+</FONT>
+</TD>
+<TD>
+<FONT FACE="Courier">
+	<NOBR>immediate byte</NOBR>
+</FONT>
+</TD>
+<TD>
 
 Interrupt numbered by immediate byte (0..255).
-Algorithm:
-
-
+<BR><BR>Algorithm:<BR><BR>
+<FONT FACE="Courier">
+<UL>
 	Push to stack:
-	
-	flags register
-	CS
-	IP
-	
+	<UL>
+	<LI>flags register</LI>
+	<LI>CS</LI>
+	<LI>IP</LI>
+	</UL>
 
-	IF = 0
+	<LI>IF = 0</LI>
 
-	Transfer control to interrupt procedure
-
-
-Example:MOV AH, 0Eh  ; teletype.
+	<LI>Transfer control to interrupt procedure</LI>
+</UL>
+</FONT>
+<BR>Example:<PRE><FONT FACE="Courier">MOV AH, 0Eh  ; teletype.
 MOV AL, 'A'
 INT 10h      ; BIOS interrupt.
-RET
+RET</FONT></PRE>
 
-
-
- C Z S O P A I 
- unchanged 0
-
-
-TOP
+<FONT FACE="Courier">
+<TABLE BORDER=1 NOSHADE>
+<TR> <TD>C</TD> <TD>Z</TD> <TD>S</TD> <TD>O</TD> <TD>P</TD> <TD>A</TD> <TD>I</TD> </TR>
+<TR> <TD COLSPAN=6>unchanged</TD> <TD>0</TD></TR>
+</TABLE>
+</FONT>

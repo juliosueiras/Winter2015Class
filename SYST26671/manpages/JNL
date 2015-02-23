@@ -1,0 +1,42 @@
+
+.TH JNL 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+JNL
+.SH OPERANDS
+
+
+	label
+
+
+
+.SH DESCRIPTION
+
+Short Jump if first operand is Not Less then second operand (as set by CMP instruction).
+Signed.
+Algorithm:
+
+
+	if SF = OF then jump
+
+
+	
+	example for emu8086 emulator:
+
+   include 'emu8086.inc'
+   ORG 100h
+   MOV AL, 2
+   CMP AL, -3
+   JNL label1
+   PRINT 'AL &lt; -3.'
+   JMP exit
+label1:
+   PRINT 'Al >= -3.'
+exit:
+   RET
+
+
+
+ C Z S O P A 
+ unchanged 
+
+

@@ -1,0 +1,33 @@
+
+.TH DEC 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+DEC
+.SH OPERANDS
+
+
+	
+	REG
+	memory
+	
+
+
+
+.SH DESCRIPTION
+
+Decrement.
+Algorithm:
+
+operand = operand - 1
+
+
+Example:MOV AL, 255  ; AL = 0FFh (255 or -1)
+DEC AL       ; AL = 0FEh (254 or -2)
+RET
+
+
+
+ Z S O P A 
+ r r r r r 
+
+CF - unchanged!
+

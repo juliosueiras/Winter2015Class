@@ -1,0 +1,26 @@
+
+.TH PUSHF 7 "17 Feb 2015" "8086 ASM" "Sheridan College Comp Arch 8086 Instrcution's set"
+.SH INSTRUCTION
+PUSHF
+.SH OPERANDS
+No operands
+
+.SH DESCRIPTION
+
+Store flags register in the stack.
+Algorithm:
+ 
+ 
+ SP = SP - 2
+ SS:[SP] (top of the stack) = flags
+ 
+ 
+
+ 
+ 
+ 
+ 
+  C Z S O P A 
+  unchanged 
+ 
+ 
