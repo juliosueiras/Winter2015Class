@@ -2,22 +2,11 @@
 <html>
     <head>
         <title>Question 2</title>
+        <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js?ver=1.4.2'></script>
         <link rel="stylesheet" href="css/style.css" />
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <!-- <script type="text/javascript"> -->
-        <!--     $("h1").click(function () { -->
-
-        <!--         var tempColor = $(this).css("color"); -->
-
-        <!--         $(this).css("color", $(this).css("background-color")); -->
-
-        <!--         $(this).css("background-color", tempColor); -->
-
-        <!--     }); -->
-        <!-- </script> -->
     </head>
     <body>
-        <h1>This is heading 1</h1>
+        <h1 id="h1">This is heading 1</h1>
         <h2>This is heading 2</h2>
         <table>
             <tr id="row1">
@@ -37,21 +26,27 @@
             </tr>
         </table>
         <img id="flowerImage" src="http://hdwallpapervault.com/wp-content/uploads/2013/05/Rose-Flower-Wallpaper.jpg" alt="" />
-    <script>
 
-        $("#flowerImage").hover( function () {
-            var width = $(this).css("width");
-            var height = $(this).css("height");
-            $(this).css("width", width*200 );
-            $(this).css("height", height*200 );
-        }, function(){
-            var width = $(this).css("width");
-            var height = $(this).css("height");
-            $(this).css("width", width/200 );
-            $(this).css("height", height/200 );
-        });
+        <script>
+
+            $(document).ready(function(){
+
+                $("#h1").click(switchColor("#h1"));
+
+                $("#flowerImage").hover( function () {
+                    var width = $(this).css("width");
+                    var height = $(this).css("height");
+                    $(this).css("width", width*200 );
+                    $(this).css("height", height*200 );
+                }, function(){
+                    var width = $(this).css("width");
+                    var height = $(this).css("height");
+                    $(this).css("width", width/200 );
+                    $(this).css("height", height/200 );
+                });
+            });
 
 
-    </script>
+        </script>
     </body>
 </html>
