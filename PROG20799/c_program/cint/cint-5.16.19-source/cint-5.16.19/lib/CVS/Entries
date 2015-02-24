@@ -1,0 +1,30 @@
+/Makefile/1.2/Fri Nov 25 04:50:17 2005//
+/README.txt/1.2/Fri Nov 25 04:50:17 2005//
+/setup/1.1.1.1/Wed May  4 10:25:16 2005//
+D/WildCard////
+D/accstrm////
+D/alphastrm////
+D/bcstream////
+D/cbstream////
+D/cintocx////
+D/dll_stl////
+D/gcc3strm////
+D/gl////
+D/iccstrm////
+D/ipc////
+D/longlong////
+D/posix////
+D/prec_stl////
+D/pthread////
+D/qt////
+D/snstream////
+D/socket////
+D/stdstrct////
+D/stream////
+D/sunstrm////
+D/vc7strm////
+D/vcstream////
+D/win32api////
+D/wintcldl////
+D/wintcldl83////
+D/xlib////

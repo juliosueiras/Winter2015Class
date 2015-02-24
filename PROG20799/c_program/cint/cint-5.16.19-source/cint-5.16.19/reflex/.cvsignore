@@ -1,0 +1,8 @@
+*.xcconfig
+*.xcodeproj
+*.xcclassmodel
+include
+lib
+bin
+.scons*
+.sconf*
