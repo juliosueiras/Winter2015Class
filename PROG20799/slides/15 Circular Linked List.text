@@ -1,0 +1,554 @@
+Instructor: 
+Maninder Kaur
+Email:
+ 
+maninder.kaur2@sheridancollege.ca
+Course:
+ 
+PROG20799
+CIRCULAR LINKED LISTS
+Linked list is empty:
+Initially, 
+START
+ contains 
+NULL
+.
+Create a new node and assign the address of this new node to 
+START
+.
+Enter some data in the 
+INFO
+ field.
+Set the 
+LINK
+ pointer to 
+START
+, as this is the only node in the list, and therefore, points to itself.
+Insert as 
+First Node in a Circular Linked List
+30-May-13
+Maninder Kaur
+11
+Linked list is NOT empty (Continued):
+Now, we need to access the last node so that we can update it’s 
+LINK
+ field to point to the newly created node.
+Use the 
+Do-While
+ loop to move the 
+TEMP
+ variable to the last node:
+TEMP = TEMP-&gt;LINK
+The last node is the one whose 
+LINK
+ field is pointing to the node which was the first node before insertion (now the second node). 
+PTR
+ is pointing to this node.
+While (TEMP-&gt;LINK != PTR)
+Once the 
+TEMP
+ reaches the last node, set it’s 
+LINK
+ field to point to the newly created node, which is being pointed by 
+START
+:
+TEMP-&gt;LINK = START
+Insert as First Node in a Circular Linked List
+30-May-13
+Maninder Kaur
+13
+Algorithm - Insert as First Node in a Circular Linked List
+30-May-13
+Maninder Kaur
+14
+Circular Insert First( ):
+Description: 
+Here 
+START 
+is a pointer variable which contains the address of first 
+node. ITEM is 
+the value 
+to 
+be inserted
+.
+	
+1
+.  If (START == NULL) Then
+	2
+.  
+	START 
+= New 
+Node			[Create 
+a new node]
+	3
+.  
+	START-
+&gt;INFO = 
+ITEM		[Assign 
+ITEM to INFO field]
+	4
+.  
+	START-
+&gt;LINK = 
+START
+	
+	[Assign the address of new node to itself]
+	5
+.  
+Else
+	6.  	Set PTR = START, TEMP = START	[Initialize PTR with START]
+	7
+.  
+	START 
+= New Node      
+  		[Create 
+a new node]
+	8
+.    
+	START-
+&gt;INFO = ITEM      	
+	[
+Assign ITEM to INFO field]
+	9
+.    
+	START-
+&gt;LINK = PTR      
+ 		[
+Assign PTR to LINK field
+]
+	
+10.	Begin Do Loop
+	
+11.		TEMP = TEMP-&gt;LINK		[Move the TEMP to the next node]
+	
+12.	While (TEMP-&gt;LINK != PTR)		[While TEMP doesn’t reach the last node]
+	
+13.	TEMP-&gt;LINK = START		[Assign address of first node to last node]
+	    [
+End of If]
+	14. Exit
+void 
+circular_insert_first
+()
+{
+	
+int
+ item;
+	
+struct
+ node *
+ptr
+, *temp;
+	
+	
+printf
+("\n\
+nEnter
+ item: ");
+	
+scanf
+("%d", &amp;item);
+	
+	if(start == NULL)
+	{
+		start = (
+struct
+ node *)
+malloc
+(
+sizeof
+(
+struct
+ node));
+		start-&gt;info = item;
+		start-&gt;link = start;
+	}
+	else
+	{
+		
+ptr
+ = start; temp = start;
+		start = (
+struct
+ node *)
+malloc
+(
+sizeof
+(
+struct
+ node));
+		start-&gt;info = item;
+		start-&gt;link = 
+ptr
+;
+		do		
+	/* 
+Move temp to the last node */
+		{
+			temp = temp-&gt;link;
+		} while (temp-&gt;link != 
+ptr
+);
+		temp-&gt;link = start;
+	
+}
+	
+	
+printf
+("\
+nItem
+ inserted: %d\n", item);
+}
+Function 
+- Insert as First Node in a Circular Linked List
+30-May-13
+Maninder Kaur
+15
+void 
+circular_display
+()
+{
+	
+struct
+ node *
+ptr
+;
+	
+int
+ 
+i
+=1;
+	
+	if (start == NULL)
+		
+printf
+("\
+nLinklist
+ is empty.\n");
+	else
+	{
+		
+ptr
+ = start;
+		
+printf
+("\
+nSr
+. No.\t\
+tAddress
+\t\
+tInfo
+\t\
+tLink
+\n");
+		
+		do
+		{
+			
+printf
+("\
+n%d
+.\t\
+t%d
+\t\
+t%d
+\t\
+t%d
+\n", 
+i
+, 
+ptr
+, 
+ptr
+-&gt;info, 
+ptr
+-&gt;link);
+			
+ptr
+ = 
+ptr
+-&gt;link;
+			
+i
+++;
+		} while(
+ptr
+ != start);
+	}
+}
+Function 
+- 
+Traverse 
+a Circular Linked List
+30-May-13
+Maninder Kaur
+16
+30-May-13
+Maninder Kaur
+17
+Any questions please?
+Let node 
+N
+ is to be inserted 
+as the first node in the linked list.
+There could be two cases:
+Linked list is empty, i.e., 
+START
+ contains 
+NULL
+.
+Linked list has some items, and 
+START
+ points to the first node.
+Insert as First Node in a Circular Linked List
+30-May-13
+Maninder Kaur
+10
+Linked list is NOT empty:
+Initially, 
+START
+ contains the address of the first node.
+Initialize a pointer variables 
+PTR
+ and 
+TEMP
+ by assigning the value of 
+START
+ to them, so that they also point to the first node:
+Set PTR = START, TEMP = START
+Create a new node and assign the address of this new node to 
+START
+.
+Enter some data in the 
+INFO
+ 
+field of the new node.
+Set the 
+LINK
+ field of the new node to the node being pointed by 
+PTR
+:
+START-&gt;LINK = PTR
+Insert as First Node in a Circular Linked List
+30-May-13
+Maninder Kaur
+12
+Program - Traversing a Circular Linked List
+30-May-13
+Maninder Kaur
+8
+To traverse a circular linked list, we must have some items in the linked list.
+Therefore, we’ll see the INSERTION operation first to add items into the circular linked list.
+Then, we’ll see the TRAVERSING operation to print the items on the screen.
+A
+ 
+circular linked 
+list is very similar to the linear list where in the circular list the 
+pointer of the last node
+ 
+points 
+not to 
+NULL but the first node
+.
+A circular list is one in which the last node's 
+LINK
+ field points back to the first node. 
+This 
+sort of list 
+is commonly 
+used for a rotating collection of objects: the songs in a playlist, for example, might be 
+circularly linked
+, so that after the last song the player goes back to the first
+. 
+Circular Linked 
+Lists 
+30-May-13
+Maninder Kaur
+2
+The structure definition of the circular linked 
+list is 
+similar to
+ singly 
+linked list is the same
+:
+Structure of Circular Linked List
+30-May-13
+Maninder Kaur
+3
+struct
+ 
+node
+{
+	
+int
+ info;
+	
+struct
+ node 
+*p;
+};
+There are several operations that can be performed on 
+a linked list.
+Circular Linked 
+List Operations
+30-May-13
+Maninder Kaur
+4
+S. No.
+Operation
+Description
+1.
+Creation
+Creating a linked list
+2.
+Traversal
+Processing each node in the linked list
+3.
+Search
+Finding the location of a node
+ 
+with a given value
+4.
+Insertion
+Adding a new node to the linked list
+5.
+Deletion
+Removing a node
+ 
+from the linked list
+6.
+Sorting
+Organizing the nodes in some order
+Insertion means 
+adding a new element into 
+the 
+linked list.
+The 
+insertion can be 
+done:
+at the 
+beginning
+,
+a
+t the end,
+s
+omewhere in between 
+the list
+.
+Insertion into Circular Linked List
+30-May-13
+Maninder Kaur
+9
+Let 
+LIST
+ 
+be a 
+circular linked 
+list in memory stored in 
+linear manner, 
+INFO
+ 
+and 
+LINK
+ with 
+START
+ pointing to the first 
+element.
+We want to traverse 
+LIST
+ in order to process each node exactly once.
+Pointer variable 
+PTR
+ points to the node that is currently being processed.
+PTR-&gt;LINK
+ 
+points to the next node to be processed.
+Thus, 
+update 
+PTR
+ by the assignment 
+PTR 
+= PTR-&gt;
+LINK
+Keep moving until 
+PTR
+ is not equal to 
+START
+:
+While (PTR != START)
+Traversing a 
+Circular Linked List
+30-May-13
+Maninder Kaur
+6
+In a conventional linked list, you iterate by starting 
+from 
+the 
+first node 
+and following the 
+LINK
+ 
+pointers until you reach a 
+NULL
+ 
+pointer.
+A 
+while
+ loop is ideal for this 
+purpose.
+In 
+the circular list, however, there is no 
+NULL
+ pointer to mark the end, so we need to follow the 
+LINK
+ 
+pointers until we reach the pointer we started 
+with.
+We 
+can't use a 
+while
+ loop for this because its termination condition would already be true when it 
+started.
+Instead 
+we use a 
+do
+ loop, which tests its termination condition at the bottom.
+Traversing a 
+Circular Linked List
+30-May-13
+Maninder Kaur
+5
+Algorith
+m
+ - Traversing a Circular Linked List
+30-May-13
+Maninder Kaur
+7
+Traverse():
+Description:
+ 
+Here START 
+is a pointer variable which contains the address of first node. 
+PROCESS 
+is any 
+operation 
+that is to be performed on the node.
+	1.	Set 
+PTR = 
+START
+	
+2.	Begin Do Loop
+	3.		Apply 
+PROCESS to PTR-&gt;INFO
+	4.		PTR 
+= PTR-&gt;
+LINK
+	
+5.	
+ While (PTR != 
+START)
+		[
+End of 
+Do-While 
+Loop]
+	6.	Exit

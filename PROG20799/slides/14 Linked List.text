@@ -1,0 +1,2631 @@
+Instructor: 
+Maninder Kaur
+Email:
+ 
+maninder.kaur2@sheridancollege.ca
+Course:
+ 
+PROG20799
+LINKED LISTS
+Deletion 
+means 
+removing an element from 
+the 
+linked list.
+The deletion 
+can be 
+done:
+at the 
+beginning
+,
+a
+t the end,
+s
+omewhere in between 
+the list
+.
+Deletion from Linked List
+30-May-13
+Maninder Kaur
+34
+#include &lt;
+stdio.h
+&gt;
+#include &lt;
+stdlib.h
+&gt;
+struct
+ node
+{
+	
+int
+ info;
+	
+struct
+ node *link;
+} *start = NULL;
+main()
+{
+	
+int
+ 
+ch
+;
+	do
+	{
+		
+printf
+("\n\n\n1. Insert Last\n2. Insert Specific\n3. Display\n4. Exit\n");
+		
+printf
+("\
+nEnter
+ your choice: ");
+		
+scanf
+("%d", &amp;
+ch
+);
+		switch(
+ch
+)
+		{
+			case 1:
+				
+insert_last
+();
+				break;
+			case 2:
+				
+insert_specific
+();
+				break;
+			case 3:
+				display();
+				break;
+			case 4:
+				exit(0);
+			default:
+				
+printf
+("\n\
+nInvalid
+ choice: Please try again.\n");
+		}
+	} while(1);
+}
+void 
+insert_last
+()
+{
+	
+int
+ item;
+	
+struct
+ node *
+ptr
+;
+	
+	
+printf
+("\n\
+nEnter
+ item: ");
+	
+scanf
+("%d", &amp;item);
+	
+	if(start == NULL)
+	{
+		start = (
+struct
+ node *)
+malloc
+(
+sizeof
+(
+struct
+ node));
+		start-&gt;info = item;
+		start-&gt;link = NULL;
+	}
+	else
+	{
+		
+ptr
+ = start;
+		
+        while (
+ptr
+-&gt;link != NULL)
+		      
+ptr
+ = 
+ptr
+-&gt;link;
+		
+		
+ptr
+-&gt;link = (
+struct
+ node *)
+malloc
+(
+sizeof
+(
+struct
+ node));
+		
+ptr
+ = 
+ptr
+-&gt;link;
+		
+ptr
+-&gt;info = item;
+		
+ptr
+-&gt;link = NULL;
+	}
+	
+	
+printf
+("\
+nItem
+ inserted: %d\n", item);
+}
+Program 
+- Insert after Specific Node in a Linked List
+30-May-13
+Maninder Kaur
+33
+void 
+insert_specific
+()
+{
+	
+int
+ n, item;
+	
+struct
+ node *
+nw
+, *
+ptr
+;
+	if (start == NULL)
+		
+printf
+("\n\
+nLinked
+ list is empty. It must have at least one node.\n");
+	else
+	{
+		
+printf
+("\n\
+nEnter
+ INFO after which new node is to be inserted: ");
+		
+scanf
+("%d", &amp;n);
+		
+printf
+("\n\
+nEnter
+ ITEM: ");
+		
+scanf
+("%d", &amp;item);
+		
+ptr
+ = start;
+		
+nw
+ = start;
+		while (
+ptr
+ != NULL)
+		{
+			if (
+ptr
+-&gt;info == n)
+			{
+				
+nw
+ = (
+struct
+ node *)
+malloc
+(
+sizeof
+(
+struct
+ node));
+				
+nw
+-&gt;info = item;
+				
+nw
+-&gt;link = 
+ptr
+-&gt;link;
+				
+ptr
+-&gt;link = 
+nw
+;
+				
+				
+printf
+("\n\
+nItem
+ inserted: %d", item);
+				return;
+			}
+			else
+				
+ptr
+ = 
+ptr
+-&gt;link;
+		}
+	}
+}
+void display()
+{
+	
+struct
+ node *
+ptr
+;
+	
+int
+ 
+i
+=1;
+	
+	if (start == NULL)
+		
+printf
+("\
+nLinklist
+ is empty.\n");
+	else
+	{
+		
+ptr
+ = start
+;
+		
+printf
+("\
+nSr
+. No.\t\
+tAddress
+\t\
+tInfo
+\t\
+tLink
+\n");
+		while(
+ptr
+ != NULL)
+		{
+			
+printf
+("\
+n%d
+.\t\
+t%d
+\t\
+t%d
+\t\
+t%d
+\n", 
+i
+, 
+ptr
+, 
+ptr
+-&gt;info, 
+ptr
+-&gt;link);
+			
+ptr
+ = 
+ptr
+-&gt;link;
+			
+i
+++;
+		}
+	}
+}
+Algorithm - 
+Insert after Specific Node in a Linked List
+30-May-13
+Maninder Kaur
+32
+Insert Specific 
+():
+Description:
+ Here 
+START 
+is a pointer variable which contains the address of first 
+node. NEW 
+is a pointer 
+variable which 
+will contain address of new  node. N is the value after which new node is to be inserted 
+and ITEM 
+is 
+the value 
+to be inserted
+.
+	1.	If 
+(START == NULL) 
+Then
+	2.		Print
+: Linked-List is empty. It must have at least one 
+node
+	3.	Else
+	4.		Set 
+PTR = 
+START
+	5.		Repeat 
+While (PTR != NULL
+)
+	6.			If 
+(PTR-&gt;INFO == N) Then
+	7.				NEW 
+= New 
+Node
+	8.				NEW-
+&gt;INFO = ITEM
+	9.				NEW-
+&gt;LINK = PTR-&gt;
+LINK
+	10.				PTR-
+&gt;LINK = NEW
+	11.				Print
+: ITEM inserted
+	12.			ELSE
+	13.				PTR 
+= PTR-&gt;LINK
+				[
+End of Step 6 If]
+			[
+End of While Loop]
+		[
+End of Step 1 If]
+	14.	Exit
+Initially, 
+START
+ contains the address of the first node.
+NEW
+ will contain the address of the newly created node, and 
+PTR
+ will hold the address of the node after which the new node is to be inserted. 
+N
+ is the value after which the new node is to be inserted.
+Initialize a pointer variables 
+PTR
+ by assigning the value of 
+START
+ to it, so that it also points to the first node:
+Set PTR = START
+Move the 
+PTR
+ from the first node to the node having 
+N
+ in the 
+INFO
+ field by using the statement:
+PTR = PTR-&gt;LINK
+On the way, compare the value of 
+INFO
+ field of each node with 
+N
+ to find the appropriate node:
+If (PTR-&gt;INFO == N
+)
+If the match is found, create a new node
+, and assign the address of this new node to 
+NEW
+ pointer. 
+Then, 
+assign the 
+ITEM
+ to the 
+INFO
+ 
+field of new node.
+Assign the value of 
+LINK
+ field of 
+PTR
+ node to the 
+LINK
+ field of the newly created node. Because, now the new node will be pointing to the node being pointed by 
+PTR
+ earlier.
+NEW-&gt;LINK = PTR-&gt;LINK
+Assign the address of the new node to the 
+LINK
+ field of the 
+PTR
+ node.
+PTR-&gt;LINK = NEW
+Insert after Specific Node in a Linked List
+30-May-13
+Maninder Kaur
+31
+Let node 
+N
+ is to be 
+inserted after a specific node in the linked list.
+Because, this algorithm is about inserting after a specific node, there must be at least one node in the linked list.
+Insert after Specific Node in a Linked List
+30-May-13
+Maninder Kaur
+30
+#include &lt;
+stdio.h
+&gt;
+#include &lt;
+stdlib.h
+&gt;
+struct
+ node
+{
+	
+int
+ 
+info;
+	
+struct
+ node *link;
+} *start = NULL;
+main()
+{
+	
+int
+ 
+ch
+;
+	do
+	{
+		
+printf
+("\n\n\n1. Insert Last\n2. Display\n3. Exit\n");
+		
+printf
+("\
+nEnter
+ your choice: ");
+		
+scanf
+("%d", &amp;
+ch
+);
+		switch(
+ch
+)
+		{
+			case 1:
+				
+insert_last
+();
+				break;
+			case 2:
+				display();
+				break;
+			case 3:
+				exit(0);
+			default:
+				
+printf
+("\n\
+nInvalid
+ choice. Please try again.\n");
+		}
+	} while (1);
+}
+void 
+insert_last
+()
+{
+	
+int
+ item;
+	
+struct
+ node *
+ptr
+;
+	
+	
+printf
+("\n\
+nEnter
+ item: ");
+	
+scanf
+("%d", &amp;item);
+Program 
+- Insert as 
+Last 
+Node in a Linked List
+30-May-13
+Maninder Kaur
+29
+	if(start 
+== NULL)
+	{
+		start = (
+struct
+ node *)
+malloc
+(
+sizeof
+(
+struct
+ node));
+		start-&gt;info = item;
+		start-&gt;link = NULL;
+	}
+	else
+	{
+		
+ptr
+ = start;
+		while (
+ptr
+-&gt;link != NULL)
+			
+ptr
+ = 
+ptr
+-&gt;link;
+		
+ptr
+-&gt;link = (
+struct
+ node *)
+malloc
+(
+sizeof
+(
+struct
+ node));
+		
+ptr
+ = 
+ptr
+-&gt;link;
+		
+		
+ptr
+-&gt;info = item;
+		
+ptr
+-&gt;link = NULL;
+	
+}
+	
+printf
+("\
+nItem
+ inserted: %d\n", item);
+}
+void display()
+{
+	
+struct
+ node *
+ptr
+;
+	
+int
+ 
+i
+=1;
+	
+	if (start == NULL)
+		
+printf
+("\
+nLinklist
+ is empty.\n");
+	else
+	{
+		
+ptr
+ = start;
+		
+printf
+("\
+nSr
+. No.\t\
+tAddress
+\t\
+tInfo
+\t\
+tLink
+\n");
+		while(
+ptr
+ != NULL)
+		{
+			
+printf
+("\
+n%d
+.\t\
+t%d
+\t\
+t%d
+\t\
+t%d
+\n", 
+i
+, 
+ptr
+, 
+ptr
+-&gt;
+info, 
+ptr
+-
+&gt;link);
+			
+ptr
+ = 
+ptr
+-&gt;link;
+			
+i
+++;
+		}
+	}
+}
+Algorithm - Insert 
+as 
+Last 
+Node in a Linked List
+30-May-13
+Maninder Kaur
+28
+Insert Last 
+():
+Description:
+ Here 
+START 
+is a pointer variable which contains the address of first 
+node. ITEM 
+is the value 
+to 
+be inserted
+.
+	1.	If 
+(START == NULL) 
+Then			[Check 
+whether list is empty]
+	2.		START 
+== New Node
+	3.		START-
+&gt;INFO = ITEM
+	4.		START-
+&gt;LINK = NULL
+	5.	Else
+	6.		Set 
+PTR = 
+START			[Initialize 
+PTR with START]
+	7.		Repeat 
+While (PTR-&gt;LINK != NULL
+)
+	8.			PTR 
+= PTR-&gt;
+LINK		[Until 
+PTR reaches last node]
+			[
+End of While Loop]
+	9.		PTR-
+&gt;LINK = New 
+Node
+ 
+ 	[
+Assign  
+address  of  new  node  
+to 
+PTR-
+&gt;
+LINK]
+	10.		PTR 
+= PTR-&gt;
+LINK			[Move 
+PTR to next node]
+	11.		PTR-
+&gt;INFO = ITEM
+	12.		PTR-
+&gt;LINK = NULL
+		[
+End of If]
+	13.	Exit
+Linked list is NOT empty:
+Initially, 
+START
+ contains the address of the first node.
+Initialize a pointer variable 
+PTR
+ by assigning the value of 
+START
+ to it, so that it also points to the first node:
+Set PTR = START
+Move the 
+PTR
+ from the first node to the last node by using the statement:
+PTR = PTR-&gt;LINK
+The last node is the one which has 
+NULL
+ in the 
+LINK
+ field. Therefore, we can use a while loop to verify when 
+PTR
+ reaches the last node:
+While 
+(PTR-&gt;LINK != NULL)
+Once there, create 
+a new node and assign the address of this new node to 
+PTR-&gt;LINK
+.
+Move the 
+PTR 
+to point to the newly created node.
+Enter some data in the 
+INFO
+ 
+field of the new node.
+Set the 
+LINK
+ field of the new node 
+NULL
+.
+Insert as 
+Last Node in 
+a 
+Linked List
+30-May-13
+Maninder Kaur
+27
+Linked list is empty:
+Initially, 
+START
+ contains 
+NULL
+.
+Create a new node and assign the address of this new node to 
+START
+.
+Enter some data in the 
+INFO
+ field.
+Set the 
+LINK
+ pointer to 
+NULL
+, as this is the only node in the list.
+Insert as 
+Last Node in 
+a 
+Linked List
+30-May-13
+Maninder Kaur
+26
+Let node 
+N
+ 
+be a 
+first 
+node 
+to be 
+deleted from the linked list.
+There could be two cases:
+Linked list is empty, i.e., 
+START
+ contains 
+NULL
+.
+Linked list has some items, and 
+START
+ points to the first node.
+Delete First Node from a Linked List
+30-May-13
+Maninder Kaur
+35
+Linked List is empty:
+If Linked List is empty that means there is nothing to delete.
+Linked 
+List is 
+NOT empty:
+Initially, 
+START
+ contains the address of the first node.
+Initialize a pointer variable 
+PTR
+ by assigning the value of 
+START
+ to it, so that it also points to the first node:
+Set PTR = START
+Assign the value of 
+INFO
+ field of 
+the first node to 
+ITEM:
+ITEM 
+= START-&gt;INFO
+Assign the value of 
+LINK
+ field of 
+the first node to START so that it now points to the second node:
+START 
+= 
+START-&gt;LINK
+Delete the first node, which is being pointed by PTR:
+Delete PTR
+Delete First Node from the Linked List
+30-May-13
+Maninder Kaur
+36
+Algorithm - Delete 
+First Node 
+from the 
+Linked List
+30-May-13
+Maninder Kaur
+37
+Delete First():
+Description: 
+Here 
+START 
+is a pointer variable which contains the address of first 
+node. ITEM 
+is the value 
+to 
+be 
+deleted.
+	
+1.	If 
+(START == NULL) Then
+	2.		Print
+: Linked-List is empty.
+	3.	Else
+	4.		PTR 
+= START
+	5.		ITEM 
+= START-&gt;
+INFO		[Assign 
+INFO of first node to ITEM]
+	6.		START = 
+START-&gt;
+LINK		[START 
+now points to 
+2
+nd
+ node
+]
+	7.		Delete PTR				[Delete 
+first node]
+	8.		Print
+: ITEM 
+deleted
+		[End 
+of If]
+	10.	Exit
+Algorithm - 
+Delete Specific Node from the Linked List
+30-May-13
+Maninder Kaur
+45
+Delete 
+Specific():
+Description
+:
+ Here START 
+is a pointer variable which contains the address of first 
+node. PTR 
+is a pointer 
+variable which 
+contains address 
+of node 
+to be deleted
+. PREV 
+is a pointer variable which points to previous 
+node
+. ITEM is the value to be deleted.
+	1.	If 
+(START == NULL) 
+Then							[Check 
+whether list is empty]
+	2.		Print
+: Linked-List is empty.
+	3.	Else 
+If (START-&gt;INFO == ITEM) 
+Then				[Check 
+if ITEM is in 
+1
+st
+ node
+]
+	4.		PTR 
+= START
+	5.		START 
+= START-&gt;
+LINK							[START 
+now points to 
+2
+nd
+ node
+]
+	6.		Delete 
+PTR
+	7.	Else
+	8.		PTR 
+= START, PREV = START
+	9.		Repeat 
+While (PTR != NULL)
+	10.			If 
+(PTR-&gt;INFO == ITEM) 
+Then				[If 
+ITEM matches with PTR-&gt;INFO]
+	11.				PREV-
+&gt;LINK = PTR-&gt;
+LINK				[Assign 
+LINK field of PTR to PREV]
+	12.				Delete PTR
+	
+13.				Break out of the While loop
+	14.			Else
+	15.				PREV 
+= 
+PTR						[Assign 
+PTR to PREV]
+	16.				PTR 
+= PTR-&gt;
+LINK					[Move 
+PTR to next node]
+				[
+End of Step 10 If]
+			[
+End of While Loop
+]
+	
+	
+ [End of Step 1 If
+]
+	
+17. If (PTR == NULL) Then							[If PTR goes beyond the last node]
+	
+18.		Print: ITEM not found
+	
+19.	Else
+	20.		Print
+: ITEM 
+deleted
+	21.	Exit
+struct
+ node
+{
+	
+int
+ info;
+	
+struct
+ node *link;
+} *start = NULL;
+main()
+{
+	
+int
+ 
+ch
+;
+	do
+	{
+	
+	
+printf
+("\n\n\n1. Insert Last\n2. Delete 
+Last\n3. Display\n4. Exit\n
+");
+		
+printf
+("\
+nEnter
+ your choice: ");
+		
+scanf
+("%d", &amp;
+ch
+);
+		switch(
+ch
+)
+		{
+			case 1:
+				
+insert_last
+();
+				break;
+			case 2:
+				
+delete_last
+();
+				break;
+			case 3:
+				display();
+				break;
+			case 4:
+				exit(0);
+			default:
+			
+   	
+printf
+("\n\
+nInvalid
+ choice: Please try again.\n");
+		}
+	} while (1);
+}
+Program – Delete Last 
+Node 
+from the 
+Linked List
+30-May-13
+Maninder Kaur
+43
+void 
+insert_last
+()
+{
+	/* logic to insert last item goes here */
+}
+void 
+delete_last
+()
+{
+	
+struct
+ node *
+ptr
+, *
+prev
+;
+	
+int
+ item;
+	if (start == NULL)
+		
+printf
+("\n\
+nLinked
+ list is empty.\n");
+	else
+	{
+		
+ptr
+ = start;
+		
+prev
+ = start;
+		while (
+ptr
+-&gt;link != NULL)
+		{
+			
+prev
+ = 
+ptr
+;
+			
+ptr
+ = 
+ptr
+-&gt;link;
+		
+}
+		item = 
+ptr
+-&gt;info;
+		if (start-&gt;link == NULL)
+			start = NULL;
+		else
+			
+prev
+-&gt;link = NULL;
+		free(
+ptr
+);
+		
+printf
+("\n\
+nItem
+ deleted: %d", item);
+	}
+}
+void display()
+{
+	/* logic to display linked list goes here */
+}
+Algorithm – Delete Last 
+Node 
+from the 
+Linked List
+30-May-13
+Maninder Kaur
+42
+Delete Last():
+Description:
+ 
+Here 
+START 
+is 
+a pointer variable which contains the address of first 
+node. PTR 
+is a pointer 
+variable which 
+contains address of node 
+to 
+be deleted
+. PREV 
+is a pointer variable which points 
+to 
+previous 
+node
+. ITEM is the value to be deleted
+.
+	1.	If 
+(START == NULL) 
+Then				[Check 
+whether list is empty]
+	2.		Print
+: Linked-List is empty
+.
+	3.	Else
+	4.		PTR 
+= START, PREV = START
+	5.		Repeat 
+While (PTR-&gt;LINK != NULL)
+	6.			PREV 
+= 
+PTR			[Assign 
+PTR to PREV]
+	7.			PTR 
+= PTR-&gt;
+LINK			[Move 
+PTR to next node]
+			[
+End of While Loop]
+	8.		ITEM 
+= PTR-&gt;
+INFO				[Assign 
+INFO of last node to ITEM]
+	9.		If 
+(START-&gt;LINK == NULL) Then 
+		[
+If only one node is left]
+	10.			START 
+= 
+NULL			[Assign 
+NULL to START]
+	11.		Else
+	12.			PREV-
+&gt;LINK = 
+NULL		[Assign 
+NULL to link field of second last node]
+			[
+End of Step 9 If]
+	13.		Delete 
+PTR
+	14.		Print
+: ITEM deleted
+		[
+End of Step 1 If]
+	15.	Exit
+struct
+ node
+{
+	
+int
+ info;
+	
+struct
+ node *link;
+} *start = NULL;
+main()
+{
+	
+int
+ 
+ch
+;
+	do
+	{
+		
+printf
+("\n\n\n1. Insert Last\n2. Delete Specific\n3. 
+	
+								   Display\n4
+. Exit\n");
+		
+printf
+("\
+nEnter
+ your choice: ");
+		
+scanf
+("%d", &amp;
+ch
+);
+		switch(
+ch
+)
+		{
+			case 1:
+				
+insert_last
+();
+				break;
+			case 2:
+				
+delete_specific
+();
+				break;
+			case 3:
+				display();
+				break;
+			case 4:
+				exit(0);
+			default:
+			
+  
+printf
+("\n\
+nInvalid
+ choice: Please try again.\n");
+		}
+	} while (1);
+}
+Program 
+- Delete Specific Node from the Linked List
+30-May-13
+Maninder Kaur
+46
+void 
+insert_last
+()
+{
+	/* logic to insert last item goes here */
+}
+void 
+delete_specific
+()
+{
+	
+struct
+ node *
+ptr
+, *
+prev
+;
+	
+int
+ item
+;
+	
+printf
+("\n\
+nEnter
+ ITEM which is to be deleted: ");
+	
+scanf
+("%d", &amp;item
+);
+	if (start == NULL)
+		
+printf
+("\n\
+nLinked
+ list is empty.\n");
+	else if (start-&gt;info == item)
+	{
+		
+ptr
+ = start;
+		start = start-&gt;link;
+		free(
+ptr
+);
+	}
+	else
+	{
+		
+ptr
+ = start;
+		
+prev
+ = start;
+		while (
+ptr
+ != NULL)
+		{
+			if (
+ptr
+-&gt;info == item)
+			{
+				
+prev
+-&gt;link = 
+ptr
+-&gt;link;
+				free(
+ptr
+);
+				break;
+			}
+			else
+			{
+				
+prev
+ = 
+ptr
+;
+				
+ptr
+ = 
+ptr
+-&gt;link;
+			}
+		}
+	}
+	if (
+ptr
+ == NULL)
+		
+printf
+("\n\
+nSorry
+. Item %d not found.", item);
+	else
+		
+printf
+("\n\
+nItem
+ deleted: %d", item);
+}
+void display()
+{
+	/* logic to display linked list goes here */
+}
+30-May-13
+Maninder Kaur
+47
+Any questions please?
+Linked 
+list is NOT empty:
+Check if there is only one node left in the list. We do that by checking the 
+LINK
+ part of the node which is being pointed by 
+START
+:
+If (START-&gt;LINK == NULL
+)
+If the above statement is true, set 
+START
+ to 
+NULL
+:
+START = NULL
+Otherwise, set the 
+LINK
+ field of the previous node to 
+NULL
+, which is pointed by 
+PREV
+:
+PREV-&gt;LINK = NULL
+Finally, delete the node pointed by 
+PTR
+.
+Delete Last Node from the Linked List
+30-May-13
+Maninder Kaur
+41
+Linked list is empty: 
+If 
+Linked List is empty that means there is nothing to delete
+.
+Linked list is NOT empty:
+Initially, 
+START
+ contains the address of the first node
+.
+PTR
+  is a 
+pointer  variable which  contains address of node  to be deleted. 
+PREV
+  is a pointer variable which points to the node which is before the node to be deleted. 
+ITEM
+ is the value to be deleted.
+Initialize a pointer 
+variables 
+PTR
+ 
+and 
+PREV 
+by assigning 
+value of 
+START
+ to 
+them, 
+so that 
+they also point 
+to the 
+first node
+:
+Set PTR = START, PREV = START
+The last node is the one which has 
+NULL
+ in the 
+LINK
+ field. Therefore, we can use a while loop to verify when 
+PTR
+ reaches the last node:
+While (PTR-&gt;LINK != NULL
+)
+PREV
+ points to the node which is just before the node being pointed by 
+PTR
+:
+					PREV 
+= 
+PTR
+Move 
+the 
+PTR
+ from the first node to the last node by using the statement:
+PTR = PTR-&gt;
+LINK
+Delete Last Node from the Linked List
+30-May-13
+Maninder Kaur
+40
+Let node 
+N
+ 
+be the last node to be deleted from the linked list.
+There could be three cases:
+Linked list is empty, i.e., 
+START
+ contains 
+NULL
+.
+Linked list has only one item.
+Linked list has more than one items.
+Delete Last Node from the Linked List
+30-May-13
+Maninder Kaur
+39
+#include &lt;
+stdio.h
+&gt;
+#include &lt;
+stdlib.h
+&gt;
+struct
+ node
+{
+	
+int
+ info;
+	
+struct
+ node *link;
+} *start = NULL;
+main()
+{
+	
+int
+ 
+ch
+;
+	do
+	{
+		
+printf
+("\n\n\n1. Insert Last\n2. Delete First\n3. Display\n4. Exit\n");
+		
+printf
+("\
+nEnter
+ your choice: ");
+		
+scanf
+("%d", &amp;
+ch
+);
+		switch(
+ch
+)
+		{
+			case 1:
+				
+insert_last
+();
+				break;
+			case 2:
+				
+delete_first
+();
+				break;
+			case 3:
+				display();
+				break;
+			case 4:
+				exit(0);
+			default:
+				
+printf
+("\n\
+nInvalid
+ choice: Please try again.\n");
+		}
+	} while (1);
+}
+Program – Delete First 
+Node 
+from the 
+Linked List
+30-May-13
+Maninder Kaur
+38
+void 
+insert_last
+()
+{
+	
+/* logic to insert last item goes here */
+}
+void 
+delete_first
+()
+{
+	
+struct
+ node *
+ptr
+;
+	
+int
+ item;
+	if (start == NULL)
+		
+printf
+("\n\
+nLinked
+ list is empty.\n");
+	else
+	{
+		
+ptr
+ = start;
+		item = start-&gt;info;
+		start = start-&gt;link;
+		free(
+ptr
+);
+		
+		
+printf
+("\n\
+nItem
+ deleted: %d", item);
+	}
+}
+void display()
+{
+	
+/* logic to display linked list goes here */
+}
+Let node 
+N
+ is to be inserted 
+as the last node in the linked list.
+There could be two cases:
+Linked list is empty, i.e., 
+START
+ contains 
+NULL
+.
+Linked list has some items, and 
+START
+ points to the first node.
+Insert as Last Node in a Linked List
+30-May-13
+Maninder Kaur
+25
+#include &lt;
+stdio.h
+&gt;
+#include &lt;
+stdlib.h
+&gt;
+struct
+ node
+{
+	
+int
+ 
+info;
+	
+struct
+ node *link;
+} *
+start = NULL;
+main()
+{
+      
+int
+ 
+ch
+;
+      do
+      {
+      	
+printf
+("\n\n\n1. Insert First\n2. Display\n3. Exit\n");
+          
+	
+printf
+("\
+nEnter
+ your choice: ");
+          
+	
+scanf
+("%d", &amp;
+ch
+);
+          
+          
+	switch(
+ch
+)
+          
+	{
+          	
+       case 
+1:
+               	
+	
+insert_first
+();
+                  	break
+;
+               
+	       case 
+2:
+	       	display
+();
+                
+		break;
+               
+	       case 
+3:
+                    
+	exit(0);
+               
+        default
+:
+                     
+      
+printf
+("\n\
+nInvalid
+ choice. Please try again.\n");
+          
+	}
+      } while (1);
+}
+Program 
+- Insert as First Node in a Linked List
+30-May-13
+Maninder Kaur
+24
+void 
+insert_first
+()
+{
+	
+int
+ 
+item;
+	
+struct
+ node *
+ptr
+;
+	
+printf
+("\n\
+nEnter
+ item: ");
+	
+scanf
+("%d", &amp;item);
+	
+	if(start == NULL)
+	{
+		start = (
+struct
+ node *)
+malloc
+(
+sizeof
+(
+struct
+ node));
+		start-&gt;info = item;
+		start-&gt;link = NULL;
+	}
+	else
+	{
+		
+ptr
+ = start;
+		start = (
+struct
+ node *)
+malloc
+(
+sizeof
+(
+struct
+ node));
+		start-&gt;info = item;
+		start-&gt;link = 
+ptr
+;
+	}
+	
+printf
+("\
+nItem
+ inserted: %d\n", item);
+}
+void display()
+{
+	
+struct
+ node *
+ptr
+ = start;
+	
+int
+ 
+i
+=1;
+	
+	if (
+ptr
+ == NULL)
+		
+printf
+("\
+nLinklist
+ is empty.\n");
+	else
+	{
+	    
+    
+printf
+("\
+nSr
+. No.\t\
+tAddress
+\t\
+tInfo
+\t\
+tLink
+\n");
+	    
+    while(
+ptr
+ 
+!= NULL)
+         
+	        {
+		
+printf
+("\
+n%d
+.\t\
+t%d
+\t\
+t%d
+\t\
+t%d
+\n", 
+i
+, 
+ptr
+, 
+ptr
+-&gt;
+info, 
+ptr
+-
+&gt;link);
+		
+ptr
+ 
+= 
+ptr
+-&gt;link;
+		
+i
+++;
+	   
+     }
+	}
+}
+Algorithm - Insert 
+as First Node in a Linked List
+30-May-13
+Maninder Kaur
+23
+Insert First ( 
+):
+Description: 
+Here START  is a pointer variable which contains the address of first node .  ITEM  is the value 
+to 
+be inserted.
+	
+1
+.  If (START == NULL) Then
+	2
+.  
+	START 
+= New Node      
+  	[Create 
+a new node]
+	3
+.  
+	START-
+&gt;INFO = ITEM      
+	[
+Assign ITEM to INFO field]
+	4
+.  
+	START-
+&gt;LINK = NULL      
+	[
+Assign NULL to LINK field]
+	5
+.  
+Else
+	6.  	Set PTR = START        	[Initialize PTR with START]
+	7
+.  
+	START 
+= New Node      
+  	[Create 
+a new node]
+	8
+.    
+	START-
+&gt;INFO = ITEM      	
+[
+Assign ITEM to INFO field]
+	9
+.    
+	START-
+&gt;LINK = PTR      
+ 	[
+Assign PTR to LINK field]
+	    [
+End of If]
+	10
+. 
+Exit
+When a member of a structure is declared as a pointer to the structure itself, then the structure is called self-referential 
+structure.
+Consider 
+the following declaration:
+Self-referential Structures
+30-May-13
+Maninder Kaur
+10
+struct
+ 
+chain
+{
+	
+int
+ 
+val
+;
+	
+struct
+ chain 
+*p;
+};
+We now know 
+that a 
+node
+ of a linked list is essentially a structure because it contains data of different types
+.
+It contains the 
+information part
+, and 
+a pointer that can point to a 
+node, i.e., to 
+itself or to some other 
+node.
+Such 
+structures are called 
+self-referential 
+structures
+.
+The pointer variable inside the node contains the address of another node. Thus, a 
+self-referential structures
+Creation of a Linked List
+30-May-13
+Maninder Kaur
+9
+There are several operations that can be performed on 
+a linked list.
+Linked List Operations
+30-May-13
+Maninder Kaur
+8
+S. No.
+Operation
+Description
+1.
+Creation
+Creating a linked list
+2.
+Traversal
+Processing each node in the linked list
+3.
+Search
+Finding the location of a node
+ 
+with a given value
+4.
+Insertion
+Adding a new node to the linked list
+5.
+Deletion
+Removing a node
+ 
+from the linked list
+6.
+Sorting
+Organizing the nodes in some order
+Representation of 
+Linked List in 
+Memory
+30-May-13
+Maninder Kaur
+7
+3
+START
+START=3, INFO[3]=
+45
+LINK[3]=2, INFO[2]=
+67
+LINK[2]=5, INFO[5]=
+75
+LINK[5]=4, INFO[4]=
+80
+LINK[4]=7, INFO[7]=
+90
+LINK[7]=0, NULL value, So the list has ended
+INFO
+LINK
+In this type of linked list, two successive nodes of the linked list are linked with each other in sequential linear 
+manner.
+This type of linked list can only be traversed in one direction.
+A linked list is a dynamic data structure with the ability to expand and shrink as per the program requirement. 
+The 
+singly liked list is easy and 
+straight-forward 
+data structure as compared to other structure. 
+By 
+changing the 
+link position
+, other type of linked list such as circular
+, or 
+doubly linked list can be formed
+.
+Singly Linked List
+30-May-13
+Maninder Kaur
+6
+Singly 
+Linked List (One-Way Linked List):
+Begins with a pointer to the first node
+Terminates with a null pointer
+Only traversed in one direction
+Circular, 
+Singly Linked:
+Pointer in the last node points back to the first node
+Doubly 
+Linked List
+ 
+(Two-Way 
+Linked List
+):
+Two “start pointers” – first element and last element
+Each node has a forward pointer and a backward pointer
+Allows traversals both forwards and backwards
+Circular, 
+Doubly Linked List:
+Forward pointer of the last node points to the first node and backward pointer of the first node points to the last node
+Types of Linked 
+Lists
+30-May-13
+Maninder Kaur
+5
+A linked list is an ordered sequence of items called 
+nodes.
+A node is the basic unit of representation in a linked 
+list.
+A
+ 
+node
+ 
+in a
+ 
+linked 
+list
+ 
+consists of two fields:
+A 
+data
+ portion
+A 
+link (pointer)
+ to the 
+next
+ node in the structure
+The 
+first item (node) in the linked list is accessed via a 
+front
+, 
+head
+ 
+or 
+start
+ pointer.
+Start
+ is a special node that points to the first node.
+Nodes
+30-May-13
+Maninder Kaur
+4
+The items do 
+not
+ 
+have to be stored in consecutive memory locations: the successor can be anywhere 
+physically.
+So, can be inserted and deleted items without shifting data.
+Can 
+increase the size of the data structure 
+easily.
+Linked 
+lists can grow 
+dynamically
+ (i.e. at run 
+time):
+The 
+amount of memory space allocated can grow and shrink as 
+needed.
+Insertion 
+and deletion of nodes is quicker with linked 
+lists.
+Advantages of Linked Lists 
+30-May-13
+Maninder Kaur
+3
+A 
+linked 
+list
+ 
+is 
+a linear collection of data elements, called 
+nodes
+, where the linear order is given by means of 
+pointers.
+Each 
+node is divided into two 
+parts:
+The 
+first part
+ contains the 
+information (Info) 
+of the element, and 
+The 
+second
+ 
+part
+, called the link field or next pointer field, contains the address of the next node in the list.
+The 
+pointer of the last node contains a special value
+, called 
+the 
+null 
+pointer
+.
+A special pointer 
+variable – called 
+START
+ 
+contains the address of the first 
+node.
+A 
+special case is the list that has no nodes, such a list is called the null list or 
+empty list
+ and is denoted by the null pointer in the variable START
+.
+Introduction
+30-May-13
+Maninder Kaur
+2
+Linked list with 3 nodes
+Start
+Info
+Link
+Node 1
+Node 3
+Info
+Info
+Link
+Node 2
+The structure called 
+chain
+ consists 
+of two 
+members:
+val
+ and 
+p
+The 
+member 
+val
+ 
+is a variable of type 
+int
+ whereas the member 
+p
+ is a pointer to a structure of type 
+chain
+.
+Thus
+, the structure 
+chain
+ 
+has a member that can point to a structure of type 
+chain
+ 
+or may be 
+itself.
+This 
+type of self-referencing structure can be viewed as shown in 
+figure.
+Self-referential Structures
+30-May-13
+Maninder Kaur
+11
+Since pointer 
+p
+ can point to a structure variable of type 
+chain
+, we can connect two such structure variables, 
+A
+ and 
+B
+, to obtain a linked structure as 
+shown below:
+Self-referential Structures
+30-May-13
+Maninder Kaur
+12
+The linked structure given 
+above can 
+be obtained by the following steps:
+Declare 
+structure 
+chain
+.
+Declare 
+variables 
+A
+ and 
+B
+ of type 
+chain
+.
+A.p
+ 
+= 
+&amp;B
+Linked list with 
+2 
+nodes
+Start
+val
+p
+A
+val
+NULL
+B
+struct
+ 
+chain
+{
+	
+int
+ 
+val
+;
+	
+struct
+ chain 
+*p;
+}A,B;
+These steps 
+could be 
+coded 
+as 
+below:
+Self-referential Structures
+30-May-13
+Maninder Kaur
+13
+struct
+ 
+chain	    /* 
+declare structure chain */
+{
+	
+int
+ 
+val
+;
+	
+struct
+ chain 
+*p;
+};
+struct
+ chain A, B; 
+ /* 
+declare structure 
+variables A 
+and B */
+A.p
+ = &amp;B;          
+ /* 
+connect A to B*/
+Linked list is NOT empty:
+Initially, 
+START
+ contains the address of the first node.
+Initialize a pointer variable 
+PTR
+ by assigning the value of 
+START
+ to it, so that it also points to the first node:
+Set PTR = START
+Create a new node and assign the address of this new node to 
+START
+.
+Enter some data in the 
+INFO
+ 
+field of the new node.
+Set the 
+LINK
+ field of the new node to the node being pointed by 
+PTR
+:
+START-&gt;LINK = PTR
+Insert as 
+First Node in 
+a 
+Linked List
+30-May-13
+Maninder Kaur
+22
+Linked list is empty:
+Initially, 
+START
+ contains 
+NULL
+.
+Create a new node and assign the address of this new node to 
+START
+.
+Enter some data in the 
+INFO
+ field.
+Set the 
+LINK
+ pointer to 
+NULL
+, as this is the only node in the list.
+Insert as 
+First Node in 
+a 
+Linked List
+30-May-13
+Maninder Kaur
+21
+Let node 
+N
+ is to be inserted 
+as the first node in the linked list.
+There could be two cases:
+Linked list is empty, i.e., 
+START
+ contains 
+NULL
+.
+Linked list has some items, and 
+START
+ points to the first node.
+Insert as First Node in a Linked List
+30-May-13
+Maninder Kaur
+20
+Insertion means 
+adding a new element into 
+the 
+linked list.
+The 
+insertion can be 
+done:
+at the 
+beginning
+,
+a
+t the end,
+s
+omewhere in between 
+the list
+.
+Insertion into Linked List
+30-May-13
+Maninder Kaur
+19
+Program - Traversing a Linked List
+30-May-13
+Maninder Kaur
+18
+To traverse a linked list, we must have some items in the linked list.
+Therefore, we’ll see the INSERTION operation first to add items into the linked list.
+Then, we’ll see the TRAVERSING operation to print the items on the screen.
+Algorith
+m
+ - Traversing a Linked List
+30-May-13
+Maninder Kaur
+17
+Traverse():
+Description:
+ 
+Here START 
+is a pointer variable which contains the address of first node. 
+PROCESS 
+is any 
+operation 
+that is to be performed on the node.
+	1.  Set 
+PTR = START
+	2
+.  Repeat While (PTR != NULL)
+	3
+.  
+	Apply 
+PROCESS to PTR-&gt;INFO
+	4
+.  
+	PTR 
+= PTR-&gt;LINK
+	    [
+End of While Loop]
+	5
+.  Exit
+Let 
+LIST
+ 
+be a linked list in memory stored in 
+linear manner, 
+INFO
+ 
+and 
+LINK
+ with 
+START
+ pointing to the first element and 
+NULL
+ indicating the end of 
+LIST
+.
+We want to traverse 
+LIST
+ in order to process each node exactly once.
+Pointer variable 
+PTR
+ points to the node that is currently being processed.
+PTR-&gt;LINK
+ 
+points to the next node to be processed.
+Thus, 
+update 
+PTR
+ by the assignment 
+	
+	
+PTR = PTR-&gt;LINK
+Traversing a 
+Linked List
+30-May-13
+Maninder Kaur
+16
+START
+X
+INFO
+ 
+LINK
+PTR
+Fig : PTR 
+:= 
+LINK[PTR]
+We can see that the members of structure 
+B
+ can be reached by the following two methods:
+From 
+its variable name 
+B
+ through dot 
+operator.
+From 
+the pointer 
+p
+ of variable 
+A
+ because it is also pointing to the structure 
+B
+. However, in this case the arrow operator (
+–&gt;
+) is needed to access the field called 
+val
+ as shown 
+below:
+Self-referential Structures
+30-May-13
+Maninder Kaur
+15
+printf
+("The 
+contents of member 
+val
+ of B = %
+d\n", 
+B.val
+);
+printf
+("The 
+contents of member 
+val
+ of B = %
+d\n", 
+A.p
+-&gt;
+val
+);
+Once the above statements are executed, the output would be:
+The contents of member 
+val
+ of B = 60
+The contents of member 
+val
+ of B = 60
+We 
+observe that the pointer 
+p
+ of structure variable 
+B
+ is dangling, i.e., it is pointing to 
+nowhere.
+Such 
+pointer can be assigned to 
+NULL
+, 
+indicating that there is no valid address in this 
+pointer.
+The 
+following statement will do the desired operation:
+Self-referential Structures
+30-May-13
+Maninder Kaur
+14
+B.p
+ = NULL;
+The data elements in this linked structure can be assigned by the following statements:
+A.val
+ = 50;
+B.val
+ = 60;
+If 
+START
+ contains 
+NULL
+ then, linked list is empty.
+Check if the first node contains the 
+ITEM
+ to be deleted:
+If (START-&gt;INFO == ITEM)
+Set 
+PTR
+ to point to the first node:
+PTR = START
+Make 
+START
+ point to the second node:
+START = START-&gt;LINK
+Delete the node pointed by 
+PTR
+.
+Otherwise, initialize 
+PTR
+ and 
+PREV
+ from the first node and move 
+PTR
+ from first node to last node. 
+PREV
+ moves just behind 
+PTR
+.
+On the way, keep checking if the 
+ITEM
+ to be deleted is found.
+If found, assign the 
+LINK
+ field of the previous node (pointed by 
+PREV
+) to point to the node which is next to the node to be deleted:
+PREV-&gt;LINK = PTR-&gt;LINK
+Delete the node pointed by 
+PTR
+. If 
+PTR
+ contains 
+NULL
+, then the 
+ITEM
+ is not found.
+Delete Specific 
+Node 
+from the 
+Linked List
+30-May-13
+Maninder Kaur
+44
