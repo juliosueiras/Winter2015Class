@@ -1,0 +1,38 @@
+<!--
+    Single channel configuration exampple.  
+    The top level configuration XML is example.xml
+
+    NormalizedByTheory should be "True" (not "TRUE" or "true") for all non-data-driven backgrounds.
+
+    If you comment or remove the <Data> tag then it will use the expected data.
+
+    Histogram inputs should be in pb and in top-level xml the lumi should be in 1/pb
+    (The important thing is that they match... fb and 1/fb is also ok)
+
+    Note: Config.dtd needs to be accessible.  It can be found in ROOT release area.  
+    The file system path is relative to location of this XML file, not the executable.
+-->
+
+<!DOCTYPE Channel  SYSTEM 'HistFactorySchema.dtd'>
+
+  <Channel Name="SignalRegion" InputFile="./data/Input.root"  HistoPath="API_vs_XML/SignalRegion/">
+    <Data HistoName="Data" />
+
+    <!-- Set the StatError type to Poisson.  Can also be Gaussian -->
+    <StatErrorConfig RelErrorThreshold="0.05" ConstraintType="Poisson" />
+
+    <Sample Name="signal" HistoName="signal" NormalizeByTheory="True">
+      <NormFactor Name="mu" Val="1" Low="0." High="10"  />
+      <OverallSys Name="AccSys" Low="0.95" High="1.05" />
+    </Sample>
+    <Sample Name="background1" HistoName="background1" NormalizeByTheory="True" >
+      <StatError Activate="True" />
+      <HistoSys Name="bkg1_shape_unc" HistoNameLow="background1_Low" HistoNameHigh="background1_High" />
+      <OverallSys Name="bkg_unc" Low="0.9" High="1.1" />
+    </Sample>
+    <Sample Name="background2" HistoName="background2" NormalizeByTheory="False" >
+      <NormFactor Name="bkg" Val="1" Low="0." High="20"  />
+      <OverallSys Name="bkg_unc" Low="0.9" High="1.2" />
+      <ShapeSys Name="bkg2_shape_unc" HistoName="bkg2_shape_unc" />
+    </Sample>
+  </Channel>
