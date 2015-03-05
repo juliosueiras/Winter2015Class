@@ -1,3 +1,4 @@
+<TABLE BORDER=1 WIDTH=100% CELLPADDING=10> <TR> <TD>Instruction</TD> <TD>Operands</TD> <TD>Description</TD></TR>
 			<A NAME="LEA">&nbsp;</A>
 </TD>
 </TR>
@@ -75,3 +76,5 @@ m  <font color=#000064>dw</font>  1234h
 </TABLE>
 </FONT>
 
+</TABLE>
+</TABLE>

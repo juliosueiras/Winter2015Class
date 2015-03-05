@@ -1,3 +1,4 @@
+<TABLE BORDER=1 WIDTH=100% CELLPADDING=10> <TR> <TD>Instruction</TD> <TD>Operands</TD> <TD>Description</TD></TR>
 			<A NAME="LODSW">&nbsp;</A>
 </TD>
 </TR>
@@ -50,3 +51,5 @@ a1 dw 111h, 222h, 333h, 444h, 555h</FONT></PRE>
 <TR> <TD COLSPAN=6>unchanged</TD> </TR>
 </TABLE>
 </FONT>
+</TABLE>
+</TABLE>

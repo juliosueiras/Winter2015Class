@@ -1,3 +1,4 @@
+<TABLE BORDER=1 WIDTH=100% CELLPADDING=10> <TR> <TD>Instruction</TD> <TD>Operands</TD> <TD>Description</TD></TR>
 			<A NAME="SCASW">&nbsp;</A>
 </TD>
 </TR>
@@ -40,3 +41,5 @@ Compare words: <NOBR>AX from ES:[DI].</NOBR> <BR><BR>Algorithm:
 <TR> <TD>r</TD> <TD>r</TD> <TD>r</TD> <TD>r</TD> <TD>r</TD> <TD>r</TD> </TR>
 </TABLE>
 </FONT>
+</TABLE>
+</TABLE>

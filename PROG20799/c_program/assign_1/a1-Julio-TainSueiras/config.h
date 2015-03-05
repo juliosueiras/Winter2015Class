@@ -2,7 +2,7 @@
 /* config.h.in.  Generated from configure.ac by autoheader.  */
 
 /* Define to 1 if you have the <dlfcn.h> header file. */
-#define HAVE_DLFCN_H 1
+/* #undef HAVE_DLFCN_H */
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #define HAVE_INTTYPES_H 1
@@ -33,31 +33,31 @@
 
 /* Define to the sub-directory in which libtool stores uninstalled libraries.
    */
-#define LT_OBJDIR ".libs/"
+/* #undef LT_OBJDIR */
 
 /* Name of package */
-#define PACKAGE "assign1_julio_tain"
+/* #undef PACKAGE */
 
 /* Define to the address where bug reports for this package should be sent. */
-#define PACKAGE_BUGREPORT "juliosueiras@gmail.com"
+#define PACKAGE_BUGREPORT "BUG-REPORT-ADDRESS"
 
 /* Define to the full name of this package. */
-#define PACKAGE_NAME "assign1_julio_tain"
+#define PACKAGE_NAME "FULL-PACKAGE-NAME"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "assign1_julio_tain 0.1"
+#define PACKAGE_STRING "FULL-PACKAGE-NAME VERSION"
 
 /* Define to the one symbol short name of this package. */
-#define PACKAGE_TARNAME "assign1_julio_tain"
+#define PACKAGE_TARNAME "full-package-name"
 
 /* Define to the home page for this package. */
 #define PACKAGE_URL ""
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "0.1"
+#define PACKAGE_VERSION "VERSION"
 
 /* Define to 1 if you have the ANSI C header files. */
 #define STDC_HEADERS 1
 
 /* Version number of package */
-#define VERSION "0.1"
+/* #undef VERSION */

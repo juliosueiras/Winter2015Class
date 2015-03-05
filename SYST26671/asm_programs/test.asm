@@ -1,0 +1,10 @@
+ORG  100h
+
+    MOV AX,0xB800
+    MOV DS,AX
+    MOV CL,'A'
+    MOV CH,00000111B
+    MOV BX,0x0000
+    MOV [BX],CX
+
+RET

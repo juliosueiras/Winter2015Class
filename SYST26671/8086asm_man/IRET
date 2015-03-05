@@ -1,3 +1,4 @@
+<TABLE BORDER=1 WIDTH=100% CELLPADDING=10> <TR> <TD>Instruction</TD> <TD>Operands</TD> <TD>Description</TD></TR>
 			<A NAME="IRET">&nbsp;</A>
 </TD>
 </TR>
@@ -35,3 +36,5 @@ Interrupt Return.
 <TR> <TD COLSPAN=6><CENTER>popped</CENTER></TD> </TR>
 </TABLE>
 </FONT>
+</TABLE>
+</TABLE>

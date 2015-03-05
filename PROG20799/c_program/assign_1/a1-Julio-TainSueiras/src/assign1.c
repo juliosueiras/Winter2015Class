@@ -146,7 +146,7 @@ void execute_option(char option, char user_string[]) {
 
         printf("\nTotal Vowels:%d\n\n", get_total_vowels(user_string));
 
-    }else if(is_true('B',option))  {
+    }else if(is_true('B',option)){
 
         printf("\nTotal Consonants:%d\n\n", get_total_consonants(user_string));
 
@@ -174,7 +174,9 @@ void execute_option(char option, char user_string[]) {
     }else if(is_true('X',option)){
         /* continue */
     }else{
+
         printf("\nThe Option is not valid please enter it again\n\n\r");
+
     }
 
 }
@@ -191,14 +193,13 @@ void program_run(){
 
     do{
 
-       printf("Enter the option(lower or upper case letter):\n");
+        printf("Enter the option(lower or upper case letter):\n");
 
         user_option = toupper(getc(stdin));
 
         execute_option(user_option, user_string);
 
         getchar();
-
 
     }while(is_false(user_option,'X'));
 

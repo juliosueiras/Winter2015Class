@@ -1,3 +1,4 @@
+<TABLE BORDER=1 WIDTH=100% CELLPADDING=10> <TR> <TD>Instruction</TD> <TD>Operands</TD> <TD>Description</TD></TR>
 			<A NAME="INTO">&nbsp;</A>
 </TD>
 </TR>
@@ -26,3 +27,5 @@ MOV AL, -5
 SUB AL, 127   ; AL = 7Ch (124)
 INTO          ; process error.
 RET</FONT></PRE>
+</TABLE>
+</TABLE>

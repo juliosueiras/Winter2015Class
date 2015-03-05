@@ -1,0 +1,4 @@
+echo Reconfiguring with
+echo '  $' ./configure  "$@"
+echo ' '
+./configure  "$@" && exit

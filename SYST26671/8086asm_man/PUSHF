@@ -1,3 +1,4 @@
+<TABLE BORDER=1 WIDTH=100% CELLPADDING=10> <TR> <TD>Instruction</TD> <TD>Operands</TD> <TD>Description</TD></TR>
  			<A NAME="PUSHF">&nbsp;</A>
 </TD>
 </TR>
@@ -29,3 +30,5 @@ Store flags register in the stack.
  <TR> <TD COLSPAN=6>unchanged</TD> </TR>
  </TABLE>
  </FONT>
+</TABLE>
+</TABLE>

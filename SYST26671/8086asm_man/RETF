@@ -1,3 +1,4 @@
+<TABLE BORDER=1 WIDTH=100% CELLPADDING=10> <TR> <TD>Instruction</TD> <TD>Operands</TD> <TD>Description</TD></TR>
 			<A NAME="RETF">&nbsp;</A>
 </TD>
 </TR>
@@ -41,3 +42,5 @@ Return from Far procedure.
 <TR> <TD COLSPAN=6>unchanged</TD> </TR>
 </TABLE>
 </FONT>
+</TABLE>
+</TABLE>

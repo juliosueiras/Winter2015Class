@@ -1,3 +1,4 @@
+<TABLE BORDER=1 WIDTH=100% CELLPADDING=10> <TR> <TD>Instruction</TD> <TD>Operands</TD> <TD>Description</TD></TR>
 			<A NAME="LOOP">&nbsp;</A>
 </TD>
 </TR>
@@ -51,3 +52,5 @@ label1:
    <TR> <TD COLSPAN=6>unchanged</TD> </TR>
    </TABLE>
    </FONT>
+</TABLE>
+</TABLE>

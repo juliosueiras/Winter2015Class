@@ -1,6 +1,4 @@
-			<A NAME="AAD">&nbsp;</A>
-</TD>
-</TR>
+<TABLE BORDER=1 WIDTH=100% CELLPADDING=10> <TR> <TD>Instruction</TD> <TD>Operands</TD> <TD>Description</TD></TR>
 
 
 
@@ -33,3 +31,4 @@ RET</FONT></PRE>
 <TR> <TD>?</TD> <TD>r</TD> <TD>r</TD> <TD>?</TD> <TD>r</TD> <TD>?</TD> </TR>
 </TABLE>
 </FONT>
+</TABLE>

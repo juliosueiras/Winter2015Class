@@ -1,13 +1,13 @@
 =============================================================================
-EMU8086 INTEGRATED ASSEMBLER EMULATOR  -- 22/02/2015 -- 11:21:50 PM
+EMU8086 INTEGRATED ASSEMBLER EMULATOR  -- 24/02/2015 -- 7:35:05 PM
 =============================================================================
-SOURCE: z:\home\juliosueiras\Documents\Winter2015Class\SYST26671\asm_programs\assig2.asm
-STATUS: Assembled in 3 passes. Time spent: 0.046 seconds.
-STATUS: "assig2.com_" is assembled successfully into 54 bytes.
+SOURCE: z:\home\juliosueiras\Documents\Winter2015Class\SYST26671\asm_programs\test.asm
+STATUS: Assembled in 1 passes. Time spent: 0.015 seconds.
+STATUS: "test.com_" is assembled successfully into 15 bytes.
 STATUS:  
-STATUS: Listing is saved: "assig2.com_.list"
-STATUS: Symbol table is saved: "assig2.com_.symbol"
+STATUS: Listing is saved: "test.com_.list"
+STATUS: Symbol table is saved: "test.com_.symbol"
 =============================================================================
-EMU8086 INTEGRATED ASSEMBLER PROCESSED 1 FILES.  22/02/2015  --  11:21:50 PM
+EMU8086 INTEGRATED ASSEMBLER PROCESSED 1 FILES.  24/02/2015  --  7:35:05 PM
 <END>
   

@@ -1,3 +1,4 @@
+<TABLE BORDER=1 WIDTH=100% CELLPADDING=10> <TR> <TD>Instruction</TD> <TD>Operands</TD> <TD>Description</TD></TR>
 			<A NAME="CMC">&nbsp;</A>
 </TD>
 </TR>
@@ -29,3 +30,5 @@ if CF = 0 then CF = 1<BR>
 <TR> <TD>r</TD> </TR>
 </TABLE>
 </FONT>
+</TABLE>
+</TABLE>

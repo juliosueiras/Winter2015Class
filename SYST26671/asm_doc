@@ -1,0 +1,3 @@
+#!/bin/sh
+ASM_DOC=/home/juliosueiras/Documents/Winter2015Class/SYST26671/8086asm_man
+w3m -dump -T text/html $ASM_DOC/$(echo "$1" | tr [a-z] [A-Z])

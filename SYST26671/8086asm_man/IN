@@ -1,3 +1,4 @@
+<TABLE BORDER=1 WIDTH=100% CELLPADDING=10> <TR> <TD>Instruction</TD> <TD>Operands</TD> <TD>Description</TD></TR>
  			<A NAME="IN">&nbsp;</A>
 </TD>
 </TR>
@@ -34,3 +35,5 @@ IN AL, 7  ; get status of stepper-motor.
 <TR> <TD COLSPAN=6>unchanged</TD> </TR>
 </TABLE>
 </FONT>
+</TABLE>
+</TABLE>

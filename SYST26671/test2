@@ -1,0 +1,12 @@
+#!/bin/sh
+
+
+
+while read p; do
+
+    name=$(echo "$p" | sed 's/^.*_//')
+
+    sed -n /\<A\ NAME=\""$p"\".*\>/,/^\<A\ HREF=\"\#top1\"/p < ./emu003r3/doc/8086_instruction_set.html  > ./8086asm_man/"$name"
+
+
+done <"$1"

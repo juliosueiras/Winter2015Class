@@ -1,5 +1,5 @@
 #The program name (8 char max)
-PROGRAM_NAME = assig2
+PROGRAM_NAME = test
 #The program ext (com or exe, lowercase)
 PROGRAM_EXT = com
  

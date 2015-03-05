@@ -1,0 +1,140 @@
+# Example makefile which makes a "libccan.a" of everything under ccan/.
+# For simple projects you could just do:
+#SRCFILES += $(wildcard ccan/*/*.c)
+
+#CCAN_CFLAGS=-g -O3 -Wall -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-declarations -Wpointer-arith -Wwrite-strings -Wundef -DCCAN_STR_DEBUG=1
+CCAN_CFLAGS=-g3 -ggdb -Wall -Wstrict-prototypes -Wold-style-definition -Wmissing-prototypes -Wmissing-declarations -Wpointer-arith -Wwrite-strings -Wundef -DCCAN_STR_DEBUG=1
+CFLAGS = $(CCAN_CFLAGS) -I. $(DEPGEN)
+
+# Modules which are just a header:
+MODS_NO_SRC := alignof \
+	argcheck \
+	array_size \
+	asearch \
+	bitmap \
+	build_assert \
+	cast \
+	check_type \
+	compiler \
+	container_of \
+	darray \
+	endian \
+	minmax \
+	objset \
+	short_types \
+	structeq \
+	tcon \
+	tlist \
+	typesafe_cb \
+	version
+
+# No external dependencies, with C code:
+MODS_WITH_SRC := antithread \
+	antithread/alloc \
+	asort \
+	asprintf \
+	autodata \
+	avl \
+	bdelta \
+	block_pool \
+	breakpoint \
+	btree \
+	bytestring \
+	ccan_tokenizer \
+	cdump \
+	charset \
+	ciniparser \
+	crc \
+	crcsync \
+	cpuid \
+	daemonize \
+	daemon_with_notify \
+	dgraph \
+	eratosthenes \
+	err \
+	failtest \
+	foreach \
+	grab_file \
+	hash \
+	heap \
+	htable \
+	idtree \
+	ilog \
+	invbloom \
+	io \
+	isaac \
+	iscsi \
+	jacobson_karels \
+	jmap \
+	json \
+	jset \
+	lbalance \
+	likely \
+	list \
+	lqueue \
+	lstack \
+	md4 \
+	mem \
+	net \
+	nfs \
+	noerr \
+	ogg_to_pcm \
+	opt \
+	ptr_valid \
+	pushpull \
+	rbtree \
+	rbuf \
+	read_write_all \
+	rfc822 \
+	siphash \
+	sparse_bsearch \
+	str \
+	stringmap \
+	strmap \
+	strset \
+	take \
+	tal \
+	tal/grab_file \
+	tal/link \
+	tal/path \
+	tal/str \
+	tal/talloc \
+	talloc \
+	tally \
+	tap \
+	time \
+	timer \
+	ttxml \
+	wwviaudio
+
+MODS:=$(MODS_WITH_SRC) $(MODS_NO_SRC)
+
+default: libccan.a test
+
+# Automatic dependency generation: makes ccan/*/*.d files.
+DEPGEN=-MD
+-include ccan/*/*.d
+
+# Anything with C files needs building; dir leaves / on, sort uniquifies
+DIRS=$(patsubst %/, %, $(sort $(foreach m, $(filter-out $(MODS_EXCLUDE), $(MODS_WITH_SRC)), $(dir $(wildcard ccan/$m/*.c)))))
+
+# Generate everyone's separate Makefiles.
+-include $(foreach dir, $(DIRS), $(dir)-Makefile)
+
+ccan/%-Makefile:
+	@echo $@: $(wildcard ccan/$*/*.[ch]) ccan/$*/_info > $@
+	@echo ccan/$*.o: $(patsubst %.c, %.o, $(wildcard ccan/$*/*.c)) >> $@
+
+# We compile all the ccan/foo/*.o files together into ccan/foo.o
+OBJFILES=$(DIRS:=.o)
+
+# We create all the .o files and link them together.
+$(OBJFILES): %.o:
+	$(LD) -r -o $@ $^
+
+libccan.a: $(OBJFILES)
+	$(AR) r $@ $(OBJFILES)
+	
+test: test.c
+	gcc $(CFLAGS) test.c ccan/tap.o -o test
+.PHONY: test

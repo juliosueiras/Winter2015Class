@@ -1,3 +1,4 @@
+<TABLE BORDER=1 WIDTH=100% CELLPADDING=10> <TR> <TD>Instruction</TD> <TD>Operands</TD> <TD>Description</TD></TR>
 			<A NAME="REPNE">&nbsp;</A>
 </TD>
 </TR>
@@ -52,3 +53,5 @@ else
 <TR> <TD>r</TD>  </TR>
 </TABLE>
 </FONT>
+</TABLE>
+</TABLE>

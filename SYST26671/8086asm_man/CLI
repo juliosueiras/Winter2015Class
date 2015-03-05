@@ -1,3 +1,4 @@
+<TABLE BORDER=1 WIDTH=100% CELLPADDING=10> <TR> <TD>Instruction</TD> <TD>Operands</TD> <TD>Description</TD></TR>
 			<A NAME="CLI">&nbsp;</A>
 </TD>
 </TR>
@@ -28,3 +29,5 @@ IF = 0
 <TR> <TD>0</TD> </TR>
 </TABLE>
 </FONT>
+</TABLE>
+</TABLE>

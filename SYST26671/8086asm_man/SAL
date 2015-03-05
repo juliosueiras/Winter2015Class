@@ -1,3 +1,4 @@
+<TABLE BORDER=1 WIDTH=100% CELLPADDING=10> <TR> <TD>Instruction</TD> <TD>Operands</TD> <TD>Description</TD></TR>
 			<A NAME="SAL">&nbsp;</A>
 </TD>
 </TR>
@@ -43,3 +44,5 @@ RET</FONT></PRE>
 <BR><BR>
 OF=0 if first operand keeps original sign.
 </FONT>
+</TABLE>
+</TABLE>

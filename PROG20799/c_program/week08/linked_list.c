@@ -77,6 +77,7 @@ void display(){
 void main()
 {
     int ch;
+    int exitOrNot = 1;
 
     do{
         printf("\n\n\n1. Insert Last\n2. Delete First\n3. Display\n4. Exit\n");
@@ -97,12 +98,12 @@ void main()
                 break;
 
             case 4:
-                exit(0);
+                exitOrNot = 0;
 
             default:
                 printf("\n\nInvalid choice: Please try again.\n");
         }
-    } while (1);
+    } while (exitOrNot);
 }
 
 
